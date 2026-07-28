@@ -104,14 +104,14 @@
 
             const doc = new jsPDFClass({ unit: 'mm', format: 'a4', orientation: 'portrait' });
 
-            // Header Banner (#336367 Teal)
+            // Header Banner (#336367 Teal) - 34mm height for extra elegance
             doc.setFillColor(51, 99, 103);
-            doc.rect(0, 0, 210, 30, 'F');
+            doc.rect(0, 0, 210, 34, 'F');
 
             doc.setTextColor(255, 255, 255);
             doc.setFont('helvetica', 'bold');
 
-            // Draw White Logo from Preloaded DOM Image with Exact Proportional Aspect Ratio
+            // Draw White Logo without background (100% transparent background + pure white logo mark)
             const logoImg = document.getElementById('pdf-brand-logo');
             let textStartX = 15;
 
@@ -122,44 +122,61 @@
                 canvas.height = logoImg.naturalHeight;
                 const ctx = canvas.getContext('2d');
                 ctx.drawImage(logoImg, 0, 0);
+
+                // Convert background pixels to transparent, and logo mark to solid white
+                const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const d = imgData.data;
+                for (let i = 0; i < d.length; i += 4) {
+                  if (d[i] > 200 && d[i+1] > 200 && d[i+2] > 200) {
+                    d[i + 3] = 0; // Make background transparent
+                  } else if (d[i + 3] > 20) {
+                    // Turn logo mark/text into solid crisp white
+                    d[i] = 255;
+                    d[i + 1] = 255;
+                    d[i + 2] = 255;
+                    d[i + 3] = 255;
+                  }
+                }
+                ctx.putImageData(imgData, 0, 0);
+
                 const logoBase64 = canvas.toDataURL('image/png');
 
-                // Proportional dimensions (Max height: 18mm inside 30mm banner)
-                const maxH = 18;
+                // Larger Proportional Dimensions (Max height: 24mm inside 34mm banner)
+                const maxH = 24;
                 const aspect = logoImg.naturalWidth / logoImg.naturalHeight;
                 const logoH = maxH;
                 const logoW = Math.round(maxH * aspect * 10) / 10;
-                const logoY = (30 - logoH) / 2; // Vertically centered
+                const logoY = (34 - logoH) / 2; // Vertically centered
 
-                doc.addImage(logoBase64, 'PNG', 12, logoY, logoW, logoH);
-                textStartX = 12 + logoW + 4; // Dynamic margin after logo
+                doc.addImage(logoBase64, 'PNG', 10, logoY, logoW, logoH);
+                textStartX = 10 + logoW + 4; // Dynamic margin after logo
               } catch (e) {
                 console.warn('Canvas logo error:', e);
               }
             }
 
-            doc.setFontSize(textStartX > 30 ? 13.5 : 15);
-            doc.text('Cesar Santos · Fisioterapia y Salud', textStartX, 14);
+            doc.setFontSize(textStartX > 35 ? 13 : 15);
+            doc.text('Cesar Santos · Fisioterapia y Salud', textStartX, 16);
 
             doc.setFontSize(8.5);
             doc.setFont('helvetica', 'normal');
-            doc.text('Salud Integrativa, Ejercicio Terapéutico y Neurobiología del Dolor', textStartX, 21);
+            doc.text('Salud Integrativa, Ejercicio Terapéutico y Neurobiología del Dolor', textStartX, 23);
 
             // Metadata right
             doc.setFontSize(8.5);
-            doc.text(`Fecha: ${todayDate}`, 195, 14, { align: 'right' });
-            doc.text(`Paciente: ${email}`, 195, 22, { align: 'right' });
+            doc.text(`Fecha: ${todayDate}`, 195, 16, { align: 'right' });
+            doc.text(`Paciente: ${email}`, 195, 23, { align: 'right' });
 
             // Title Box with Terracotta accent (#D35232)
             doc.setFillColor(244, 247, 246);
-            doc.rect(15, 38, 180, 22, 'F');
+            doc.rect(15, 41, 180, 22, 'F');
             doc.setFillColor(211, 82, 50);
-            doc.rect(15, 38, 3, 22, 'F');
+            doc.rect(15, 41, 3, 22, 'F');
 
             doc.setTextColor(211, 82, 50);
             doc.setFont('helvetica', 'bold');
             doc.setFontSize(11);
-            doc.text('PLAN PERSONALIZADO DE AFRONTAMIENTO ACTIVO', 22, 47);
+            doc.text('PLAN PERSONALIZADO DE AFRONTAMIENTO ACTIVO', 22, 50);
 
             doc.setTextColor(50, 50, 50);
             doc.setFontSize(9.5);
