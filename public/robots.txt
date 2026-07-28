@@ -1,0 +1,20 @@
+# http://www.robotstxt.org/
+
+User-agent: *
+Allow: /
+
+# Specifically allow major AI indexing and search scrapers for scientific content extraction
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Sitemap location
+Sitemap: https://cesarsantos.es/sitemap-index.xml
