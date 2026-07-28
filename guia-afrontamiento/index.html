@@ -95,19 +95,42 @@
 
             const doc = new jsPDFClass({ unit: 'mm', format: 'a4', orientation: 'portrait' });
 
-            // Header Banner (#336367 Teal) - 34mm height for extra elegance
+            // Header Banner (#336367 Teal) - 34mm height for extra prominence
             doc.setFillColor(51, 99, 103);
             doc.rect(0, 0, 210, 34, 'F');
 
             doc.setTextColor(255, 255, 255);
             doc.setFont('helvetica', 'bold');
 
-            // Draw White Transparent Logo directly from DOM element
+            // Draw Crisp White Transparent Logo without background or grey borders
             const logoImg = document.getElementById('pdf-brand-logo');
             let textStartX = 15;
 
             if (logoImg && logoImg.complete && logoImg.naturalWidth > 0) {
               try {
+                const canvas = document.createElement('canvas');
+                canvas.width = logoImg.naturalWidth;
+                canvas.height = logoImg.naturalHeight;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(logoImg, 0, 0);
+
+                // Convert background pixels to 100% transparent, and logo mark to solid crisp white
+                const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const d = imgData.data;
+                for (let i = 0; i < d.length; i += 4) {
+                  if (d[i] > 150 && d[i + 1] > 150 && d[i + 2] > 150) {
+                    d[i + 3] = 0; // 100% transparent background
+                  } else {
+                    // Solid crisp white logo mark and text (no fuzzy borders)
+                    d[i] = 255;
+                    d[i + 1] = 255;
+                    d[i + 2] = 255;
+                    d[i + 3] = 255;
+                  }
+                }
+                ctx.putImageData(imgData, 0, 0);
+                const logoBase64 = canvas.toDataURL('image/png');
+
                 // Larger Proportional Dimensions (Max height: 24mm inside 34mm banner)
                 const maxH = 24;
                 const aspect = logoImg.naturalWidth / logoImg.naturalHeight;
@@ -115,10 +138,10 @@
                 const logoW = Math.round(maxH * aspect * 10) / 10;
                 const logoY = (34 - logoH) / 2; // Vertically centered
 
-                doc.addImage(logoImg, 'PNG', 10, logoY, logoW, logoH);
+                doc.addImage(logoBase64, 'PNG', 10, logoY, logoW, logoH, undefined, 'FAST');
                 textStartX = 10 + logoW + 4; // Dynamic margin after logo
               } catch (e) {
-                console.warn('Logo error:', e);
+                console.warn('Canvas logo error:', e);
               }
             }
 
