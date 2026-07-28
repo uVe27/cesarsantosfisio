@@ -1,0 +1,271 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { useTranslations } from '../../utils/i18n';
+
+const lang = 'en';
+const t = useTranslations(lang);
+
+// Get latest articles filtered by English subdirectory
+const allArticles = await getCollection('blog');
+const enArticles = allArticles
+  .filter(item => item.id.startsWith('en/'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+// JSON-LD ProfilePage Schema
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "name": "Cesar Santos | Physiotherapy, Psychoneuroimmunology & Integrative Health",
+  "description": "Evidence-based physiotherapy, Clinical Psychoneuroimmunology (PNI), therapeutic exercise, and resilience for patients and health professionals.",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Cesar Santos",
+    "givenName": "Cesar",
+    "familyName": "Santos",
+    "jobTitle": "Physiotherapist & Integrative Health Communicator",
+    "knowsAbout": [
+      "Musculoskeletal Physiotherapy",
+      "Clinical Psychoneuroimmunology (PNI)",
+      "Therapeutic Exercise & Pilates Method",
+      "Persistent Pain & Active Coping"
+    ],
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "ONCE University School of Physiotherapy - UAM"
+    }
+  }
+};
+
+const schemaJson = JSON.stringify(schema);
+---
+
+<Layout 
+  title="Cesar Santos · Physiotherapy & Health" 
+  description="Science, movement, and resilience. Discover the integrative connection between physiotherapy, the immune system, exercise, and persistent pain." 
+  lang={lang} 
+  canonicalPath="/en" 
+  schemaJson={schemaJson}
+>
+  <!-- Hero Section with Storytelling & Mission -->
+  <section class="hero-section" aria-labelledby="manifesto-heading">
+    <span class="hero-subtitle">Science, Resilience & Integrative Health</span>
+    <h1 id="manifesto-heading" class="hero-title">
+      From tactical discipline to understanding the human body
+    </h1>
+    <p class="hero-description">
+      I am <strong>Cesar Santos</strong>, physiotherapist graduated from the ONCE University School of Physiotherapy (UAM), former Captain of Mountain Troops, with a Master's in Musculoskeletal Manual Therapy and education in Therapeutic Exercise, Pilates, and Clinical Psychoneuroimmunology (PNI) applied to daily practice. After overcoming a drastic life change due to a neurological condition with 80% visual disability, I now dedicate my life to translating medical science so that patients and healthcare professionals understand the extraordinary adaptability of the human body.
+    </p>
+
+    <!-- Rapid Access Buttons -->
+    <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
+      <a href="/en/demystifying-pain" class="btn-submit" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; width: auto; padding: 12px 24px; font-weight: 700;">
+        <span aria-hidden="true">📖</span> View Articles & Publications
+      </a>
+      <a href="/en/coping-guide" class="btn-link" style="padding: 10px 0; font-weight: 700;">
+        <span aria-hidden="true">🛠️</span> Patient Tools &rarr;
+      </a>
+    </div>
+    
+    <!-- Hero Main Image -->
+    <div class="hero-image-wrapper" style="margin-bottom: 30px;">
+      <img src="/images/hero_physiotherapy.jpg" alt="Physiotherapist guiding a patient through therapeutic exercise and active rehabilitation" class="hero-image" />
+    </div>
+    
+    <!-- Profile Banner & Story Highlight -->
+    <div class="profile-card" style="margin-top: 30px; display: flex; flex-direction: column; gap: 15px;">
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <div class="profile-avatar" aria-hidden="true">
+          CS
+        </div>
+        <div>
+          <h2 class="profile-info-title" style="margin: 0;">Cesar Santos</h2>
+          <p class="profile-info-text" style="margin: 0;">
+            Physiotherapist (ONCE · UAM) · Master in Manual Therapy · Exercise & Applied PNI
+          </p>
+        </div>
+      </div>
+      <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-color); margin: 10px 0 0 0;">
+        <em>"What do you do when life turns out the lights overnight? You reinvent yourself to teach others how to find their own path."</em>
+      </p>
+      <div style="margin-top: 5px;">
+        <a href="/en/about-me" class="btn-link" style="font-size: 0.9rem; font-weight: 700;">
+          Discover my full story &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dual Track Audience Selector -->
+  <section style="margin: 50px 0;">
+    <h2 class="section-title" style="text-align: center; margin-bottom: 25px;">
+      How can I help you today?
+    </h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+      <!-- Track 1: Patients -->
+      <div class="contact-card" style="padding: 25px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div class="card-image-wrapper">
+            <img src="/images/patient_empowerment.jpg" alt="Patient performing guided therapeutic exercise with confidence" class="card-image" />
+          </div>
+          <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--color-secondary); letter-spacing: 0.08em; display: block; margin-bottom: 10px;">For Patients & People in Pain</span>
+          <h3 style="font-size: 1.3rem; margin-bottom: 15px; color: var(--text-color);">Understand your pain and regain your autonomy</h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
+            Learn how your movement, sleep, immune system, and daily habits interconnect. Free of incomprehensible jargon or unjustified fear about MRIs and posture.
+          </p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <a href="/en/coping-guide" class="btn-submit" style="text-decoration: none; text-align: center;">
+            Go to Active Coping Guide
+          </a>
+          <a href="/en/demystifying-pain" class="btn-link" style="text-align: center; font-size: 0.85rem;">
+            Read articles for patients &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Track 2: Health Professionals -->
+      <div class="contact-card" style="padding: 25px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div class="card-image-wrapper">
+            <img src="/images/professional_clinical.jpg" alt="Healthcare professionals collaborating and reasoning clinical cases" class="card-image" />
+          </div>
+          <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--color-primary); letter-spacing: 0.08em; display: block; margin-bottom: 10px;">For Healthcare Professionals</span>
+          <h3 style="font-size: 1.3rem; margin-bottom: 15px; color: var(--text-color);">Clinical rigor and integrative perspective</h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
+            Analysis on neurophysiological mechanisms of manual therapy, PNI approaches in complex musculoskeletal pathologies, therapeutic exercise, and praxis reflections.
+          </p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <a href="/en/contact" class="btn-submit" style="text-decoration: none; text-align: center; background-color: var(--color-primary);">
+            Collaborations & Teaching
+          </a>
+          <a href="/en/demystifying-pain" class="btn-link" style="text-align: center; font-size: 0.85rem;">
+            View papers with DOI/PubMed &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Myth Buster Section -->
+  <section class="myth-section" aria-labelledby="myths-heading">
+    <h2 id="myths-heading" class="section-title" style="text-align: center; margin-bottom: 10px;">
+      Quick Health Myth-Buster
+    </h2>
+    <p style="color: var(--text-muted); text-align: center; max-width: 600px; margin: 0 auto 30px auto; font-size: 0.95rem;">
+      Click on any card to contrast common beliefs with scientific facts demonstrated by clinical research.
+    </p>
+
+    <div class="myth-grid" role="region" aria-label="Pain Myths and Realities">
+      <!-- Card 1: Hernias -->
+      <div class="myth-card" role="button" aria-expanded="false" tabindex="0">
+        <div>
+          <span class="myth-label">Common Myth</span>
+          <h3 class="myth-title">"I have a herniated disc on my MRI, so my spine is broken and damaged."</h3>
+        </div>
+        <div class="reality-content">
+          <span class="reality-label">Scientific Reality</span>
+          <p style="margin: 0; font-size: 0.9rem;">
+            <strong>35% of people over 40 have herniated discs without feeling any pain</strong> (Varun S. et al., 2025). The image reflects normal age-related changes, like wrinkles on the skin, not a certificate of disability.
+          </p>
+        </div>
+        <span class="myth-action-hint">See reality &rarr;</span>
+      </div>
+
+      <!-- Card 2: Posture -->
+      <div class="myth-card" role="button" aria-expanded="false" tabindex="0">
+        <div>
+          <span class="myth-label">Common Myth</span>
+          <h3 class="myth-title">"I need to find the perfect posture to sit or stand and thus avoid back pain."</h3>
+        </div>
+        <div class="reality-content">
+          <span class="reality-label">Scientific Reality</span>
+          <p style="margin: 0; font-size: 0.9rem;">
+            <strong>There is no single or perfect posture.</strong> Science shows no causal link between static postures and pain. The body needs movement and variability; your best posture is the next one.
+          </p>
+        </div>
+        <span class="myth-action-hint">See reality &rarr;</span>
+      </div>
+
+      <!-- Card 3: Pain vs Damage -->
+      <div class="myth-card" role="button" aria-expanded="false" tabindex="0">
+        <div>
+          <span class="myth-label">Common Myth</span>
+          <h3 class="myth-title">"If a physical activity hurts, it means I am causing damage to my body tissues."</h3>
+        </div>
+        <div class="reality-content">
+          <span class="reality-label">Scientific Reality</span>
+          <p style="margin: 0; font-size: 0.9rem;">
+            <strong>Persistent pain is a hypersensitive alarm system.</strong> Pain protects before actual damage occurs. Graded, adapted movement trains the brain to regulate sensitivity.
+          </p>
+        </div>
+        <span class="myth-action-hint">See reality &rarr;</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Articles Section -->
+  <section class="articles-section" aria-labelledby="articles-heading" style="margin-top: 50px;">
+    <div class="section-header">
+      <h2 id="articles-heading" class="section-title">
+        {t('latestPosts')}
+      </h2>
+      <a href="/en/demystifying-pain" class="btn-link">
+        {t('viewAll')} &rarr;
+      </a>
+    </div>
+
+    <!-- Articles Grid -->
+    <div class="articles-grid">
+      {enArticles.map((article) => {
+        const cleanSlug = article.id.replace(/^en\//, '');
+        return (
+          <article class="article-card">
+            <span class="article-category">
+              {article.data.category}
+            </span>
+            <h3 class="article-title">
+              <a href={`/en/demystifying-pain/${cleanSlug}`}>
+                {article.data.title}
+              </a>
+            </h3>
+            <p class="article-description">
+              {article.data.description}
+            </p>
+            <div class="article-footer">
+              <span>{new Date(article.data.pubDate).toLocaleDateString('en-US', { dateStyle: 'medium' })}</span>
+              {article.data.doi && <span class="doi-badge">DOI: {article.data.doi.split('/')[1] || article.data.doi}</span>}
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- Script to handle card interactions -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.myth-card');
+      
+      cards.forEach(card => {
+        const toggleCard = () => {
+          const isActive = card.classList.contains('active');
+          card.classList.toggle('active');
+          card.setAttribute('aria-expanded', !isActive);
+        };
+
+        card.addEventListener('click', toggleCard);
+        
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleCard();
+          }
+        });
+      });
+    });
+  </script>
+</Layout>
