@@ -66,21 +66,21 @@
           const week3 = Math.round(baseline * 1.5);
           const todayDate = new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
 
-          // 1. Send Lead Data directly to private Google Sheet Webhook (including language 'es')
+          // 1. Send Lead Data directly to private Google Sheet Webhook (URLSearchParams for reliable Google Apps Script parsing)
           const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbyNePeLox6Q49ZzoRrBK2XEAX6haLDOtMF2RKMfQtSymPCFJufyL024bXhjQHru-51B/exec';
           try {
+            const params = new URLSearchParams();
+            params.append('email', email);
+            params.append('actividad', activity);
+            params.append('minutos_peor_dia', maxTime);
+            params.append('cuota_semana_1', baseline + ' min/día');
+            params.append('idioma', 'es');
+
             fetch(googleSheetUrl, {
               method: 'POST',
               mode: 'no-cors',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                email: email,
-                actividad: activity,
-                minutos_peor_dia: maxTime,
-                cuota_semana_1: baseline + ' min/día',
-                idioma: 'es',
-                fecha: new Date().toISOString()
-              })
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: params.toString()
             }).catch(() => {});
           } catch (e) {}
 
@@ -95,10 +95,14 @@
 
           // 3. Construct HTML Template for PDF Generation with Brand Guidelines (#336367, #D35232, Logo)
           const pdfElement = document.createElement('div');
-          pdfElement.style.padding = '30px';
+          pdfElement.style.padding = '35px';
           pdfElement.style.fontFamily = 'Helvetica, Arial, sans-serif';
           pdfElement.style.color = '#1A1A1A';
           pdfElement.style.backgroundColor = '#FFFFFF';
+          pdfElement.style.position = 'absolute';
+          pdfElement.style.left = '-9999px';
+          pdfElement.style.top = '0';
+          pdfElement.style.width = '750px';
 
           pdfElement.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #336367; padding-bottom: 15px; margin-bottom: 20px;">
@@ -168,18 +172,22 @@
             </div>
           `;
 
+          document.body.appendChild(pdfElement);
+
           // 4. Trigger Automatic PDF Download with html2pdf
           const opt = {
             margin: 10,
             filename: `Pauta_Afrontamiento_CesarSantos_${activity.replace(/\s+/g, '_')}.pdf`,
             image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2 },
+            html2canvas: { scale: 2, useCORS: true, logging: false },
             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
           };
 
           if (window.html2pdf) {
             await window.html2pdf().set(opt).from(pdfElement).save();
           }
+
+          document.body.removeChild(pdfElement);
 
           calcBtn.disabled = false;
           calcBtn.innerText = '⚡ Generar y Descargar Pauta PDF Personalizada';
