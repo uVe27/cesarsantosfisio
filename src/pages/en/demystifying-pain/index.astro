@@ -1,0 +1,64 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { useTranslations } from '../../../utils/i18n';
+
+const lang = 'en';
+const t = useTranslations(lang);
+
+// Load English articles
+const allArticles = await getCollection('blog');
+const enArticles = allArticles
+  .filter(item => item.id.startsWith('en/'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout 
+  title="Demystifying Pain | Health Articles & Evidence" 
+  description="Clear scientific explanations about low back pain, disc herniations, and posture to break myths and regain your confidence." 
+  lang={lang} 
+  canonicalPath="/en/demystifying-pain"
+>
+  <div class="article-detail">
+    <span class="hero-subtitle">{t('nav.repo')}</span>
+    <h1 class="hero-title" style="margin-bottom: 25px;">
+      Demystifying Pain
+    </h1>
+    <p class="hero-description" style="border-bottom: 1px solid var(--border-color); padding-bottom: 30px; margin-bottom: 40px;">
+      A space dedicated to translating the latest scientific health findings into clear and useful language for patients, breaking down structural myths that perpetuate pain.
+    </p>
+
+    <!-- Post list -->
+    <div role="feed" aria-label="Health and science articles">
+      {enArticles.map((article) => {
+        const cleanSlug = article.id.replace(/^en\//, '');
+        return (
+          <article style="border-bottom: 1px solid var(--border-color); padding-bottom: 30px; margin-bottom: 30px;" aria-labelledby={`title-${cleanSlug}`}>
+            <div style="display: flex; align-items: center; gap: 15px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 10px;">
+              <span style="color: var(--color-secondary);">{article.data.category}</span>
+              {article.data.doi && <span class="doi-badge">Ref: {article.data.doi}</span>}
+            </div>
+            
+            <h2 id={`title-${cleanSlug}`} style="font-size: 1.6rem; font-weight: 700; margin-bottom: 10px; text-transform: none; letter-spacing: normal;">
+              <a href={`/en/demystifying-pain/${cleanSlug}`} style="color: var(--text-color); text-decoration: none;">
+                {article.data.title}
+              </a>
+            </h2>
+            
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px; line-height: 1.6;">
+              {article.data.description}
+            </p>
+
+            <div style="display: flex; gap: 15px; font-size: 0.8rem; color: var(--text-muted);">
+              <time datetime={article.data.pubDate.toISOString()}>
+                {new Date(article.data.pubDate).toLocaleDateString('en-US', { dateStyle: 'long' })}
+              </time>
+              <span>·</span>
+              <span>{t('authorLabel')}: {article.data.author}</span>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</Layout>
