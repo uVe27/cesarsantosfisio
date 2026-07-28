@@ -67,24 +67,22 @@
           const todayDate = new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
 
           // 1. Send Lead Data directly to private Google Sheet Webhook (including language 'es')
-          const googleSheetUrl = window.GOOGLE_SHEET_WEBHOOK_URL || '';
-          if (googleSheetUrl) {
-            try {
-              fetch(googleSheetUrl, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  email: email,
-                  actividad: activity,
-                  minutos_peor_dia: maxTime,
-                  cuota_semana_1: baseline + ' min/día',
-                  idioma: 'es',
-                  fecha: new Date().toISOString()
-                })
-              }).catch(() => {});
-            } catch (e) {}
-          }
+          const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbyNePeLox6Q49ZzoRrBK2XEAX6haLDOtMF2RKMfQtSymPCFJufyL024bXhjQHru-51B/exec';
+          try {
+            fetch(googleSheetUrl, {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                email: email,
+                actividad: activity,
+                minutos_peor_dia: maxTime,
+                cuota_semana_1: baseline + ' min/día',
+                idioma: 'es',
+                fecha: new Date().toISOString()
+              })
+            }).catch(() => {});
+          } catch (e) {}
 
           // 2. Display Result on screen
           resultText.innerHTML = `
