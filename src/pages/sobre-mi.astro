@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { useTranslations } from '../utils/i18n';
+
+const lang = 'es';
+const t = useTranslations(lang);
+---
+
+<Layout 
+  title="Sobre mí | Cesar Santos · Fisioterapia y Salud Integrativa" 
+  description="De las Tropas de Montaña a la Salud Integrativa. Conoce mi historia de reinvención, fisioterapia, Psiconeuroinmunología Clínica (PNI) y resiliencia." 
+  lang={lang} 
+  canonicalPath="/sobre-mi"
+>
+  <div class="article-detail" style="max-width: 850px;">
+    <span class="hero-subtitle">Mi Historia</span>
+    <h1 class="hero-title" style="margin-bottom: 25px; font-size: 2.3rem; line-height: 1.25;">
+      ¿Qué haces cuando la vida te apaga la luz de un día para otro? Te reinventas.
+    </h1>
+
+    <div class="prose" style="font-size: 1.05rem; line-height: 1.8;">
+      <p style="font-size: 1.2rem; font-weight: 500; color: var(--color-primary); margin-bottom: 30px; line-height: 1.6;">
+        Mi vocación siempre fue el servicio, la disciplina y la superación. Durante años, mi vida estuvo en las montañas, liderando unidades operativas. Hoy aplico esa misma estrategia y rigor para enseñar a las personas a tomar el control de su salud y a entender cómo se adapta el cuerpo humano.
+      </p>
+
+      <div class="content-image-wrapper">
+        <img src="/images/aragonese_pyrenees.jpg" alt="Cumbres del Pirineo Aragonés (Monte Perdido y Ordesa), entorno de instrucción de la Compañía de Esquiadores Escaladores y el Regimiento de Cazadores de Montaña Galicia 64" class="content-image" />
+      </div>
+
+      <div style="background-color: rgba(48, 62, 69, 0.04); border-left: 4px solid var(--color-secondary); padding: 25px; margin: 30px 0; border-radius: 4px;">
+        <h2 style="font-size: 1.3rem; margin-top: 0; margin-bottom: 15px; color: var(--text-color);">De la montaña a la primera línea</h2>
+        <p style="margin: 0; color: var(--text-muted);">
+          Me formé en la <strong>Academia General Militar</strong> y me especialicé en Infantería. Serví como Teniente Jefe de Sección en la <strong>Compañía de Esquiadores Escaladores</strong> y, posteriormente como Capitán, asumí la Jefatura de la <strong>Sección de Inteligencia del Regimiento de Cazadores de Montaña "Galicia" 64</strong>. La planificación táctica, el trabajo bajo presión y la fortaleza física y mental formaban parte de mi día a día.
+        </p>
+      </div>
+
+      <h2 style="font-size: 1.5rem; margin-top: 40px; margin-bottom: 15px;">El giro que lo cambió todo</h2>
+      <p>
+        En la primavera de 2020, durante el confinamiento y mientras participaba en la <strong>Operación Balmis</strong>, mi vida dio un vuelco drástico. Un contacto estrecho con COVID-19 desencadenó una trombosis en un seno venoso que provocó una <strong>hipertensión intracraneal</strong>. Esta presión continuada fue la que terminó causando una <strong>atrofia en los nervios ópticos</strong>.
+      </p>
+      <p>
+        En cuestión de semanas, y tras luchar por mantener la normalidad apoyándome en el ojo que aún conservaba cierta visión, la afección terminó afectando a ambos ojos. El resultado fue una patología permanente con una discapacidad visual del 80% y mi pase a retiro de las Fuerzas Armadas.
+      </p>
+
+      <h2 style="font-size: 1.5rem; margin-top: 40px; margin-bottom: 15px;">La reinvención a través del movimiento y la ciencia</h2>
+      <p>
+        Podía haberme rendido, pero decidí aplicar la disciplina militar a mi propia recuperación. Retomé una inquietud que tenía desde joven: entender en profundidad el funcionamiento del cuerpo humano a través de la salud.
+      </p>
+      <p>
+        Afiliado a la ONCE, ingresé en su <strong>Escuela Universitaria de Fisioterapia (Universidad Autónoma de Madrid)</strong> y me gradué en mayo de 2025. Entender el dolor y la capacidad del organismo para adaptarse no fue solo un expediente académico, sino una necesidad vital.
+      </p>
+
+      <div style="background-color: var(--bg-color); border: 1px solid var(--border-color); padding: 30px; border-radius: 8px; margin: 35px 0;">
+        <h2 style="font-size: 1.3rem; margin-top: 0; margin-bottom: 15px; color: var(--color-secondary);">Formación y Abordaje Integrativo</h2>
+        <p style="margin-bottom: 15px; font-size: 0.98rem;">
+          Para ofrecer respuestas rigurosas tanto a pacientes como a profesionales de la salud, integro el razonamiento clínico de la terapia manual con herramientas de ejercicio y PNI en la práctica diaria:
+        </p>
+        <ul style="margin: 0; padding-left: 20px; font-size: 0.98rem; line-height: 1.7;">
+          <li><strong>Máster en Terapia Manual del Sistema Musculoesquelético:</strong> Razonamiento clínico y abordaje neurofisiológico de las disfunciones articulares y musculares.</li>
+          <li><strong>Ejercicio Terapéutico y Método Pilates:</strong> Programación de movimiento guiado para restaurar la capacidad funcional y la estabilidad.</li>
+          <li><strong>Psiconeuroinmunología Clínica (PNI):</strong> Comprensión de las interacciones entre el sistema nervioso, el sistema inmune, el descanso, la nutrición y el estilo de vida.</li>
+        </ul>
+      </div>
+
+      <h2 style="font-size: 1.5rem; margin-top: 40px; margin-bottom: 15px;">Mi misión hoy</h2>
+      <p>
+        Ya no dirijo tropas en la montaña, pero sigo al servicio de los demás. Como fisioterapeuta y como persona que ha vivido en su propia piel un cambio de salud radical, mi objetivo es <strong>traducir la evidencia médica a soluciones reales</strong>.
+      </p>
+      <p>
+        Quiero ayudar a los pacientes a perder el miedo al dolor y a entender cómo su estilo de vida, su sistema inmune y su movimiento se conectan. Al mismo tiempo, comparto reflexiones y rigor técnico con otros profesionales de la salud que buscan una visión integrativa del ser humano.
+      </p>
+
+      <div style="margin-top: 40px; border-top: 1px solid var(--border-color); padding-top: 30px; display: flex; gap: 15px; flex-wrap: wrap;">
+        <a href="/contacto" class="btn-submit" style="text-decoration: none; display: inline-block; width: auto; padding: 12px 25px;">
+          Contactar conmigo
+        </a>
+        <a href="/desmitificando-el-dolor" class="btn-link" style="padding: 12px 0;">
+          Leer publicaciones científicas &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>
