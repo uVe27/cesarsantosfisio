@@ -66,24 +66,25 @@
           const week3 = Math.round(baseline * 1.5);
           const todayDate = new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
 
-          // 1. Send Lead Email & Activity data via FormSubmit API in background
-          try {
-            const formData = new FormData();
-            formData.append('email', email);
-            formData.append('actividad_recuperar', activity);
-            formData.append('minutos_peor_dia', maxTime);
-            formData.append('cuota_semana_1', baseline + ' min/día');
-            formData.append('cuota_semana_2', week2 + ' min/día');
-            formData.append('cuota_semana_3', week3 + ' min/día');
-            formData.append('_subject', `[LEAD PAUTA PDF] Nuevo paciente registrado: ${email}`);
-            formData.append('_captcha', 'false');
-
-            fetch('https://formsubmit.co/ajax/masthorth_csc@hotmail.com', {
-              method: 'POST',
-              body: formData,
-              headers: { 'Accept': 'application/json' }
-            }).catch(() => {});
-          } catch (e) {}
+          // 1. Send Lead Data directly to private Google Sheet Webhook (including language 'es')
+          const googleSheetUrl = window.GOOGLE_SHEET_WEBHOOK_URL || '';
+          if (googleSheetUrl) {
+            try {
+              fetch(googleSheetUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  email: email,
+                  actividad: activity,
+                  minutos_peor_dia: maxTime,
+                  cuota_semana_1: baseline + ' min/día',
+                  idioma: 'es',
+                  fecha: new Date().toISOString()
+                })
+              }).catch(() => {});
+            } catch (e) {}
+          }
 
           // 2. Display Result on screen
           resultText.innerHTML = `
