@@ -67,7 +67,7 @@
           const todayDate = new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
 
           // 1. Send Lead Data directly to private Google Sheet Webhook via FormData & GET Fallback
-          const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbyNePeLox6Q49ZzoRrBK2XEAX6haLDOtMF2RKMfQtSymPCFJufyL024bXhjQHru-51B/exec';
+          const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbxxYxY2bqf-pdLvwzjmkkOB7pmqf_pAXmG67jsnudNHrIRkzHsL4KYEJn9JsJFyH9pxkg/exec';
           try {
             const formData = new FormData();
             formData.append('email', email);
