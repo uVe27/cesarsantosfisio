@@ -1,0 +1,121 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+import { useTranslations } from '../../../utils/i18n';
+
+export async function getStaticPaths() {
+  const allArticles = await getCollection('blog');
+  const enArticles = allArticles.filter(item => item.id.startsWith('en/'));
+  
+  return enArticles.map((article) => {
+    const slug = article.id.replace(/^en\//, '');
+    return {
+      params: { slug },
+      props: { article }
+    };
+  });
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+
+const lang = 'en';
+const t = useTranslations(lang);
+
+// Constructing precise JSON-LD TechArticle schema for EEAT
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": article.data.title,
+  "description": article.data.description,
+  "datePublished": article.data.pubDate.toISOString(),
+  "dateModified": article.data.pubDate.toISOString(),
+  "author": {
+    "@type": "Person",
+    "name": article.data.author,
+    "jobTitle": "Physiotherapist",
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "ONCE University School of Physiotherapy - Autonomous University of Madrid"
+    }
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Cesar Santos Physiotherapy & Health"
+  },
+  "genre": "Scientific Divulgation",
+  "about": {
+    "@type": "MedicalSpecialty",
+    "name": "Physical Therapy"
+  },
+  ...(article.data.doi && { "identifier": article.data.doi }),
+  ...(article.data.pubmedUrl && { "sameAs": article.data.pubmedUrl })
+};
+
+const schemaJson = JSON.stringify(schema);
+---
+
+<Layout 
+  title={article.data.title} 
+  description={article.data.description} 
+  lang={lang} 
+  canonicalPath={`/en/demystifying-pain/${Astro.params.slug}`}
+  schemaJson={schemaJson}
+  ogType="article"
+>
+  <article class="article-detail">
+    <!-- Meta details header -->
+    <header class="article-detail-header">
+      <span class="article-category">
+        {article.data.category}
+      </span>
+      <h1 class="hero-title" style="text-transform: none; font-size: 2.2rem; line-height: 1.3; margin-bottom: 20px;">
+        {article.data.title}
+      </h1>
+      
+      <div class="article-detail-meta">
+        <time datetime={article.data.pubDate.toISOString()}>
+          {new Date(article.data.pubDate).toLocaleDateString('en-US', { dateStyle: 'long' })}
+        </time>
+        <span>·</span>
+        <span>{t('authorLabel')}: {article.data.author}</span>
+      </div>
+
+      <!-- Evidence / Authority References -->
+      {(article.data.doi || article.data.pubmedUrl) && (
+        <div class="authority-references" style="margin-top: 25px;">
+          {article.data.doi && (
+            <div>
+              <strong style="color: var(--text-color);">{t('doiLabel')}:</strong>{' '}
+              <a href={`https://doi.org/${article.data.doi}`} target="_blank" rel="noopener noreferrer" style="font-family: monospace;">
+                {article.data.doi}
+              </a>
+            </div>
+          )}
+          {article.data.pubmedUrl && (
+            <a 
+              href={article.data.pubmedUrl} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="pubmed-btn"
+            >
+              {t('pubmedLabel')}
+            </a>
+          )}
+        </div>
+      )}
+    </header>
+
+    <!-- Main Content rendered from markdown -->
+    <div class="prose">
+      <Content />
+    </div>
+
+    <!-- Back Button -->
+    <footer class="back-btn-wrapper">
+      <a href="/en/demystifying-pain" class="btn-link">
+        &larr; Back to list
+      </a>
+    </footer>
+  </article>
+</Layout>
