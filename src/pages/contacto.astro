@@ -1,0 +1,105 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { useTranslations } from '../utils/i18n';
+
+const lang = 'es';
+const t = useTranslations(lang);
+---
+
+<Layout 
+  title="Contacto y Colaboraciones | Cesar Santos" 
+  description="Contacta con Cesar Santos para consultas de salud, dudas de dolor persistente, colaboraciones profesionales o ponencias." 
+  lang={lang} 
+  canonicalPath="/contacto"
+>
+  <div class="article-detail" style="max-width: 1000px;">
+    <span class="hero-subtitle">{t('contactTitle')}</span>
+    <h1 class="hero-title" style="margin-bottom: 30px;">
+      Contacto y Colaboraciones
+    </h1>
+
+    <div class="contact-layout">
+      <!-- Media Kit / Collab Info -->
+      <section aria-labelledby="collaboration-heading">
+        <h2 id="collaboration-heading" style="font-size: 1.3rem; margin-bottom: 15px;">
+          ¿Hablamos?
+        </h2>
+        <p style="color: var(--text-muted); margin-bottom: 25px;">
+          Si eres paciente y quieres entender tu salud, o si eres un profesional interesado en colaborar, compartir divulgación o docencia integrativa, estaré encantado de escucharte.
+        </p>
+        <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px;" role="list">
+          <li style="display: flex; align-items: start; gap: 10px; font-size: 0.95rem;">
+            <span style="color: var(--color-secondary); font-weight: bold;" aria-hidden="true">&#10003;</span>
+            <span>Dudas sobre dolor persistente, ejercicio y Salud Integrativa para pacientes.</span>
+          </li>
+          <li style="display: flex; align-items: start; gap: 10px; font-size: 0.95rem;">
+            <span style="color: var(--color-secondary); font-weight: bold;" aria-hidden="true">&#10003;</span>
+            <span>Colaboraciones docentes y científicas con otros profesionales de la salud.</span>
+          </li>
+          <li style="display: flex; align-items: start; gap: 10px; font-size: 0.95rem;">
+            <span style="color: var(--color-secondary); font-weight: bold;" aria-hidden="true">&#10003;</span>
+            <span>Participación en ponencias, podcasts, radio y prensa especializada.</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Contact Form / Action Box -->
+      <section aria-labelledby="form-heading" class="contact-card">
+        <h2 id="form-heading" style="font-size: 1.3rem; margin-bottom: 10px;">
+          Enviar Mensaje
+        </h2>
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 25px;">
+          Todos los campos son obligatorios. Recibirás respuesta en breve.
+        </p>
+
+        <form action="https://formspree.io/f/placeholder" method="POST">
+          <div class="form-group">
+            <label for="name" class="form-label">
+              Nombre Completo
+            </label>
+            <input 
+              type="text" 
+              id="name" 
+              name="name" 
+              required 
+              class="form-control"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">
+              Correo Electrónico
+            </label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              required 
+              class="form-control"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="message" class="form-label">
+              Mensaje o Consulta
+            </label>
+            <textarea 
+              id="message" 
+              name="message" 
+              rows="5" 
+              required 
+              class="form-control"
+            ></textarea>
+          </div>
+
+          <button 
+            type="submit" 
+            class="btn-submit"
+          >
+            Enviar Mensaje
+          </button>
+        </form>
+      </section>
+    </div>
+  </div>
+</Layout>
