@@ -17,4 +17,4 @@ User-agent: Applebot-Extended
 Allow: /
 
 # Sitemap location
-Sitemap: https://cesarsantos.es/sitemap-index.xml
+Sitemap: https://cesarsantos.me/sitemap-index.xml
