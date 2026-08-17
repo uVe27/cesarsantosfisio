@@ -150,19 +150,26 @@ const text = labels[lang] || labels.es;
   .filter-pill:hover {
     border-color: var(--color-secondary);
     color: var(--color-secondary);
+    transform: translateY(-1px);
+  }
+
+  .dark .filter-pill:hover {
+    border-color: var(--color-secondary-light);
+    color: var(--color-secondary-light);
   }
 
   .filter-pill.active {
     background: var(--color-secondary);
-    color: #ffffff;
+    color: #ffffff !important;
     border-color: var(--color-secondary);
     box-shadow: 0 4px 12px rgba(51, 99, 103, 0.25);
   }
 
   .dark .filter-pill.active {
-    background: var(--color-secondary-light);
-    color: #1a2226;
-    border-color: var(--color-secondary-light);
+    background: #5ca1a8;
+    color: #071114 !important;
+    border-color: #7ecbd2;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
   }
 
   .results-count {

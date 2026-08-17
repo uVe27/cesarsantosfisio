@@ -112,7 +112,7 @@ const schemaJson = JSON.stringify(schema);
       <div class="contact-card" style="padding: 25px; display: flex; flex-direction: column; justify-content: space-between;">
         <div>
           <div class="card-image-wrapper">
-            <img src="/images/.webp" alt="Patient effectuant un exercice thérapeutique guidé avec confiance" class="card-image" />
+            <img src={`${import.meta.env.BASE_URL}images/patient_empowerment.webp`} alt="Patient effectuant un exercice thérapeutique guidé avec confiance" class="card-image" />
           </div>
           <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--color-secondary); letter-spacing: 0.08em; display: block; margin-bottom: 10px;">Pour les Patients & Personnes en Douleur</span>
           <h3 style="font-size: 1.3rem; margin-bottom: 15px; color: var(--text-color);">Comprenez votre douleur et retrouvez votre autonomie</h3>
@@ -120,11 +120,11 @@ const schemaJson = JSON.stringify(schema);
             Apprenez comment interagissent votre mouvement, votre sommeil, votre système immunitaire et vos habitudes. Sans jargon incompréhensible ni peur injustifiée sur vos IRM ou votre posture.
           </p>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-          <a href="/fr/guide-adaptation" class="btn-submit" style="text-decoration: none; text-align: center;">
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <a href="/fr/guide-adaptation" class="btn-submit">
             Voir le Guide d'Adaptation Active
           </a>
-          <a href="/fr/demystifier-la-douleur" class="btn-link" style="text-align: center; font-size: 0.85rem;">
+          <a href="/fr/demystifier-la-douleur" class="btn-link">
             Lire les articles pour patients &rarr;
           </a>
         </div>
@@ -134,7 +134,7 @@ const schemaJson = JSON.stringify(schema);
       <div class="contact-card" style="padding: 25px; display: flex; flex-direction: column; justify-content: space-between;">
         <div>
           <div class="card-image-wrapper">
-            <img src="/images/.webp" alt="Professionnels de santé collaborant et analysant des cas cliniques" class="card-image" />
+            <img src={`${import.meta.env.BASE_URL}images/professional_clinical.webp`} alt="Professionnels de santé collaborant et analysant des cas cliniques" class="card-image" />
           </div>
           <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--color-primary); letter-spacing: 0.08em; display: block; margin-bottom: 10px;">Pour les Professionnels de Santé</span>
           <h3 style="font-size: 1.3rem; margin-bottom: 15px; color: var(--text-color);">Rigueur clinique et perspective intégrative</h3>
@@ -142,11 +142,11 @@ const schemaJson = JSON.stringify(schema);
             Analyses des mécanismes neurophysiologiques de la thérapie manuelle, prise en charge PNI des pathologies musculosquelettiques complexes, exercice thérapeutique et réflexions cliniques.
           </p>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-          <a href="/fr/contact" class="btn-submit" style="text-decoration: none; text-align: center; background-color: var(--color-primary);">
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <a href="/fr/contact" class="btn-secondary">
             Collaborations & Enseignement
           </a>
-          <a href="/fr/demystifier-la-douleur" class="btn-link" style="text-align: center; font-size: 0.85rem;">
+          <a href="/fr/demystifier-la-douleur" class="btn-link">
             Voir les publications avec DOI/PubMed &rarr;
           </a>
         </div>

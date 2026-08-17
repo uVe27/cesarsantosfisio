@@ -121,23 +121,28 @@ const { lang = 'es', gaId = import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID || 'G-YEQ
 
   .p-btn-primary {
     background-color: var(--color-secondary, #336367);
-    color: #ffffff;
+    color: #ffffff !important;
     box-shadow: 0 4px 14px rgba(51, 99, 103, 0.3);
   }
 
   .p-btn-primary:hover {
     background-color: #274d50;
+    color: #ffffff !important;
     transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(51, 99, 103, 0.4);
   }
 
   :global(.dark) .p-btn-primary {
-    background-color: var(--color-secondary, #5ca1a8);
-    color: #0f171a;
+    background-color: #5ca1a8;
+    color: #071114 !important;
+    border: 1px solid #7ecbd2;
   }
 
   :global(.dark) .p-btn-primary:hover {
-    background-color: var(--color-secondary-light, #7ecbd2);
-    color: #080d0f;
+    background-color: #7ecbd2;
+    color: #02080a !important;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(126, 203, 210, 0.35);
   }
 
   .p-btn-secondary {
@@ -148,6 +153,19 @@ const { lang = 'es', gaId = import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID || 'G-YEQ
 
   .p-btn-secondary:hover {
     background-color: rgba(0, 0, 0, 0.05);
+    transform: translateY(-1px);
+  }
+
+  :global(.dark) .p-btn-secondary {
+    border-color: #3b4d57;
+    color: #ebf1f0;
+  }
+
+  :global(.dark) .p-btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: #5ca1a8;
+    color: #ffffff;
+    transform: translateY(-1px);
   }
 </style>
 

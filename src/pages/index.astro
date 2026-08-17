@@ -102,10 +102,10 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
 
     <!-- Rapid Access Buttons -->
     <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
-      <a href={getLocalizedPath('/desmitificando-el-dolor', lang)} class="btn-submit" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; width: auto; padding: 12px 24px; font-weight: 700;">
+      <a href={getLocalizedPath('/desmitificando-el-dolor', lang)} class="btn-submit" style="width: auto;">
         <span aria-hidden="true">📖</span> Ver Artículos y Publicaciones
       </a>
-      <a href={getLocalizedPath('/guia-afrontamiento', lang)} class="btn-link" style="padding: 10px 0; font-weight: 700;">
+      <a href={getLocalizedPath('/guia-afrontamiento', lang)} class="btn-link">
         <span aria-hidden="true">🛠️</span> Herramientas para Pacientes &rarr;
       </a>
     </div>
@@ -160,11 +160,11 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
             Aprende cómo interactúan tu movimiento, tu descanso, tu sistema inmune y tus hábitos. Sin jerga incomprensible ni miedos injustificados sobre tus resonancias o tu postura.
           </p>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-          <a href={getLocalizedPath('/guia-afrontamiento', lang)} class="btn-submit" style="text-decoration: none; text-align: center;">
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <a href={getLocalizedPath('/guia-afrontamiento', lang)} class="btn-submit">
             Ir a la Guía de Afrontamiento Activo
           </a>
-          <a href={getLocalizedPath('/desmitificando-el-dolor', lang)} class="btn-link" style="text-align: center; font-size: 0.85rem;">
+          <a href={getLocalizedPath('/desmitificando-el-dolor', lang)} class="btn-link">
             Leer artículos para pacientes &rarr;
           </a>
         </div>
@@ -182,11 +182,11 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
             Análisis sobre mecanismos neurofisiológicos de la terapia manual, abordaje PNI en patologías musculoesqueléticas complejas, ejercicio terapéutico y reflexiones de praxis.
           </p>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-          <a href={getLocalizedPath('/contacto', lang)} class="btn-submit" style="text-decoration: none; text-align: center; background-color: var(--color-primary);">
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <a href={getLocalizedPath('/contacto', lang)} class="btn-secondary">
             Colaboraciones y Docencia
           </a>
-          <a href={getLocalizedPath('/desmitificando-el-dolor', lang)} class="btn-link" style="text-align: center; font-size: 0.85rem;">
+          <a href={getLocalizedPath('/desmitificando-el-dolor', lang)} class="btn-link">
             Ver publicaciones con DOI/PubMed &rarr;
           </a>
         </div>
@@ -208,7 +208,7 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
       <!-- Pillar 1 -->
-      <div class="contact-card" style="padding: 25px; transition: transform 0.2s ease, box-shadow 0.2s ease; border-top: 4px solid var(--color-secondary);">
+      <div class="pillar-card" style="padding: 25px; border-top: 4px solid var(--color-secondary);">
         <div style="font-size: 2.2rem; margin-bottom: 12px;" aria-hidden="true">💆‍♂️</div>
         <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
           1. Terapia Manual Musculoesquelética
@@ -219,7 +219,7 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
       </div>
 
       <!-- Pillar 2 -->
-      <div class="contact-card" style="padding: 25px; transition: transform 0.2s ease, box-shadow 0.2s ease; border-top: 4px solid var(--color-primary);">
+      <div class="pillar-card" style="padding: 25px; border-top: 4px solid var(--color-primary);">
         <div style="font-size: 2.2rem; margin-bottom: 12px;" aria-hidden="true">🏃‍♂️</div>
         <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
           2. Ejercicio Terapéutico & Método Pilates
@@ -230,7 +230,7 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
       </div>
 
       <!-- Pillar 3 -->
-      <div class="contact-card" style="padding: 25px; transition: transform 0.2s ease, box-shadow 0.2s ease; border-top: 4px solid #28a745;">
+      <div class="pillar-card" style="padding: 25px; border-top: 4px solid #28a745;">
         <div style="font-size: 2.2rem; margin-bottom: 12px;" aria-hidden="true">🧬</div>
         <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
           3. Psiconeuroinmunología Clínica (PNI)
@@ -241,7 +241,7 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
       </div>
 
       <!-- Pillar 4 -->
-      <div class="contact-card" style="padding: 25px; transition: transform 0.2s ease, box-shadow 0.2s ease; border-top: 4px solid #17a2b8;">
+      <div class="pillar-card" style="padding: 25px; border-top: 4px solid #17a2b8;">
         <div style="font-size: 2.2rem; margin-bottom: 12px;" aria-hidden="true">🧠</div>
         <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
           4. Neurobiología y Educación (PNE)

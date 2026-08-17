@@ -112,7 +112,7 @@ const schemaJson = JSON.stringify(schema);
       <div class="contact-card" style="padding: 25px; display: flex; flex-direction: column; justify-content: space-between;">
         <div>
           <div class="card-image-wrapper">
-            <img src="/images/.webp" alt="Patient performing guided therapeutic exercise with confidence" class="card-image" />
+            <img src={`${import.meta.env.BASE_URL}images/patient_empowerment.webp`} alt="Patient performing guided therapeutic exercise with confidence" class="card-image" />
           </div>
           <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--color-secondary); letter-spacing: 0.08em; display: block; margin-bottom: 10px;">For Patients & People in Pain</span>
           <h3 style="font-size: 1.3rem; margin-bottom: 15px; color: var(--text-color);">Understand your pain and regain your autonomy</h3>
@@ -120,11 +120,11 @@ const schemaJson = JSON.stringify(schema);
             Learn how your movement, sleep, immune system, and daily habits interconnect. Free of incomprehensible jargon or unjustified fear about MRIs and posture.
           </p>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-          <a href="/en/coping-guide" class="btn-submit" style="text-decoration: none; text-align: center;">
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <a href="/en/coping-guide" class="btn-submit">
             Go to Active Coping Guide
           </a>
-          <a href="/en/demystifying-pain" class="btn-link" style="text-align: center; font-size: 0.85rem;">
+          <a href="/en/demystifying-pain" class="btn-link">
             Read articles for patients &rarr;
           </a>
         </div>
@@ -134,7 +134,7 @@ const schemaJson = JSON.stringify(schema);
       <div class="contact-card" style="padding: 25px; display: flex; flex-direction: column; justify-content: space-between;">
         <div>
           <div class="card-image-wrapper">
-            <img src="/images/.webp" alt="Healthcare professionals collaborating and reasoning clinical cases" class="card-image" />
+            <img src={`${import.meta.env.BASE_URL}images/professional_clinical.webp`} alt="Healthcare professionals collaborating and reasoning clinical cases" class="card-image" />
           </div>
           <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--color-primary); letter-spacing: 0.08em; display: block; margin-bottom: 10px;">For Healthcare Professionals</span>
           <h3 style="font-size: 1.3rem; margin-bottom: 15px; color: var(--text-color);">Clinical rigor and integrative perspective</h3>
@@ -142,11 +142,11 @@ const schemaJson = JSON.stringify(schema);
             Analysis on neurophysiological mechanisms of manual therapy, PNI approaches in complex musculoskeletal pathologies, therapeutic exercise, and praxis reflections.
           </p>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-          <a href="/en/contact" class="btn-submit" style="text-decoration: none; text-align: center; background-color: var(--color-primary);">
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <a href="/en/contact" class="btn-secondary">
             Collaborations & Teaching
           </a>
-          <a href="/en/demystifying-pain" class="btn-link" style="text-align: center; font-size: 0.85rem;">
+          <a href="/en/demystifying-pain" class="btn-link">
             View papers with DOI/PubMed &rarr;
           </a>
         </div>
