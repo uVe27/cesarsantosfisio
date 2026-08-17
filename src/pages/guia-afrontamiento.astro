@@ -1,0 +1,437 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { useTranslations } from '../utils/i18n';
+import { WHITE_LOGO_BASE64 } from '../utils/logoBase64.js';
+
+const lang = 'es';
+const t = useTranslations(lang);
+---
+
+<Layout 
+  title="Guía de Afrontamiento Activo y Autogestión del Dolor | Cesar Santos" 
+  description="Calculadora interactiva de actividad graduada (pacing) para el dolor de espalda y dolor persistente. Diseña tu plan de ejercicio progresivo basado en evidencia científica." 
+  lang={lang} 
+  canonicalPath="/guia-afrontamiento"
+>
+  <div class="article-detail" style="max-width: 900px;">
+    <span class="hero-subtitle">Herramientas de Autogestión y Fisioterapia Activa</span>
+    <h1 class="hero-title" style="margin-bottom: 20px;">
+      Guía de Afrontamiento Activo y Reentrenamiento del Movimiento
+    </h1>
+    <p class="hero-description" style="margin-bottom: 40px;">
+      El dolor persistente y el miedo a volver a lesionarte pueden limitar tus actividades diarias. Esta herramienta interactiva basada en neurociencia te ayuda a calcular tu cuota inicial de movimiento (pacing) para reentrenar tu sistema nervioso y recuperar tu vida activa con seguridad.
+    </p>
+
+    <!-- PIPT Toolkit sections -->
+    <div style="display: flex; flex-direction: column; gap: 40px;">
+      
+      <!-- Section 1: Graded Activity Calculator -->
+      <section class="contact-card" aria-labelledby="graded-heading" style="padding: 30px;">
+        <div class="card-image-wrapper" style="height: 220px;">
+          <img src={`${import.meta.env.BASE_URL}images/graded_activity.webp`} alt="Persona realizando caminata y ejercicio de actividad graduada al aire libre" class="card-image" />
+        </div>
+        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+          <span style="font-size: 2rem;" aria-hidden="true">📊</span>
+          <h2 id="graded-heading" style="font-size: 1.4rem; margin: 0;">
+            1. Planificador de Actividad Graduada (Movimiento por Cuotas)
+          </h2>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px;">
+          Para superar la kinesiofobia (miedo al movimiento), la ciencia propone realizar ejercicio basado en <strong>cuotas temporales fijas</strong>, independientes del nivel de dolor del momento. Usa este planificador para definir tu punto de partida seguro.
+        </p>
+
+        <!-- Interactive Calculator & PDF Generator Form -->
+        <div style="background-color: var(--bg-color); border: 1px solid var(--border-color); padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+          <div class="form-group">
+            <label for="activity-name" class="form-label"><strong>1. ¿Qué actividad quieres recuperar?</strong> (Ej. Caminar, Sentarse en la oficina, Cargar peso, Jugar con mis hijos)</label>
+            <input type="text" id="activity-name" required placeholder="Escribe la actividad aquí..." class="form-control" />
+          </div>
+
+          <div class="form-group">
+            <label for="max-time" class="form-label"><strong>2. ¿Cuántos minutos puedes realizar esta actividad en tu peor día?</strong></label>
+            <input type="number" id="max-time" min="1" required placeholder="Ej. 10" class="form-control" />
+          </div>
+
+          <div class="form-group">
+            <label for="user-email" class="form-label"><strong>3. Tu Correo Electrónico</strong> (Requerido para generar y descargar gratis tu Pauta PDF Oficial)</label>
+            <input type="email" id="user-email" required placeholder="ejemplo@correo.com" class="form-control" />
+          </div>
+
+          <!-- RGPD Privacy Checkbox -->
+          <div style="margin-top: 18px; margin-bottom: 20px; display: flex; align-items: start; gap: 10px;">
+            <input type="checkbox" id="privacy-consent" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--color-secondary); cursor: pointer;" />
+            <label for="privacy-consent" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; cursor: pointer;">
+              Acepto la <a href={`${import.meta.env.BASE_URL}aviso-legal`} target="_blank" style="color: var(--color-secondary); font-weight: 600; text-decoration: underline;">Política de Privacidad</a> para descargar mi Pauta PDF personalizada y recibir novedades divulgativas y recursos sobre Salud Integrativa.
+            </label>
+          </div>
+
+          <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
+            <button id="calc-btn" class="btn-submit" style="width: auto; padding: 14px 28px; font-size: 1rem; font-weight: 700;">
+              ⚡ Generar y Descargar Pauta PDF Personalizada
+            </button>
+          </div>
+        </div>
+
+        <!-- Calculator Result Area & Success Notification -->
+        <div id="calc-result" style="display: none; margin-top: 25px; padding: 25px; background-color: rgba(51, 99, 103, 0.06); border-left: 5px solid var(--color-secondary); border-radius: 8px;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+            <span style="font-size: 1.5rem;">🎉</span>
+            <h3 style="font-size: 1.2rem; margin: 0; color: var(--color-secondary); font-weight: 700;">¡Tu Pauta Oficial en PDF se ha generado e iniciado la descarga!</h3>
+          </div>
+          <p id="result-text" style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px;"></p>
+          <div style="font-size: 0.85rem; color: var(--text-muted); background: var(--card-bg, #ffffff); padding: 12px 15px; border-radius: 6px; border: 1px solid var(--border-color);">
+            <strong>Nota de Salud Integrativa:</strong> Hemos enviado una copia de tu registro y se ha iniciado la descarga directa del PDF en tu navegador. Si la descarga no ha comenzado automáticamente, revisa que tu navegador no esté bloqueando ventanas emergentes.
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Pacing Guide -->
+      <section class="contact-card" aria-labelledby="pacing-heading" style="padding: 30px;">
+        <div class="card-image-wrapper" style="height: 220px;">
+          <img src={`${import.meta.env.BASE_URL}images/pacing_activity.webp`} alt="Persona descansando de forma equilibrada aplicando técnicas de Pacing" class="card-image" />
+        </div>
+        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+          <span style="font-size: 2rem;" aria-hidden="true">⏱️</span>
+          <h2 id="pacing-heading" style="font-size: 1.4rem; margin: 0;">
+            2. Pacing (Regulación del Ritmo)
+          </h2>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">
+          El mayor enemigo de la recuperación es el ciclo de "Boom and Bust" (hacer demasiado los días buenos y quedar postrado los días malos). El Pacing te enseña a dividir tus actividades en bloques estables.
+        </p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
+          <div style="padding: 15px; background: rgba(220, 53, 69, 0.05); border-radius: 6px; border-left: 3px solid #dc3545;">
+            <h3 style="font-size: 0.95rem; color: #dc3545; margin-bottom: 8px;">Lo que debes evitar (Boom & Bust)</h3>
+            <ul style="padding-left: 20px; font-size: 0.85rem; color: var(--text-color); margin: 0;">
+              <li>Limpiar toda la casa seguida porque "hoy no me duele tanto".</li>
+              <li>Ignorar las alarmas leves y forzar el cuerpo hasta el agotamiento.</li>
+              <li>Guardar reposo absoluto durante varios días tras un brote de dolor.</li>
+            </ul>
+          </div>
+          <div style="padding: 15px; background: rgba(40, 167, 69, 0.05); border-radius: 6px; border-left: 3px solid #28a745;">
+            <h3 style="font-size: 0.95rem; color: #28a745; margin-bottom: 8px;">Pauta Recomendada (Pacing Activo)</h3>
+            <ul style="padding-left: 20px; font-size: 0.85rem; color: var(--text-color); margin: 0;">
+              <li>Divide las tareas grandes en bloques de 15-20 minutos.</li>
+              <li>Introduce descansos activos breves <strong>antes</strong> de sentir dolor fuerte.</li>
+              <li>Mantén un nivel mínimo de actividad constante todos los días.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Prefrontal Brake (PNE & Relaxation) -->
+      <section class="contact-card" aria-labelledby="brake-heading" style="padding: 30px;">
+        <div class="card-image-wrapper" style="height: 220px;">
+          <img src={`${import.meta.env.BASE_URL}images/prefrontal_relaxation.webp`} alt="Persona practicando respiración diafragmática para la modulación vaga del dolor" class="card-image" />
+        </div>
+        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+          <span style="font-size: 2rem;" aria-hidden="true">🧠</span>
+          <h2 id="brake-heading" style="font-size: 1.4rem; margin: 0;">
+            3. El Freno Cerebral (Modulación y Relajación)
+          </h2>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">
+          La educación sobre el dolor y las técnicas cognitivas no son solo ideas; modifican físicamente las señales nerviosas de tu prefrontal hacia la médula espinal, actuando como un "freno de mano" para el dolor.
+        </p>
+
+        <div style="border-top: 1px solid var(--border-color); padding-top: 20px;">
+          <h3 style="font-size: 1rem; margin-bottom: 10px;">Ejercicio de Respiración Diafragmática Coherente</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+            Este ejercicio estimula el nervio vago y reduce el estado de alarma de la amígdala cerebral, ayudando a disminuir la hipersensibilidad al dolor:
+          </p>
+          <ol style="font-size: 0.9rem; padding-left: 20px; line-height: 1.6;">
+            <li>Siéntate o acuéstate en una posición cómoda. Pon una mano en tu pecho y otra en tu abdomen.</li>
+            <li>Inhala lentamente por la nariz durante 5 segundos, sintiendo cómo se infla tu abdomen (no tu pecho).</li>
+            <li>Exhala suavemente por la boca durante 5 segundos.</li>
+            <li>Repite este ciclo durante 3 a 5 minutos cuando sientas un incremento de dolor o tensión.</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- Scientific Evidence & Primary References Section -->
+      <section class="contact-card" aria-labelledby="references-heading" style="padding: 30px; background: rgba(51, 99, 103, 0.04); border: 1px solid var(--border-color);">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+          <span style="font-size: 1.8rem;" aria-hidden="true">📚</span>
+          <h2 id="references-heading" style="font-size: 1.3rem; margin: 0; color: var(--text-color);">
+            Evidencia Científica y Referencias Base
+          </h2>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">
+          Publicaciones y ensayos clínicos primarios en los que se fundamentan las intervenciones de esta guía:
+        </p>
+
+        <ol style="display: flex; flex-direction: column; gap: 15px; padding-left: 20px; font-size: 0.85rem; line-height: 1.6; color: var(--text-color);">
+          <!-- Ref 1 Vancouver -->
+          <li style="padding: 14px; background: var(--card-bg, #ffffff); border-radius: 8px; border: 1px solid var(--border-color);">
+            Macedo LG, Maher CG, Latimer J, McAuley JH. Graded activity for chronic low back pain: a systematic review. <em>Phys Ther</em>. 2010 Jun;90(6):860-79. doi: <a href="https://doi.org/10.1093/ptj/ptq089" target="_blank" rel="noopener noreferrer" style="color: var(--color-secondary); font-weight: 600;">10.1093/ptj/ptq089</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/20601865/" target="_blank" rel="noopener noreferrer" style="color: var(--color-secondary); font-weight: 600;">20601865</a>.
+          </li>
+
+          <!-- Ref 2 Vancouver -->
+          <li style="padding: 14px; background: var(--card-bg, #ffffff); border-radius: 8px; border: 1px solid var(--border-color);">
+            Antcliff D, Campbell P, Woby S, Keeley P. Testing a newly developed activity pacing framework for chronic pain/fatigue: a feasibility study. <em>Musculoskelet Sci Pract</em>. 2021 Dec;56:102476. doi: <a href="https://doi.org/10.1016/j.msksp.2021.102476" target="_blank" rel="noopener noreferrer" style="color: var(--color-secondary); font-weight: 600;">10.1016/j.msksp.2021.102476</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/34880007/" target="_blank" rel="noopener noreferrer" style="color: var(--color-secondary); font-weight: 600;">34880007</a>.
+          </li>
+
+          <!-- Ref 3 Vancouver -->
+          <li style="padding: 14px; background: var(--card-bg, #ffffff); border-radius: 8px; border: 1px solid var(--border-color);">
+            Watson JA, Ryan CG, Cooper L, Ellington D, Whittle R, Lavender M, et al. Pain Neuroscience Education for Adults With Chronic Musculoskeletal Pain: A Mixed-Methods Systematic Review and Meta-Analysis. <em>J Pain</em>. 2019 Oct;20(10):1140-1155. doi: <a href="https://doi.org/10.1016/j.jpain.2019.02.011" target="_blank" rel="noopener noreferrer" style="color: var(--color-secondary); font-weight: 600;">10.1016/j.jpain.2019.02.011</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/30872671/" target="_blank" rel="noopener noreferrer" style="color: var(--color-secondary); font-weight: 600;">30872671</a>.
+          </li>
+        </ol>
+      </section>
+    </div>
+  </div>
+
+  <!-- Pre-loaded Brand Logo for instant PDF embedding -->
+  <img id="pdf-brand-logo" src={`${import.meta.env.BASE_URL}LOGO/LOGO TRANSPARENTE.png`} alt="Cesar Santos Logo" style="display: none;" />
+
+  <!-- Library jsPDF for Direct Vector PDF Generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" is:inline></script>
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const calcBtn = document.getElementById('calc-btn');
+      const activityInput = document.getElementById('activity-name');
+      const timeInput = document.getElementById('max-time');
+      const emailInput = document.getElementById('user-email');
+      const privacyConsent = document.getElementById('privacy-consent');
+      const resultDiv = document.getElementById('calc-result');
+      const resultText = document.getElementById('result-text');
+
+      if (calcBtn) {
+        calcBtn.addEventListener('click', () => {
+          const activity = activityInput.value.trim();
+          const maxTime = parseInt(timeInput.value);
+          const email = emailInput.value.trim();
+
+          if (!activity) {
+            alert('Por favor, indica qué actividad quieres recuperar.');
+            activityInput.focus();
+            return;
+          }
+
+          if (!maxTime || maxTime <= 0) {
+            alert('Por favor, introduce un número válido de minutos.');
+            timeInput.focus();
+            return;
+          }
+
+          if (!email || !email.includes('@')) {
+            alert('Por favor, introduce un correo electrónico válido para registrar y descargar tu pauta.');
+            emailInput.focus();
+            return;
+          }
+
+          if (!privacyConsent || !privacyConsent.checked) {
+            alert('Por favor, acepta la Política de Privacidad para continuar con la descarga.');
+            privacyConsent.focus();
+            return;
+          }
+
+          // Graded activity baseline calculation
+          const baseline = Math.max(1, Math.round(maxTime * 0.8));
+          const week2 = Math.round(baseline * 1.25);
+          const week3 = Math.round(baseline * 1.5);
+          const todayDate = new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
+
+          // 1. Send Lead Data to Google Sheet Webhook (SINGLE NON-BLOCKING POST REQUEST TO PREVENT DUPLICATES)
+          try {
+            const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbxxYxY2bqf-pdLvwzjmkkOB7pmqf_pAXmG67jsnudNHrIRkzHsL4KYEJn9JsJFyH9pxkg/exec';
+            const formData = new FormData();
+            formData.append('email', email);
+            formData.append('actividad', activity);
+            formData.append('minutos_peor_dia', maxTime);
+            formData.append('cuota_semana_1', baseline + ' min/día');
+            formData.append('idioma', 'es');
+
+            fetch(googleSheetUrl, { method: 'POST', mode: 'no-cors', body: formData }).catch(() => {});
+          } catch (e) {}
+
+          // 2. Display Result on screen
+          resultText.innerHTML = `
+            Para empezar a reentrenar tu cuerpo en la actividad de <strong>"${activity}"</strong>:<br><br>
+            • <strong>Semana 1 (Tu Cuota Inicial):</strong> Realiza la actividad durante exactamente <strong>${baseline} minutos</strong> al día.<br>
+            • <strong>Semana 2 (Adaptación):</strong> Incrementa la cuota a <strong>${week2} minutos</strong> diarios.<br>
+            • <strong>Semana 3 (Consolidación):</strong> Incrementa la cuota a <strong>${week3} minutos</strong> diarios.
+          `;
+          resultDiv.style.display = 'block';
+
+          // 3. Generate and Save PDF using jsPDF (OFFICIAL BRAND STYLE GUIDE IMPLEMENTATION)
+          try {
+            const jsPDFClass = (window.jspdf && window.jspdf.jsPDF) ? window.jspdf.jsPDF : (window.jsPDF || null);
+            if (!jsPDFClass) {
+              alert('Cargando generador de PDF, por favor vuelve a pulsar el botón.');
+              return;
+            }
+
+            const doc = new jsPDFClass({ unit: 'mm', format: 'a4', orientation: 'portrait' });
+
+            // Top Accent Bar (#336367 Verde Petróleo - 5mm)
+            doc.setFillColor(51, 99, 103);
+            doc.rect(0, 0, 210, 5, 'F');
+
+            // Header Background: Crisp White (#FFFFFF)
+            doc.setFillColor(255, 255, 255);
+            doc.rect(0, 5, 210, 37, 'F');
+
+            // Draw Brand Logo Image (Prominent 30mm height)
+            const logoImg = document.getElementById('pdf-brand-logo');
+            let textStartX = 15;
+
+            if (logoImg && logoImg.complete && logoImg.naturalWidth > 0) {
+              try {
+                const maxH = 30;
+                const aspect = logoImg.naturalWidth / logoImg.naturalHeight;
+                const logoH = maxH;
+                const logoW = Math.round(maxH * aspect * 10) / 10;
+                const logoY = 6;
+
+                doc.addImage(logoImg, 'PNG', 12, logoY, logoW, logoH);
+                textStartX = 12 + logoW + 5;
+              } catch (e) {
+                console.warn('Logo embed error:', e);
+              }
+            }
+
+            // Title: Pizarra Azulada (#303E45) as per Official Brand Style Guide
+            doc.setTextColor(48, 62, 69);
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(15);
+            doc.text('CESAR SANTOS', textStartX, 18);
+
+            // Subtitle: Verde Petróleo (#336367) as per Official Brand Style Guide
+            doc.setTextColor(51, 99, 103);
+            doc.setFontSize(9.5);
+            doc.setFont('helvetica', 'bold');
+            doc.text('FISIOTERAPIA Y SALUD', textStartX, 24);
+
+            doc.setFontSize(8.5);
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(100, 100, 100);
+            doc.text('Salud Integrativa, Ejercicio Terapéutico y Neurobiología del Dolor', textStartX, 30);
+
+            // Patient Metadata right
+            doc.setFontSize(8.5);
+            doc.setTextColor(50, 50, 50);
+            doc.setFont('helvetica', 'bold');
+            doc.text(`Fecha: ${todayDate}`, 195, 18, { align: 'right' });
+            doc.setFont('helvetica', 'normal');
+            doc.text(`Paciente: ${email}`, 195, 25, { align: 'right' });
+
+            // Horizontal Separator Line (#336367)
+            doc.setDrawColor(51, 99, 103);
+            doc.setLineWidth(0.5);
+            doc.line(15, 40, 195, 40);
+
+            // Title Box with Terracotta accent (#D35232)
+            doc.setFillColor(244, 247, 246);
+            doc.rect(15, 45, 180, 22, 'F');
+            doc.setFillColor(211, 82, 50);
+            doc.rect(15, 45, 3, 22, 'F');
+
+            doc.setTextColor(211, 82, 50);
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(11);
+            doc.text('PLAN PERSONALIZADO DE AFRONTAMIENTO ACTIVO', 22, 54);
+
+            doc.setTextColor(50, 50, 50);
+            doc.setFontSize(9.5);
+            doc.setFont('helvetica', 'normal');
+            doc.text(`Actividad Objetivo: ${activity}   |   Límite en Peor Día: ${maxTime} minutos`, 22, 61);
+
+            // Section 1: Pacing Table
+            doc.setTextColor(51, 99, 103);
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'bold');
+            doc.text('1. Programación de Cuotas Temporales (Pacing Activo)', 15, 70);
+
+            // Table Header
+            doc.setFillColor(51, 99, 103);
+            doc.rect(15, 74, 180, 8, 'F');
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(9);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Fase de Reentrenamiento', 18, 79);
+            doc.text('Cuota Diaria', 85, 79);
+            doc.text('Instrucción Clínica', 125, 79);
+
+            // Row 1
+            doc.setFillColor(255, 255, 255);
+            doc.rect(15, 82, 180, 10, 'F');
+            doc.setTextColor(211, 82, 50);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Semana 1 (Línea Base Segura)', 18, 88);
+            doc.setTextColor(0, 0, 0);
+            doc.text(`${baseline} min/día`, 85, 88);
+            doc.setFont('helvetica', 'normal');
+            doc.text(`Cumplir los ${baseline} minutos diarios y detenerse.`, 125, 88);
+
+            // Row 2
+            doc.setFillColor(249, 249, 249);
+            doc.rect(15, 92, 180, 10, 'F');
+            doc.setTextColor(51, 99, 103);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Semana 2 (Adaptación)', 18, 98);
+            doc.setTextColor(0, 0, 0);
+            doc.text(`${week2} min/día`, 85, 98);
+            doc.setFont('helvetica', 'normal');
+            doc.text(`Incrementar la cuota gradualmente sin forzar.`, 125, 98);
+
+            // Row 3
+            doc.setFillColor(255, 255, 255);
+            doc.rect(15, 102, 180, 10, 'F');
+            doc.setTextColor(51, 99, 103);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Semana 3 (Consolidación)', 18, 108);
+            doc.setTextColor(0, 0, 0);
+            doc.text(`${week3} min/día`, 85, 108);
+            doc.setFont('helvetica', 'normal');
+            doc.text(`Consolidar el umbral de confianza física.`, 125, 108);
+
+            // Section 2: Golden Rules
+            doc.setTextColor(51, 99, 103);
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'bold');
+            doc.text('2. Reglas de Oro del Pacing (Regulación del Ritmo)', 15, 124);
+
+            doc.setTextColor(50, 50, 50);
+            doc.setFontSize(9);
+            doc.setFont('helvetica', 'normal');
+            doc.text('• Independencia del dolor: Realiza tu cuota fijada independientemente de la molestia leve.', 18, 131);
+            doc.text('• Pausas activas: Introduce descansos breves antes de alcanzar picos de dolor.', 18, 137);
+            doc.text(`• En caso de brote de dolor: No abandones; completa los ${baseline} minutos a ritmo más suave.`, 18, 143);
+
+            // Section 3: Prefrontal Brake Protocol
+            doc.setTextColor(51, 99, 103);
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'bold');
+            doc.text('3. Protocolo del Freno Cerebral (Respiración Diafragmática 5s / 5s)', 15, 158);
+
+            doc.setTextColor(50, 50, 50);
+            doc.setFontSize(9);
+            doc.setFont('helvetica', 'normal');
+            const splitBrake = doc.splitTextToSize('Si sientes tensión o molestia elevada: realiza 5 segundos de inhalación nasal diafragmática (inflando el abdomen) y 5 segundos de exhalación bucal suave durante 3-5 minutos para estimular el nervio vago y activar el control prefrontal inhibitorio.', 175);
+            doc.text(splitBrake, 18, 165);
+
+            // Footer
+            doc.setDrawColor(51, 99, 103);
+            doc.setLineWidth(0.5);
+            doc.line(15, 270, 195, 270);
+
+            doc.setTextColor(100, 100, 100);
+            doc.setFontSize(8);
+            doc.setFont('helvetica', 'normal');
+            doc.text('Cesar Santos · Fisioterapia y Salud | Grado Fisioterapia (EUF ONCE - UAM)', 15, 276);
+            doc.text('Documento Oficial de Afrontamiento Activo', 195, 276, { align: 'right' });
+
+            // Direct Save Download
+            doc.save(`Pauta_Afrontamiento_CesarSantos_${activity.replace(/\s+/g, '_')}.pdf`);
+          } catch (pdfErr) {
+            alert('Error generando PDF: ' + pdfErr.message);
+          }
+
+          resultDiv.scrollIntoView({ behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
+</Layout>

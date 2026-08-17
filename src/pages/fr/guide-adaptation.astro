@@ -1,0 +1,173 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { useTranslations } from '../../utils/i18n';
+
+const lang = 'fr';
+const t = useTranslations(lang);
+---
+
+<Layout 
+  title="Guide d'Adaptation Active | Outils de Santé" 
+  description="Outils d'autogestion pratiques et interactifs pour la douleur et l'exercice progressif pour retrouver votre autonomie, basés sur des données scientifiques." 
+  lang={lang} 
+  canonicalPath="/fr/guide-adaptation"
+>
+  <div class="article-detail" style="max-width: 900px;">
+    <span class="hero-subtitle">{t('nav.guide')}</span>
+    <h1 class="hero-title" style="margin-bottom: 20px;">
+      Guide d'Adaptation Active
+    </h1>
+    <p class="hero-description" style="margin-bottom: 40px;">
+      La douleur persistante peut nous faire sentir fragiles et limiter nos activités. Ces outils basés sur des preuves scientifiques vous aideront à entraîner votre corps et votre système nerveux pour retrouver votre vie active, étape par étape.
+    </p>
+
+    <!-- PIPT Toolkit sections -->
+    <div style="display: flex; flex-direction: column; gap: 40px;">
+      
+      <!-- Section 1: Graded Activity Calculator -->
+      <section class="contact-card" aria-labelledby="graded-heading" style="padding: 30px;">
+        <div class="card-image-wrapper" style="height: 220px;">
+          <img src="/images/.webp" alt="Personne effectuant un exercice d'activité graduée en plein air" class="card-image" />
+        </div>
+        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+          <span style="font-size: 2rem;" aria-hidden="true">📊</span>
+          <h2 id="graded-heading" style="font-size: 1.4rem; margin: 0;">
+            1. Planificateur d'Activité Graduée (Mouvement par Quotas)
+          </h2>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px;">
+          Pour surmonter la kinésiophobie (peur du mouvement), la science propose de réaliser des exercices basés sur des <strong>quotas de temps fixes</strong>, indépendants du niveau de douleur du moment. Utilisez ce planificateur pour définir votre point de départ sécurisé.
+        </p>
+
+        <!-- Interactive Calculator Form -->
+        <div style="background-color: var(--bg-color); border: 1px solid var(--border-color); padding: 20px; border-radius: 8px;">
+          <div class="form-group">
+            <label for="activity-name" class="form-label">Quelle activité souhaitez-vous reprendre ? (Ex. Marcher, S'asseoir au bureau, Porter du poids)</label>
+            <input type="text" id="activity-name" placeholder="Écrivez l'activité ici..." class="form-control" />
+          </div>
+
+          <div class="form-group">
+            <label for="max-time" class="form-label">Combien de minutes pouvez-vous réaliser cette activité votre pire jour avant que la douleur ne devienne insupportable ?</label>
+            <input type="number" id="max-time" min="1" placeholder="Ex. 10" class="form-control" />
+          </div>
+
+          <button id="calc-btn" class="btn-submit" style="margin-top: 10px; width: auto; padding: 12px 25px;">
+            Générer le Plan de Mouvement
+          </button>
+        </div>
+
+        <!-- Calculator Result Area -->
+        <div id="calc-result" style="display: none; margin-top: 25px; padding: 20px; background-color: rgba(51, 99, 103, 0.05); border-left: 4px solid var(--color-secondary); border-radius: 4px;">
+          <h3 style="font-size: 1.1rem; margin-bottom: 10px; color: var(--color-secondary);">Votre Plan Personnalisé</h3>
+          <p id="result-text" style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px;"></p>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">
+            <strong>Note scientifique :</strong> En réalisant exactement le quota fixé (ni plus ni moins), votre cerveau apprend à dissocier le mouvement du signal de danger.
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Pacing Guide -->
+      <section class="contact-card" aria-labelledby="pacing-heading" style="padding: 30px;">
+        <div class="card-image-wrapper" style="height: 220px;">
+          <img src="/images/.webp" alt="Personne régulant le rythme de ses activités avec équilibre" class="card-image" />
+        </div>
+        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+          <span style="font-size: 2rem;" aria-hidden="true">⏱️</span>
+          <h2 id="pacing-heading" style="font-size: 1.4rem; margin: 0;">
+            2. Pacing (Régulation du Rythme)
+          </h2>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">
+          Le plus grand ennemi de la récupération est le cycle de « Boom and Bust » (en faire trop les bons jours et rester alité les mauvais jours). Le Pacing vous apprend à diviser vos activités.
+        </p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
+          <div style="padding: 15px; background: rgba(220, 53, 69, 0.05); border-radius: 6px; border-left: 3px solid #dc3545;">
+            <h3 style="font-size: 0.95rem; color: #dc3545; margin-bottom: 8px;">À éviter (Boom & Bust)</h3>
+            <ul style="padding-left: 20px; font-size: 0.85rem; color: var(--text-color); margin: 0;">
+              <li>Nettoyer toute la maison d'un coup parce que « aujourd'hui j'ai moins mal ».</li>
+              <li>Ignorer les légères alarmes et forcer son corps jusqu'à l'épuisement.</li>
+              <li>Observer un repos alité absolu pendant plusieurs jours après une crise.</li>
+            </ul>
+          </div>
+          <div style="padding: 15px; background: rgba(40, 167, 69, 0.05); border-radius: 6px; border-left: 3px solid #28a745;">
+            <h3 style="font-size: 0.95rem; color: #28a745; margin-bottom: 8px;">Recommandation (Pacing Actif)</h3>
+            <ul style="padding-left: 20px; font-size: 0.85rem; color: var(--text-color); margin: 0;">
+              <li>Divisez les grandes tâches en blocs de 15 à 20 minutes.</li>
+              <li>Introduisez de courtes pauses actives <strong>avant</strong> d'avoir une douleur vive.</li>
+              <li>Maintenez un niveau d'activité constant chaque jour.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Prefrontal Brake (PNE & Relaxation) -->
+      <section class="contact-card" aria-labelledby="brake-heading" style="padding: 30px;">
+        <div class="card-image-wrapper" style="height: 220px;">
+          <img src="/images/.webp" alt="Personne pratiquant la respiration diPhragmatique" class="card-image" />
+        </div>
+        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+          <span style="font-size: 2rem;" aria-hidden="true">🧠</span>
+          <h2 id="brake-heading" style="font-size: 1.4rem; margin: 0;">
+            3. Le Frein Cérébral (Modulation & Relaxation)
+          </h2>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">
+          L'éducation sur la douleur et las techniques cognitives ne sont pas seulement des idées; elles modifient physiquement les signaux nerveux de votre cortex préfrontal vers la moelle épinière, agissant comme un "frein à main" pour la douleur.
+        </p>
+
+        <div style="border-top: 1px solid var(--border-color); padding-top: 20px;">
+          <h3 style="font-size: 1rem; margin-bottom: 10px;">Exercice de Respiration Diaphragmatique Cohérente</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+            Cet exercice stimule le nerf vague et réduit l'état d'alarme de l'amygdale cérébrale, aidant à diminuer l'hypersensibilité à la douleur :
+          </p>
+          <ol style="font-size: 0.9rem; padding-left: 20px; line-height: 1.6;">
+            <li>Asseyez-vous ou allongez-vous dans une position confortable. Placez une main sur votre poitrine et l'autre sur votre abdomen.</li>
+            <li>Inhalez lentement par le nez pendant 5 secondes, en sentant votre abdomen se gonfler (pas votre poitrine).</li>
+            <li>Exhalez doucement par la bouche pendant 5 secondes.</li>
+            <li>Répétez ce cycle pendant 3 à 5 minutes chaque fois que vous ressentez une augmentation de douleur ou de tension.</li>
+          </ol>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Interactive script for calculator -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const calcBtn = document.getElementById('calc-btn');
+      const activityInput = document.getElementById('activity-name');
+      const timeInput = document.getElementById('max-time');
+      const resultDiv = document.getElementById('calc-result');
+      const resultText = document.getElementById('result-text');
+
+      if (calcBtn) {
+        calcBtn.addEventListener('click', () => {
+          const activity = activityInput.value.trim() || 'votre activité';
+          const maxTime = parseInt(timeInput.value);
+
+          if (!maxTime || maxTime <= 0) {
+            alert('Veuillez entrer un nombre de minutes valide.');
+            return;
+          }
+
+          const baseline = Math.max(1, Math.round(maxTime * 0.8));
+          const week2 = Math.round(baseline * 1.25);
+          const week3 = Math.round(baseline * 1.5);
+
+          resultText.innerHTML = `
+            Pour commencer à réentraîner votre corps pour l'activité de <strong>"${activity}"</strong> :<br><br>
+            • <strong>Semaine 1 (Votre Quota) :</strong> Effectuez l'activité pendant exactement <strong>${baseline} minutes</strong> par jour, quoi qu'il arrive. Arrêtez-vous une fois ce temps atteint, même si vous vous sentez assez fort pour continuer.<br>
+            • <strong>Semaine 2 :</strong> Augmentez le quota à <strong>${week2} minutes</strong> par jour.<br>
+            • <strong>Semaine 3 :</strong> Augmentez le quota à <strong>${week3} minutes</strong> par jour.<br><br>
+            Si vous avez une poussée de douleur un jour, <strong>n'abandonnez pas</strong>. Remplissez votre quota de ${baseline} minutes à un rythme plus doux ou avec des pauses fractionnées, mais complétez le temps. Cela apprend à votre cerveau que la douleur ne signifie pas des dégâts.
+          `;
+          
+          resultDiv.style.display = 'block';
+          resultDiv.scrollIntoView({ behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
+</Layout>

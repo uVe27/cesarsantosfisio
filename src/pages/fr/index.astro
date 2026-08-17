@@ -1,0 +1,275 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { useTranslations } from '../../utils/i18n';
+
+const lang = 'fr';
+const t = useTranslations(lang);
+
+// Get latest articles filtered by French subdirectory
+const allArticles = await getCollection('blog');
+const frArticles = allArticles
+  .filter(item => item.id.startsWith('fr/'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+// JSON-LD ProfilePage & MedicalWebPage Schema
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": "Cesar Santos | Kinésithérapie Intégrative, Neurosciences de la Douleur & PNI",
+  "description": "Physiothérapie basée sur la science pour les douleurs persistantes, hernies discales, exercice progressif et Psychoneuroimmunologie Clinique (PNI).",
+  "medicalSpecialty": "Physiotherapy",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Cesar Santos",
+    "givenName": "Cesar",
+    "familyName": "Santos",
+    "jobTitle": "Physiothérapeute Spécialiste en Douleur Persistante & Santé Intégrative",
+    "knowsAbout": [
+      "Physiothérapie Musculosquelettique Basée sur les Preuves",
+      "Neurosciences de la Douleur Persistante & Sensibilisation Centrale",
+      "Psychoneuroimmunologie Clinique (PNI)",
+      "Exercice Thérapeutique Progressif (Pacing)",
+      "Gestion de la Hernie Discale & Lombalgie"
+    ],
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "École Universitaire de Physiothérapie ONCE - Université Autonome de Madrid (UAM)"
+    }
+  }
+};
+
+const schemaJson = JSON.stringify(schema);
+---
+
+<Layout 
+  title="Physiothérapie & Douleur Chronique | Cesar Santos · Santé Intégrative" 
+  description="Kinésithérapie basée sur la science, neurosciences de la douleur persistante, hernie discale, exercice thérapeutique progressif et PNI." 
+  lang={lang} 
+  canonicalPath="/fr" 
+  schemaJson={schemaJson}
+>
+  <!-- Hero Section with Storytelling & Mission -->
+  <section class="hero-section" aria-labelledby="manifesto-heading">
+    <span class="hero-subtitle">Physiothérapie Basée sur les Preuves, Exercice & Santé Intégrative</span>
+    <h1 id="manifesto-heading" class="hero-title">
+      Physiothérapie Intégrative et Neurosciences de la Douleur Persistante
+    </h1>
+    <p class="hero-description">
+      Je suis <strong>Cesar Santos</strong>, physiothérapeute diplômé de l'École Universitaire de l'ONCE (UAM), ancien Capitaine d'Infanterie des Troupes de Montagne, avec un Master en Thérapie Manuelle Musculosquelettique et une formation en Exercice Thérapeutique, Pilates et Psychoneuroimmunologie Clinique (PNI) appliquée à la consultation quotidienne. Après avoir surmonté un changement de vie radical dû à une pathologie neurologique avec un handicap visuel de 80 %, je me consacre aujourd'hui à traduire la science médicale pour que patients et professionnels comprennent l'extraordinaire capacité d'adaptation de l'être humain.
+    </p>
+
+    <!-- Rapid Access Buttons -->
+    <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
+      <a href="/fr/demystifier-la-douleur" class="btn-submit" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; width: auto; padding: 12px 24px; font-weight: 700;">
+        <span aria-hidden="true">📖</span> Voir les Articles & Publications
+      </a>
+      <a href="/fr/guide-adaptation" class="btn-link" style="padding: 10px 0; font-weight: 700;">
+        <span aria-hidden="true">🛠️</span> Outils pour Patients &rarr;
+      </a>
+    </div>
+    
+    <!-- Hero Main Image -->
+    <div class="hero-image-wrapper" style="margin-bottom: 30px;">
+      <img src="/images/.webp" alt="Physiothérapeute guidant un patient dans un exercice thérapeutique et réhabilitation active" class="hero-image" />
+    </div>
+    
+    <!-- Profile Banner & Story Highlight -->
+    <div class="profile-card" style="margin-top: 30px; display: flex; flex-direction: column; gap: 15px;">
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <img 
+          src="/images/cesar_santos_portrait.webp" 
+          alt="Cesar Santos - Physiothérapeute" 
+          class="profile-avatar-img" 
+        />
+        <div>
+          <h2 class="profile-info-title" style="margin: 0;">Cesar Santos</h2>
+          <p class="profile-info-text" style="margin: 0;">
+            Physiothérapeute · Master en Physiothérapie Manuelle Orthopédique · Méthode Pilates & PNI
+          </p>
+        </div>
+      </div>
+      <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-color); margin: 10px 0 0 0;">
+        <em>« Que faites-vous quand la vie éteint la lumière du jour au lendemain ? Vous vous réinventez pour enseigner aux autres à trouver leur propre voie. »</em>
+      </p>
+      <div style="margin-top: 5px;">
+        <a href="/fr/a-propos" class="btn-link" style="font-size: 0.9rem; font-weight: 700;">
+          Découvrir mon histoire complète &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dual Track Audience Selector -->
+  <section style="margin: 50px 0;">
+    <h2 class="section-title" style="text-align: center; margin-bottom: 25px;">
+      Comment puis-je vous aider aujourd'hui ?
+    </h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+      <!-- Track 1: Patients -->
+      <div class="contact-card" style="padding: 25px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div class="card-image-wrapper">
+            <img src="/images/.webp" alt="Patient effectuant un exercice thérapeutique guidé avec confiance" class="card-image" />
+          </div>
+          <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--color-secondary); letter-spacing: 0.08em; display: block; margin-bottom: 10px;">Pour les Patients & Personnes en Douleur</span>
+          <h3 style="font-size: 1.3rem; margin-bottom: 15px; color: var(--text-color);">Comprenez votre douleur et retrouvez votre autonomie</h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
+            Apprenez comment interagissent votre mouvement, votre sommeil, votre système immunitaire et vos habitudes. Sans jargon incompréhensible ni peur injustifiée sur vos IRM ou votre posture.
+          </p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <a href="/fr/guide-adaptation" class="btn-submit" style="text-decoration: none; text-align: center;">
+            Voir le Guide d'Adaptation Active
+          </a>
+          <a href="/fr/demystifier-la-douleur" class="btn-link" style="text-align: center; font-size: 0.85rem;">
+            Lire les articles pour patients &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Track 2: Health Professionals -->
+      <div class="contact-card" style="padding: 25px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div class="card-image-wrapper">
+            <img src="/images/.webp" alt="Professionnels de santé collaborant et analysant des cas cliniques" class="card-image" />
+          </div>
+          <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--color-primary); letter-spacing: 0.08em; display: block; margin-bottom: 10px;">Pour les Professionnels de Santé</span>
+          <h3 style="font-size: 1.3rem; margin-bottom: 15px; color: var(--text-color);">Rigueur clinique et perspective intégrative</h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
+            Analyses des mécanismes neurophysiologiques de la thérapie manuelle, prise en charge PNI des pathologies musculosquelettiques complexes, exercice thérapeutique et réflexions cliniques.
+          </p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <a href="/fr/contact" class="btn-submit" style="text-decoration: none; text-align: center; background-color: var(--color-primary);">
+            Collaborations & Enseignement
+          </a>
+          <a href="/fr/demystifier-la-douleur" class="btn-link" style="text-align: center; font-size: 0.85rem;">
+            Voir les publications avec DOI/PubMed &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Myth Buster Section -->
+  <section class="myth-section" aria-labelledby="myths-heading">
+    <h2 id="myths-heading" class="section-title" style="text-align: center; margin-bottom: 10px;">
+      Démystificateur Rapide de Santé
+    </h2>
+    <p style="color: var(--text-muted); text-align: center; max-width: 600px; margin: 0 auto 30px auto; font-size: 0.95rem;">
+      Cliquez sur n'importe quelle carte pour contraster les croyances communes avec les faits scientifiques démontrés par la recherche clinique.
+    </p>
+
+    <div class="myth-grid" role="region" aria-label="Mythes et Réalités de la Douleur">
+      <!-- Card 1: Hernias -->
+      <div class="myth-card" role="button" aria-expanded="false" tabindex="0">
+        <div>
+          <span class="myth-label">Mythe Commun</span>
+          <h3 class="myth-title">"J'ai une hernie discale sur mon IRM, donc ma colonne est cassée et endommagée."</h3>
+        </div>
+        <div class="reality-content">
+          <span class="reality-label">La Réalité Scientifique</span>
+          <p style="margin: 0; font-size: 0.9rem;">
+            <strong>35 % des personnes de plus de 40 ans ont des hernies discales sans ressentir aucune douleur</strong> (Varun S. et al., 2025). L'imagerie reflète des changements normaux liés à l'âge, comme les rides sur la peau, pas un certificat d'invalidité.
+          </p>
+        </div>
+        <span class="myth-action-hint">Voir réalité &rarr;</span>
+      </div>
+
+      <!-- Card 2: Posture -->
+      <div class="myth-card" role="button" aria-expanded="false" tabindex="0">
+        <div>
+          <span class="myth-label">Mythe Commun</span>
+          <h3 class="myth-title">"J'ai besoin de trouver la posture parfaite pour m'asseoir ou me tenir debout afin d'éviter le mal de dos."</h3>
+        </div>
+        <div class="reality-content">
+          <span class="reality-label">La Réalité Scientifique</span>
+          <p style="margin: 0; font-size: 0.9rem;">
+            <strong>Il n'y a pas de posture unique ou parfaite.</strong> La science montre qu'il n'y a pas de lien de cause à effet entre les postures statiques et la douleur. Le corps a besoin de mouvement et de variabilité; votre meilleure posture est la suivante.
+          </p>
+        </div>
+        <span class="myth-action-hint">Voir réalité &rarr;</span>
+      </div>
+
+      <!-- Card 3: Pain vs Damage -->
+      <div class="myth-card" role="button" aria-expanded="false" tabindex="0">
+        <div>
+          <span class="myth-label">Mythe Commun</span>
+          <h3 class="myth-title">"Si une activité physique me fait mal, cela signifie que j'endommage les tissus de mon corps."</h3>
+        </div>
+        <div class="reality-content">
+          <span class="reality-label">La Réalité Scientifique</span>
+          <p style="margin: 0; font-size: 0.9rem;">
+            <strong>La douleur persistante est un système d'alarme hypersensible.</strong> La douleur protège avant qu'il n'y ait de véritables dommages. Le mouvement progressif et adapté entraîne le cerveau à réguler cette sensibilité.
+          </p>
+        </div>
+        <span class="myth-action-hint">Voir réalité &rarr;</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Articles Section -->
+  <section class="articles-section" aria-labelledby="articles-heading" style="margin-top: 50px;">
+    <div class="section-header">
+      <h2 id="articles-heading" class="section-title">
+        {t('latestPosts')}
+      </h2>
+      <a href="/fr/demystifier-la-douleur" class="btn-link">
+        {t('viewAll')} &rarr;
+      </a>
+    </div>
+
+    <!-- Articles Grid -->
+    <div class="articles-grid">
+      {frArticles.map((article) => {
+        const cleanSlug = article.id.replace(/^fr\//, '');
+        return (
+          <article class="article-card">
+            <span class="article-category">
+              {article.data.category}
+            </span>
+            <h3 class="article-title">
+              <a href={`/fr/demystifier-la-douleur/${cleanSlug}`}>
+                {article.data.title}
+              </a>
+            </h3>
+            <p class="article-description">
+              {article.data.description}
+            </p>
+            <div class="article-footer">
+              <span>{new Date(article.data.pubDate).toLocaleDateString('fr-FR', { dateStyle: 'medium' })}</span>
+              {article.data.doi && <span class="doi-badge">DOI: {article.data.doi.split('/')[1] || article.data.doi}</span>}
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- Script to handle card interactions -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.myth-card');
+      
+      cards.forEach(card => {
+        const toggleCard = () => {
+          const isActive = card.classList.contains('active');
+          card.classList.toggle('active');
+          card.setAttribute('aria-expanded', !isActive);
+        };
+
+        card.addEventListener('click', toggleCard);
+        
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleCard();
+          }
+        });
+      });
+    });
+  </script>
+</Layout>

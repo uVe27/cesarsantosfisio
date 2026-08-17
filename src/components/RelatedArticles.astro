@@ -1,0 +1,196 @@
+---
+import { getCollection } from 'astro:content';
+import { useTranslations, getLocalizedPath, type Locale } from '../utils/i18n';
+
+interface Props {
+  currentId: string;
+  category?: string;
+  tags?: string[];
+  lang?: Locale;
+}
+
+const { currentId, category = '', tags = [], lang = 'es' } = Astro.props;
+
+// Get all articles in current language
+const allArticles = await getCollection('blog');
+const langArticles = allArticles.filter(item => item.id.startsWith(`${lang}/`) && item.id !== currentId);
+
+// Rank articles by relevance (matching tags/category)
+const scoredArticles = langArticles.map(article => {
+  let score = 0;
+  if (article.data.category === category) score += 5;
+  if (article.data.tags && tags.length > 0) {
+    const commonTags = article.data.tags.filter(tag => tags.includes(tag));
+    score += commonTags.length * 3;
+  }
+  return { article, score };
+});
+
+// Sort by score desc, then pubDate desc, take top 2
+scoredArticles.sort((a, b) => {
+  if (b.score !== a.score) return b.score - a.score;
+  return b.article.data.pubDate.valueOf() - a.article.data.pubDate.valueOf();
+});
+
+const related = scoredArticles.slice(0, 2).map(item => item.article);
+
+const titles = {
+  es: 'Artículos Relacionados',
+  en: 'Related Articles',
+  fr: 'Articles Connexes'
+};
+const subtitle = {
+  es: 'Sigue explorando la evidencia científica y la salud integrativa',
+  en: 'Keep exploring scientific evidence and integrative health',
+  fr: 'Continuez d\'explorer les preuves scientifiques et la santé intégrative'
+};
+
+const sectionTitle = titles[lang] || titles.es;
+const sectionSubtitle = subtitle[lang] || subtitle.es;
+---
+
+{related.length > 0 && (
+  <section class="related-articles-section" aria-labelledby="related-heading">
+    <div class="related-header">
+      <h2 id="related-heading" class="related-title">{sectionTitle}</h2>
+      <p class="related-subtitle">{sectionSubtitle}</p>
+    </div>
+
+    <div class="related-grid">
+      {related.map(art => {
+        const cleanSlug = art.id.replace(new RegExp(`^${lang}/`), '');
+        const basePath = lang === 'es' ? '/desmitificando-el-dolor' : lang === 'en' ? '/demystifying-pain' : '/demystifier-la-douleur';
+        const articleLink = getLocalizedPath(`${basePath}/${cleanSlug}`, lang);
+        
+        return (
+          <article class="related-card">
+            <div>
+              <div class="related-category">{art.data.category}</div>
+              <h3 class="related-card-title">
+                <a href={articleLink}>
+                  {art.data.title}
+                </a>
+              </h3>
+              <p class="related-card-desc">{art.data.description}</p>
+            </div>
+            <div class="related-card-meta">
+              <time datetime={art.data.pubDate.toISOString()}>
+                {new Date(art.data.pubDate).toLocaleDateString(lang === 'es' ? 'es-ES' : lang === 'en' ? 'en-US' : 'fr-FR', { dateStyle: 'long' })}
+              </time>
+              <span aria-hidden="true">&rarr;</span>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </section>
+)}
+
+<style>
+  .related-articles-section {
+    margin-top: 45px;
+    padding-top: 35px;
+    border-top: 2px solid var(--border-color);
+  }
+
+  .related-header {
+    margin-bottom: 25px;
+  }
+
+  .related-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 5px;
+  }
+
+  .related-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .related-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+
+  .related-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-secondary);
+    box-shadow: 0 8px 24px rgba(51, 99, 103, 0.12);
+  }
+
+  .related-category {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+
+  .dark .related-category {
+    color: var(--color-secondary-light);
+  }
+
+  .related-card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.4;
+    text-transform: none;
+    margin-bottom: 10px;
+  }
+
+  .related-card-title a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .related-card-title a:hover {
+    color: var(--color-secondary);
+  }
+
+  .dark .related-card-title a:hover {
+    color: var(--color-secondary-light);
+  }
+
+  .related-card-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 18px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .related-card-meta {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-secondary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dark .related-card-meta {
+    color: var(--color-secondary-light);
+  }
+</style>

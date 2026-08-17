@@ -1,0 +1,212 @@
+---
+// CookieConsent.astro - Modal Centrado Bloqueante con Desenfoque de Fondo (Glassmorphism & RGPD)
+import { useTranslations } from '../utils/i18n';
+
+interface Props {
+  lang?: 'es' | 'en' | 'fr';
+  gaId?: string;
+}
+
+const { lang = 'es', gaId = import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID || 'G-YEQ62CFDFF' } = Astro.props;
+---
+
+<div id="p-privacy-modal-overlay" class="p-privacy-modal-overlay" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="p-privacy-title">
+  <div class="p-privacy-card">
+    <div class="p-privacy-icon" aria-hidden="true">🍪</div>
+    <h2 id="p-privacy-title" class="p-privacy-title">
+      {lang === 'es' ? 'Privacidad y Medición de Salud' : lang === 'en' ? 'Privacy & Health Analytics' : 'Confidentialité & Mesure de Santé'}
+    </h2>
+    <p class="p-privacy-desc">
+      {lang === 'es' 
+        ? 'Utilizamos cookies analíticas para medir las visitas y entender qué contenidos te resultan más útiles. Para navegar por la web y ayudarnos con estas métricas, por favor selecciona tu preferencia:'
+        : lang === 'en'
+        ? 'We use analytical cookies to measure visits and understand which health content is most useful to you. Please select your preference:'
+        : 'Nous utilisons des cookies analytiques pour mesurer les visites et comprendre quels contenus vous sont les plus utiles. Veuillez choisir votre préférence :'}
+    </p>
+    
+    <div class="p-privacy-actions">
+      <button id="p-accept-btn" type="button" class="p-privacy-btn p-btn-primary">
+        {lang === 'es' ? 'Aceptar y Continuar' : lang === 'en' ? 'Accept & Continue' : 'Accepter & Continuer'}
+      </button>
+      <button id="p-reject-btn" type="button" class="p-privacy-btn p-btn-secondary">
+        {lang === 'es' ? 'Continuar solo con cookies necesarias' : lang === 'en' ? 'Continue with necessary cookies only' : 'Continuer avec cookies nécessaires uniquement'}
+      </button>
+    </div>
+
+    <p style="margin-top: 18px; font-size: 0.78rem; color: var(--text-muted, #666666);">
+      <a href={lang === 'es' ? '/aviso-legal' : `/${lang}/aviso-legal`} style="color: var(--color-secondary, #336367); text-decoration: underline;">
+        {lang === 'es' ? 'Más información en nuestra Política de Privacidad y Cookies' : lang === 'en' ? 'More information in our Privacy & Cookie Policy' : 'Plus d\'informations dans notre Politique de Confidentialité'}
+      </a>
+    </p>
+  </div>
+</div>
+
+<style>
+  .p-privacy-modal-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(0, 0, 0, 0.65) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    z-index: 999999 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .p-privacy-card {
+    max-width: 480px;
+    width: 100%;
+    background: var(--card-bg, #ffffff);
+    border: 1px solid var(--border-color, #e0e0e0);
+    border-radius: 20px;
+    padding: 35px 25px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+    text-align: center;
+    animation: pPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  @keyframes pPop {
+    from {
+      opacity: 0;
+      transform: scale(0.9) translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  .p-privacy-icon {
+    font-size: 2.8rem;
+    margin-bottom: 12px;
+  }
+
+  .p-privacy-title {
+    font-size: 1.3rem;
+    margin: 0 0 10px 0;
+    color: var(--text-color, #222222);
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+
+  .p-privacy-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted, #555555);
+    line-height: 1.55;
+    margin-bottom: 25px;
+  }
+
+  .p-privacy-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .p-privacy-btn {
+    width: 100%;
+    padding: 13px 20px;
+    border-radius: 10px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+  }
+
+  .p-btn-primary {
+    background-color: var(--color-secondary, #336367);
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(51, 99, 103, 0.3);
+  }
+
+  .p-btn-primary:hover {
+    background-color: #274d50;
+    transform: translateY(-1px);
+  }
+
+  :global(.dark) .p-btn-primary {
+    background-color: var(--color-secondary, #5ca1a8);
+    color: #0f171a;
+  }
+
+  :global(.dark) .p-btn-primary:hover {
+    background-color: var(--color-secondary-light, #7ecbd2);
+    color: #080d0f;
+  }
+
+  .p-btn-secondary {
+    background-color: transparent;
+    border: 1px solid var(--border-color, #cccccc);
+    color: var(--text-color, #444444);
+  }
+
+  .p-btn-secondary:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+</style>
+
+<script is:inline define:vars={{ gaId }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('p-privacy-modal-overlay');
+    const acceptBtn = document.getElementById('p-accept-btn');
+    const rejectBtn = document.getElementById('p-reject-btn');
+
+    const consent = localStorage.getItem('cesar_cookie_consent');
+
+    if (!consent && overlay) {
+      overlay.style.display = 'flex';
+
+      // Verification check: Only lock body scroll if the modal is ACTUALLY visible on screen!
+      setTimeout(() => {
+        const computedStyle = window.getComputedStyle(overlay);
+        if (computedStyle.display !== 'none' && computedStyle.visibility !== 'hidden' && overlay.offsetHeight > 0) {
+          document.body.style.overflow = 'hidden';
+        }
+      }, 60);
+    } else if (consent === 'accepted') {
+      enableAnalytics();
+    }
+
+    function unlockScroll() {
+      if (overlay) overlay.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    if (acceptBtn) {
+      acceptBtn.addEventListener('click', () => {
+        localStorage.setItem('cesar_cookie_consent', 'accepted');
+        unlockScroll();
+        enableAnalytics();
+      });
+    }
+
+    if (rejectBtn) {
+      rejectBtn.addEventListener('click', () => {
+        localStorage.setItem('cesar_cookie_consent', 'rejected');
+        unlockScroll();
+      });
+    }
+
+    function enableAnalytics() {
+      if (!gaId || window.gtagLoaded) return;
+      window.gtagLoaded = true;
+
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+      document.head.appendChild(script);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { window.dataLayer.push(arguments); }
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', gaId, { 'anonymize_ip': true });
+    }
+  });
+</script>

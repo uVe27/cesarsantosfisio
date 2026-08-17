@@ -1,0 +1,96 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { useTranslations } from '../utils/i18n';
+
+const lang = 'es';
+const t = useTranslations(lang);
+---
+
+<Layout 
+  title="Sobre Mí | Cesar Santos · Fisioterapeuta en Salud Integrativa y PNI" 
+  description="Trayectoria profesional de Cesar Santos: ex-Capitán de Infantería de Montaña, Fisioterapeuta (UAM) y especialista en Psiconeuroinmunología Clínica, Ejercicio Terapéutico y Dolor Persistente." 
+  lang={lang} 
+  canonicalPath="/sobre-mi"
+>
+  <div class="article-detail" style="max-width: 850px;">
+    <span class="hero-subtitle">Trayectoria y Filosofía en Fisioterapia Integrativa</span>
+    <h1 class="hero-title" style="margin-bottom: 25px; font-size: 2.3rem; line-height: 1.25;">
+      ¿Qué haces cuando la vida te apaga la luz de un día para otro? Te reinventas.
+    </h1>
+
+    <!-- Featured Hero Portrait of Cesar Santos -->
+    <div class="bio-hero-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; align-items: center; margin: 30px 0 40px 0;">
+      <div class="content-image-wrapper" style="margin: 0;">
+        <img 
+          src={`${import.meta.env.BASE_URL}images/cesar_santos_portrait.webp`} 
+          alt="Cesar Santos - Fisioterapeuta en Salud Integrativa y PNI" 
+          class="content-image" 
+          style="border-radius: 12px; box-shadow: var(--shadow-medium); width: 100%; object-fit: cover; aspect-ratio: 4/3;"
+        />
+      </div>
+      <div>
+        <p class="lead-paragraph" style="margin: 0;">
+          Mi vocación siempre fue el servicio, la disciplina y la superación. Durante años, mi vida estuvo en las montañas, liderando unidades operativas. Hoy aplico esa misma estrategia y rigor para enseñar a las personas a tomar el control de su salud y a entender cómo se adapta el cuerpo humano.
+        </p>
+      </div>
+    </div>
+
+    <div class="prose" style="font-size: 1.05rem; line-height: 1.8;">
+      <div style="background-color: rgba(48, 62, 69, 0.04); border-left: 4px solid var(--color-secondary); padding: 25px; margin: 30px 0; border-radius: 4px;">
+        <h2 style="font-size: 1.3rem; margin-top: 0; margin-bottom: 15px; color: var(--text-color);">De la montaña a la primera línea</h2>
+        <p style="margin-bottom: 20px; color: var(--text-muted);">
+          Me formé en la <strong>Academia General Militar</strong> y me especialicé en Infantería. Serví como Teniente Jefe de Sección en la <strong>Compañía de Esquiadores Escaladores</strong> y, posteriormente como Capitán, asumí la Jefatura de la <strong>Sección de Inteligencia del Regimiento de Cazadores de Montaña "Galicia" 64</strong>. La planificación táctica, el trabajo bajo presión y la fortaleza física y mental formaban parte de mi día a día.
+        </p>
+        <div class="content-image-wrapper" style="margin: 15px 0 0 0;">
+          <img src={`${import.meta.env.BASE_URL}images/aragonese_pyrenees.webp`} alt="Cumbres del Pirineo Aragonés (Monte Perdido y Ordesa), entorno de instrucción de la Compañía de Esquiadores Escaladores y el Regimiento de Cazadores de Montaña Galicia 64" class="content-image" style="border-radius: 8px; max-height: 260px; object-fit: cover; width: 100%;" />
+        </div>
+      </div>
+
+      <h2 style="font-size: 1.5rem; margin-top: 40px; margin-bottom: 15px;">El giro que lo cambió todo</h2>
+      <p>
+        En la primavera de 2020, durante el confinamiento y mientras participaba en la <strong>Operación Balmis</strong>, mi vida dio un vuelco drástico. Un contacto estrecho con COVID-19 desencadenó una trombosis en un seno venoso que provocó una <strong>hipertensión intracraneal</strong>. Esta presión continuada fue la que terminó causando una <strong>atrofia en los nervios ópticos</strong>.
+      </p>
+      <p>
+        En cuestión de semanas, y tras luchar por mantener la normalidad apoyándome en el ojo que aún conservaba cierta visión, la afección terminó afectando a ambos ojos. El resultado fue una patología permanente con una discapacidad visual del 80% y mi pase a retiro de las Fuerzas Armadas.
+      </p>
+
+      <h2 style="font-size: 1.5rem; margin-top: 40px; margin-bottom: 15px;">La reinvención a través del movimiento y la ciencia</h2>
+      <p>
+        Podía haberme rendido, pero decidí aplicar la disciplina militar a mi propia recuperación. Retomé una inquietud que tenía desde joven: entender en profundidad el funcionamiento del cuerpo humano a través de la salud.
+      </p>
+      <p>
+        Afiliado a la ONCE, ingresé en su <strong>Escuela Universitaria de Fisioterapia (Universidad Autónoma de Madrid)</strong> y me gradué en mayo de 2025. Entender el dolor y la capacidad del organismo para adaptarse no fue solo un expediente académico, sino una necesidad vital.
+      </p>
+
+      <div style="background-color: var(--bg-card); border: 1px solid var(--border-color); padding: 30px; border-radius: 12px; margin: 35px 0;">
+        <h2 style="font-size: 1.3rem; margin-top: 0; margin-bottom: 15px; color: var(--color-secondary);">Formación Académica y Especialización</h2>
+        <p style="margin-bottom: 18px; font-size: 0.98rem; color: var(--text-color);">
+          Titulación universitaria oficial y postgrados de especialización:
+        </p>
+        <ul style="margin: 0; padding-left: 20px; font-size: 0.95rem; line-height: 1.8; color: var(--text-muted);">
+          <li><strong>Grado en Fisioterapia</strong> – Escuela Universitaria de Fisioterapia de la ONCE (EUFO - UAM).</li>
+          <li><strong>Máster Universitario en Fisioterapia del Sistema Musculoesquelético "Fisioterapia Manual Ortopédica"</strong> – Escuela Universitaria de Fisioterapia de la ONCE (EUFO).</li>
+          <li><strong>Curso del Método Pilates</strong> – Escuela Universitaria de Fisioterapia de la ONCE (EUFO).</li>
+          <li><strong>Curso de Iniciación a la Psiconeuroinmunología Clínica</strong> – Regenera.</li>
+        </ul>
+      </div>
+
+      <h2 style="font-size: 1.5rem; margin-top: 40px; margin-bottom: 15px;">Mi misión hoy</h2>
+      <p>
+        Ya no dirijo tropas en la montaña, pero sigo al servicio de los demás. Como fisioterapeuta y como persona que ha vivido en su propia piel un cambio de salud radical, mi objetivo es <strong>traducir la evidencia médica a soluciones reales</strong>.
+      </p>
+      <p>
+        Quiero ayudar a los pacientes a perder el miedo al dolor y a entender cómo su estilo de vida, su sistema inmune y su movimiento se conectan. Al mismo tiempo, comparto reflexiones y rigor técnico con otros profesionales de la salud que buscan una visión integrativa del ser humano.
+      </p>
+
+      <div style="margin-top: 40px; border-top: 1px solid var(--border-color); padding-top: 30px; display: flex; gap: 15px; flex-wrap: wrap;">
+        <a href="/contacto" class="btn-submit" style="text-decoration: none; display: inline-block; width: auto; padding: 12px 25px;">
+          Contactar conmigo
+        </a>
+        <a href="/desmitificando-el-dolor" class="btn-link" style="padding: 12px 0;">
+          Leer publicaciones científicas &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>

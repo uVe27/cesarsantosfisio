@@ -1,0 +1,261 @@
+---
+// ArticleSearchFilter.astro - Buscador y filtro dinámico en tiempo real
+interface Props {
+  categories: string[];
+  lang?: 'es' | 'en' | 'fr';
+}
+
+const { categories = [], lang = 'es' } = Astro.props;
+
+const labels = {
+  es: {
+    searchPlaceholder: 'Buscar por título, hernia, resonancia, PNI...',
+    allCategories: 'Todas las temáticas',
+    noResults: 'No se encontraron artículos que coincidan con tu búsqueda.',
+    resetBtn: 'Limpiar búsqueda',
+    showing: 'Mostrando'
+  },
+  en: {
+    searchPlaceholder: 'Search by title, MRI, herniated disc, PNI...',
+    allCategories: 'All topics',
+    noResults: 'No articles found matching your search.',
+    resetBtn: 'Reset search',
+    showing: 'Showing'
+  },
+  fr: {
+    searchPlaceholder: 'Rechercher par titre, IRM, hernie discale, PNI...',
+    allCategories: 'Tous les thèmes',
+    noResults: 'Aucun article ne correspond à votre recherche.',
+    resetBtn: 'Réinitialiser la recherche',
+    showing: 'Affichage de'
+  }
+};
+
+const text = labels[lang] || labels.es;
+---
+
+<div class="search-filter-wrapper">
+  <!-- Search Input Bar -->
+  <div class="search-input-container">
+    <span class="search-icon" aria-hidden="true">🔍</span>
+    <input 
+      type="search" 
+      id="article-search-input" 
+      class="search-input" 
+      placeholder={text.searchPlaceholder}
+      aria-label={text.searchPlaceholder}
+    />
+    <button type="button" id="search-clear-btn" class="search-clear-btn" style="display: none;" aria-label={text.resetBtn}>
+      ✕
+    </button>
+  </div>
+
+  <!-- Category Filter Pills -->
+  <div class="filter-pills-container" role="group" aria-label="Filtrar por categoría">
+    <button type="button" class="filter-pill active" data-category="all">
+      {text.allCategories}
+    </button>
+    {categories.map(cat => (
+      <button type="button" class="filter-pill" data-category={cat}>
+        {cat}
+      </button>
+    ))}
+  </div>
+
+  <!-- Results Count Indicator -->
+  <div id="results-count" class="results-count"></div>
+
+  <!-- Fallback No Results Message -->
+  <div id="no-results-msg" class="no-results-box" style="display: none;">
+    <p>{text.noResults}</p>
+    <button type="button" id="reset-filter-btn" class="btn-link" style="margin-top: 10px; font-weight: 700; cursor: pointer; background: none; border: none; font-size: 0.95rem;">
+      {text.resetBtn} &rarr;
+    </button>
+  </div>
+</div>
+
+<style>
+  .search-filter-wrapper {
+    margin-bottom: 35px;
+  }
+
+  .search-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 16px;
+    font-size: 1.1rem;
+    pointer-events: none;
+    color: var(--text-muted);
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 14px 45px 14px 48px;
+    font-size: 0.98rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    color: var(--text-color);
+    transition: all 0.25s ease;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .search-input:focus {
+    border-color: var(--color-secondary);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(51, 99, 103, 0.15);
+  }
+
+  .dark .search-input:focus {
+    box-shadow: 0 0 0 4px rgba(92, 161, 168, 0.2);
+  }
+
+  .search-clear-btn {
+    position: absolute;
+    right: 14px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 50%;
+  }
+
+  .filter-pills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .filter-pill {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .filter-pill:hover {
+    border-color: var(--color-secondary);
+    color: var(--color-secondary);
+  }
+
+  .filter-pill.active {
+    background: var(--color-secondary);
+    color: #ffffff;
+    border-color: var(--color-secondary);
+    box-shadow: 0 4px 12px rgba(51, 99, 103, 0.25);
+  }
+
+  .dark .filter-pill.active {
+    background: var(--color-secondary-light);
+    color: #1a2226;
+    border-color: var(--color-secondary-light);
+  }
+
+  .results-count {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+
+  .no-results-box {
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin-top: 20px;
+  }
+</style>
+
+<script is:inline define:vars={{ lang }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('article-search-input');
+    const clearBtn = document.getElementById('search-clear-btn');
+    const countEl = document.getElementById('results-count');
+    const noResults = document.getElementById('no-results-msg');
+    const resetBtn = document.getElementById('reset-filter-btn');
+    const pills = document.querySelectorAll('.filter-pill');
+    
+    // Get all article elements inside the feed container
+    const articleElements = document.querySelectorAll('div[role="feed"] > article');
+
+    let activeCategory = 'all';
+
+    function filterArticles() {
+      const query = (input?.value || '').toLowerCase().trim();
+      let visibleCount = 0;
+
+      if (clearBtn) {
+        clearBtn.style.display = query.length > 0 ? 'block' : 'none';
+      }
+
+      articleElements.forEach(art => {
+        const title = (art.getAttribute('data-title') || art.innerText || '').toLowerCase();
+        const desc = (art.getAttribute('data-description') || '').toLowerCase();
+        const category = art.getAttribute('data-category') || '';
+        const tags = (art.getAttribute('data-tags') || '').toLowerCase();
+
+        const matchesQuery = !query || title.includes(query) || desc.includes(query) || category.toLowerCase().includes(query) || tags.includes(query);
+        const matchesCategory = activeCategory === 'all' || category === activeCategory;
+
+        if (matchesQuery && matchesCategory) {
+          art.style.display = 'block';
+          visibleCount++;
+        } else {
+          art.style.display = 'none';
+        }
+      });
+
+      if (countEl) {
+        const word = lang === 'es' ? (visibleCount === 1 ? 'artículo' : 'artículos') : lang === 'en' ? (visibleCount === 1 ? 'article' : 'articles') : (visibleCount === 1 ? 'article' : 'articles');
+        const prefix = lang === 'es' ? 'Mostrando' : lang === 'en' ? 'Showing' : 'Affichage de';
+        countEl.textContent = `${prefix} ${visibleCount} ${word}`;
+      }
+
+      if (noResults) {
+        noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
+    }
+
+    input?.addEventListener('input', filterArticles);
+    
+    clearBtn?.addEventListener('click', () => {
+      if (input) input.value = '';
+      filterArticles();
+    });
+
+    resetBtn?.addEventListener('click', () => {
+      if (input) input.value = '';
+      activeCategory = 'all';
+      pills.forEach(p => p.classList.toggle('active', p.getAttribute('data-category') === 'all'));
+      filterArticles();
+    });
+
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        activeCategory = pill.getAttribute('data-category') || 'all';
+        filterArticles();
+      });
+    });
+
+    // Initial run
+    filterArticles();
+  });
+</script>

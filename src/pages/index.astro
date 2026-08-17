@@ -1,0 +1,433 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { useTranslations, getLocalizedPath } from '../utils/i18n';
+import { getCollection } from 'astro:content';
+
+const lang = 'es';
+const t = useTranslations(lang);
+
+// Get latest articles filtered by Spanish subdirectory
+const allArticles = await getCollection('blog');
+const esArticles = allArticles
+  .filter(item => item.id.startsWith('es/'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+// JSON-LD ProfilePage & MedicalWebPage Schema
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": "Cesar Santos | Fisioterapia Integrativa, Neurociencia del Dolor y PNI",
+  "description": "Fisioterapia basada en evidencia para el dolor persistente, hernia discal, ejercicios de actividad graduada y Psiconeuroinmunología Clínica (PNI).",
+  "medicalSpecialty": "Physiotherapy",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Cesar Santos",
+    "givenName": "Cesar",
+    "familyName": "Santos",
+    "jobTitle": "Fisioterapeuta Especialista en Dolor Persistente y Salud Integrativa",
+    "knowsAbout": [
+      "Fisioterapia Musculoesquelética Basada en Evidencia",
+      "Neurociencia del Dolor Persistente y Sensibilización Central",
+      "Psiconeuroinmunología Clínica (PNI)",
+      "Ejercicio Terapéutico Graduado y Pacing",
+      "Abordaje de Hernias Discales y Dolor Lumbar"
+    ],
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "Escuela Universitaria de Fisioterapia ONCE - Universidad Autónoma de Madrid (UAM)"
+    }
+  }
+};
+
+// JSON-LD FAQPage Schema for Google Rich Snippets & Search Intent
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Puedo hacer ejercicio si tengo una hernia discal o desgaste en la resonancia lumbar?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, rotundamente. La evidencia científica demuestra que las hernias discales y las deshidrataciones son hallazgos habituales en el 35% de personas de 40 años sin dolor de espalda. Con un plan de fisioterapia integrativa y ejercicio graduado (pacing), puedes recuperar tu movimiento con total seguridad."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué es el afrontamiento activo y el pacing en el dolor de espalda persistente?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El reposo prolongado debilita la musculatura e incrementa la sensibilidad del sistema nervioso. El afrontamiento activo sustituye el miedo al movimiento por un reentrenamiento progresivo controlado por cuotas de tiempo (pacing) para reeducar la alarma del dolor."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo ayuda la Psiconeuroinmunología Clínica (PNI) en la consulta de fisioterapia?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La PNI analiza las relaciones entre el sistema nervioso, inmune y endocrino. Evalúa factores del estilo de vida (sueño, estrés crónico, nutrición e inflamación de bajo grado) que condicionan la hipersensibilidad del dolor muscular y articular."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Por qué educarse en neurociencia del dolor ayuda a reducir el dolor físico?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Entender que el dolor es un mecanismo de protección y no siempre un signo de daño en los tejidos desactiva la alarma del miedo en la amígdala cerebral y activa el control inhibitorio descendente del córtex prefrontal."
+      }
+    }
+  ]
+};
+
+const schemaJson = JSON.stringify([schema, faqSchema]);
+---
+
+<Layout 
+  title="Fisioterapia y Dolor Crónico | Cesar Santos · Salud Integrativa y Ejercicio" 
+  description="Especialista en fisioterapia basada en la evidencia, neurociencia del dolor persistente, hernias discales, ejercicio terapéutico graduado y Psiconeuroinmunología Clínica (PNI)." 
+  lang={lang} 
+  canonicalPath="/" 
+  schemaJson={schemaJson}
+>
+  <!-- Hero Section with Storytelling & Mission -->
+  <section class="hero-section" aria-labelledby="manifesto-heading">
+    <span class="hero-subtitle">Fisioterapia Basada en Evidencia, Ejercicio y Salud Integrativa</span>
+    <h1 id="manifesto-heading" class="hero-title">
+      Fisioterapia Integrativa y Neurociencia del Dolor Persistente
+    </h1>
+    <p class="hero-description">
+      Soy <strong>Cesar Santos</strong>, fisioterapeuta, ex-Capitán de Infantería de Tropas de Montaña, con Máster Universitario en Fisioterapia del Sistema Musculoesquelético, formación en el Método Pilates e Iniciación a la Psiconeuroinmunología Clínica. Tras superar un cambio de vida radical debido a una patología neurológica con discapacidad visual, hoy dedico mi vida a traducir la ciencia médica para que pacientes y profesionales comprendan la enorme capacidad de adaptación del ser humano.
+    </p>
+
+    <!-- Rapid Access Buttons -->
+    <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
+      <a href={getLocalizedPath('/desmitificando-el-dolor', lang)} class="btn-submit" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; width: auto; padding: 12px 24px; font-weight: 700;">
+        <span aria-hidden="true">📖</span> Ver Artículos y Publicaciones
+      </a>
+      <a href={getLocalizedPath('/guia-afrontamiento', lang)} class="btn-link" style="padding: 10px 0; font-weight: 700;">
+        <span aria-hidden="true">🛠️</span> Herramientas para Pacientes &rarr;
+      </a>
+    </div>
+    
+    <!-- Hero Main Image -->
+    <div class="hero-image-wrapper" style="margin-bottom: 30px;">
+      <img src={`${import.meta.env.BASE_URL}images/hero_physiotherapy.webp`} alt="Fisioterapeuta guiando a un paciente en ejercicio terapéutico y rehabilitación activa" class="hero-image" />
+    </div>
+    
+    <!-- Profile Banner & Story Highlight -->
+    <div class="profile-card" style="margin-top: 30px; display: flex; flex-direction: column; gap: 15px;">
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <img 
+          src={`${import.meta.env.BASE_URL}images/cesar_santos_portrait.webp`} 
+          alt="Cesar Santos - Fisioterapeuta" 
+          class="profile-avatar-img" 
+        />
+        <div>
+          <h2 class="profile-info-title" style="margin: 0;">Cesar Santos</h2>
+          <p class="profile-info-text" style="margin: 0;">
+            Fisioterapeuta · Máster Universitario en Fisioterapia Manual Ortopédica · Método Pilates & PNI
+          </p>
+        </div>
+      </div>
+      <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-color); margin: 10px 0 0 0;">
+        <em>"¿Qué haces cuando la vida te apaga la luz de un día para otro? Te reinventas para enseñar a otros a encontrar su propio camino."</em>
+      </p>
+      <div style="margin-top: 5px;">
+        <a href={getLocalizedPath('/sobre-mi', lang)} class="btn-link" style="font-size: 0.9rem; font-weight: 700;">
+          Conoce mi historia completa &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dual Track Audience Selector -->
+  <section style="margin: 50px 0;">
+    <h2 class="section-title" style="text-align: center; margin-bottom: 25px;">
+      ¿En qué puedo ayudarte hoy?
+    </h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+      <!-- Track 1: Patients -->
+      <div class="contact-card" style="padding: 25px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div class="card-image-wrapper">
+            <img src={`${import.meta.env.BASE_URL}images/patient_empowerment.webp`} alt="Paciente realizando ejercicio terapéutico guiado con confianza" class="card-image" />
+          </div>
+          <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--color-secondary); letter-spacing: 0.08em; display: block; margin-bottom: 10px;">Para Pacientes y Personas con Dolor</span>
+          <h3 style="font-size: 1.3rem; margin-bottom: 15px; color: var(--text-color);">Entiende tu dolor y recupera tu autonomía</h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
+            Aprende cómo interactúan tu movimiento, tu descanso, tu sistema inmune y tus hábitos. Sin jerga incomprensible ni miedos injustificados sobre tus resonancias o tu postura.
+          </p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <a href={getLocalizedPath('/guia-afrontamiento', lang)} class="btn-submit" style="text-decoration: none; text-align: center;">
+            Ir a la Guía de Afrontamiento Activo
+          </a>
+          <a href={getLocalizedPath('/desmitificando-el-dolor', lang)} class="btn-link" style="text-align: center; font-size: 0.85rem;">
+            Leer artículos para pacientes &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Track 2: Health Professionals -->
+      <div class="contact-card" style="padding: 25px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div class="card-image-wrapper">
+            <img src={`${import.meta.env.BASE_URL}images/professional_clinical.webp`} alt="Profesionales de la salud colaborando y razonando casos clínicos" class="card-image" />
+          </div>
+          <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--color-primary); letter-spacing: 0.08em; display: block; margin-bottom: 10px;">Para Profesionales de la Salud</span>
+          <h3 style="font-size: 1.3rem; margin-bottom: 15px; color: var(--text-color);">Rigor clínico y visión integrativa</h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
+            Análisis sobre mecanismos neurofisiológicos de la terapia manual, abordaje PNI en patologías musculoesqueléticas complejas, ejercicio terapéutico y reflexiones de praxis.
+          </p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <a href={getLocalizedPath('/contacto', lang)} class="btn-submit" style="text-decoration: none; text-align: center; background-color: var(--color-primary);">
+            Colaboraciones y Docencia
+          </a>
+          <a href={getLocalizedPath('/desmitificando-el-dolor', lang)} class="btn-link" style="text-align: center; font-size: 0.85rem;">
+            Ver publicaciones con DOI/PubMed &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The 4 Pillars of Integrative Health Section -->
+  <section aria-labelledby="pillars-heading" style="margin: 50px 0;">
+    <div style="text-align: center; max-width: 700px; margin: 0 auto 35px auto;">
+      <span style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: var(--color-secondary); letter-spacing: 0.08em; display: block; margin-bottom: 8px;">Metodología de Abordaje</span>
+      <h2 id="pillars-heading" class="section-title" style="font-size: 1.8rem; margin-bottom: 12px; color: var(--text-color);">
+        Los 4 Pilares de la Salud Integrativa
+      </h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+        Un enfoque integrativo y científicamente fundamentado para abordar el dolor de forma global, respetando la complejidad biológica del ser humano.
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
+      <!-- Pillar 1 -->
+      <div class="contact-card" style="padding: 25px; transition: transform 0.2s ease, box-shadow 0.2s ease; border-top: 4px solid var(--color-secondary);">
+        <div style="font-size: 2.2rem; margin-bottom: 12px;" aria-hidden="true">💆‍♂️</div>
+        <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
+          1. Terapia Manual Musculoesquelética
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+          Evaluación rigurosa y razonamiento clínico para la modulación de síntomas, alivio articular/miofascial y optimización de la movilidad corporal.
+        </p>
+      </div>
+
+      <!-- Pillar 2 -->
+      <div class="contact-card" style="padding: 25px; transition: transform 0.2s ease, box-shadow 0.2s ease; border-top: 4px solid var(--color-primary);">
+        <div style="font-size: 2.2rem; margin-bottom: 12px;" aria-hidden="true">🏃‍♂️</div>
+        <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
+          2. Ejercicio Terapéutico & Método Pilates
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+          Reentrenamiento progresivo por cuotas de tiempo y movimiento adaptado para fortalecer tejidos y recuperar la seguridad física.
+        </p>
+      </div>
+
+      <!-- Pillar 3 -->
+      <div class="contact-card" style="padding: 25px; transition: transform 0.2s ease, box-shadow 0.2s ease; border-top: 4px solid #28a745;">
+        <div style="font-size: 2.2rem; margin-bottom: 12px;" aria-hidden="true">🧬</div>
+        <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
+          3. Psiconeuroinmunología Clínica (PNI)
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+          Abordaje práctico en la consulta diaria de los factores de estilo de vida: regulación del descanso, biorritmos, inflamación de bajo grado y estrés.
+        </p>
+      </div>
+
+      <!-- Pillar 4 -->
+      <div class="contact-card" style="padding: 25px; transition: transform 0.2s ease, box-shadow 0.2s ease; border-top: 4px solid #17a2b8;">
+        <div style="font-size: 2.2rem; margin-bottom: 12px;" aria-hidden="true">🧠</div>
+        <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
+          4. Neurobiología y Educación (PNE)
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+          Desmitificación de la fragilidad estructural y activación del freno prefrontal inhibitorio para reducir la hipersensibilidad al dolor.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Myth Buster Section -->
+  <section class="myth-section" aria-labelledby="myths-heading">
+    <h2 id="myths-heading" class="section-title" style="text-align: center; margin-bottom: 10px;">
+      Desmitificador Rápido de Salud
+    </h2>
+    <p style="color: var(--text-muted); text-align: center; max-width: 600px; margin: 0 auto 30px auto; font-size: 0.95rem;">
+      Haz clic en cualquier tarjeta para contrastar las creencias comunes con la realidad que demuestra la investigación clínica.
+    </p>
+
+    <div class="myth-grid" role="region" aria-label="Mitos y Realidades del Dolor">
+      <!-- Card 1: Hernias -->
+      <div class="myth-card" role="button" aria-expanded="false" tabindex="0">
+        <div>
+          <span class="myth-label">Mito Común</span>
+          <h3 class="myth-title">"Tengo una hernia discal en mi resonancia, por lo tanto mi columna está rota y dañada."</h3>
+        </div>
+        <div class="reality-content">
+          <span class="reality-label">La Realidad Científica</span>
+          <p style="margin: 0; font-size: 0.9rem;">
+            <strong>El 35% de las personas mayores de 40 años tienen hernias discales sin sentir ningún dolor</strong> (Varun S. et al., 2025). La imagen refleja cambios normales por edad, como las arrugas en la piel, no un acta de discapacidad.
+          </p>
+        </div>
+        <span class="myth-action-hint">Ver realidad &rarr;</span>
+      </div>
+
+      <!-- Card 2: Posture -->
+      <div class="myth-card" role="button" aria-expanded="false" tabindex="0">
+        <div>
+          <span class="myth-label">Mito Común</span>
+          <h3 class="myth-title">"Necesito encontrar la postura perfecta para sentarme o pararme y así evitar el dolor de espalda."</h3>
+        </div>
+        <div class="reality-content">
+          <span class="reality-label">La Realidad Científica</span>
+          <p style="margin: 0; font-size: 0.9rem;">
+            <strong>No existe una postura única o perfecta.</strong> La ciencia demuestra que no hay relación causal entre posturas estáticas y el dolor. El cuerpo necesita movimiento y variabilidad; tu mejor postura es la siguiente.
+          </p>
+        </div>
+        <span class="myth-action-hint">Ver realidad &rarr;</span>
+      </div>
+
+      <!-- Card 3: Pain vs Damage -->
+      <div class="myth-card" role="button" aria-expanded="false" tabindex="0">
+        <div>
+          <span class="myth-label">Mito Común</span>
+          <h3 class="myth-title">"Si una actividad física me duele, significa que me estoy haciendo daño en los tejidos."</h3>
+        </div>
+        <div class="reality-content">
+          <span class="reality-label">La Realidad Científica</span>
+          <p style="margin: 0; font-size: 0.9rem;">
+            <strong>El dolor persistente es un sistema de alarma hipersensible.</strong> El dolor protege antes de que haya daño real. El movimiento graduado y adaptado entrena al cerebro para regular la sensibilidad.
+          </p>
+        </div>
+        <span class="myth-action-hint">Ver realidad &rarr;</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Articles Section -->
+  <section class="articles-section" aria-labelledby="articles-heading" style="margin-top: 50px;">
+    <div class="section-header">
+      <h2 id="articles-heading" class="section-title">
+        {t('latestPosts')}
+      </h2>
+      <a href="/desmitificando-el-dolor" class="btn-link">
+        {t('viewAll')} &rarr;
+      </a>
+    </div>
+
+    <!-- Articles Grid -->
+    <div class="articles-grid">
+      {esArticles.map((article) => {
+        const cleanSlug = article.id.replace(/^es\//, '');
+        return (
+          <article class="article-card">
+            <span class="article-category">
+              {article.data.category}
+            </span>
+            <h3 class="article-title">
+              <a href={getLocalizedPath(`/desmitificando-el-dolor/${cleanSlug}`, lang)}>
+                {article.data.title}
+              </a>
+            </h3>
+            <p class="article-description">
+              {article.data.description}
+            </p>
+            <div class="article-footer">
+              <span>{new Date(article.data.pubDate).toLocaleDateString('es-ES', { dateStyle: 'medium' })}</span>
+              {article.data.doi && <span class="doi-badge">DOI: {article.data.doi.split('/')[1] || article.data.doi}</span>}
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- FAQ Section with Schema.org FAQPage -->
+  <section class="faq-section" aria-labelledby="faq-heading" style="margin-top: 55px; padding: 40px 30px; background: rgba(51, 99, 103, 0.03); border: 1px solid var(--border-color); border-radius: 16px;">
+    <div style="text-align: center; max-width: 700px; margin: 0 auto 35px auto;">
+      <span style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: var(--color-secondary); letter-spacing: 0.08em; display: block; margin-bottom: 8px;">Resolviendo Dudas Frecuentes</span>
+      <h2 id="faq-heading" class="section-title" style="font-size: 1.8rem; margin-bottom: 12px; color: var(--text-color);">
+        Preguntas Frecuentes sobre Salud y Dolor
+      </h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+        Respuestas directas basadas en la evidencia biomédica para pacientes y profesionales de la salud.
+      </p>
+    </div>
+
+    <div class="faq-list" style="display: flex; flex-direction: column; gap: 15px; max-width: 800px; margin: 0 auto;">
+      <!-- FAQ Item 1 -->
+      <details class="faq-item">
+        <summary style="font-weight: 700; font-size: 1.05rem; color: var(--text-color); list-style: none; display: flex; justify-content: space-between; align-items: center;">
+          <span>¿Puedo volver a hacer deporte si tengo una hernia discal o desgaste en la resonancia?</span>
+          <span style="color: var(--color-secondary); font-size: 1.3rem; margin-left: 10px;">+</span>
+        </summary>
+        <p style="margin-top: 14px; font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; border-top: 1px solid var(--border-color); padding-top: 12px;">
+          <strong>Sí, rotundamente.</strong> La investigación demuestra que las hernias discales y deshidrataciones son hallazgos habituales en el 35% de las personas asintomáticas mayores de 40 años sin dolor. La columna es una estructura sólida y adaptable. Con una pauta de ejercicio graduado y reentrenamiento activo, puedes recuperar tu vida deportiva con total seguridad.
+        </p>
+      </details>
+
+      <!-- FAQ Item 2 -->
+      <details class="faq-item">
+        <summary style="font-weight: 700; font-size: 1.05rem; color: var(--text-color); list-style: none; display: flex; justify-content: space-between; align-items: center;">
+          <span>¿Qué diferencia hay entre el reposo absoluto y el afrontamiento activo?</span>
+          <span style="color: var(--color-secondary); font-size: 1.3rem; margin-left: 10px;">+</span>
+        </summary>
+        <p style="margin-top: 14px; font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; border-top: 1px solid var(--border-color); padding-top: 12px;">
+          El reposo prolongado debilita la musculatura, reduce la nutrición discal e incrementa la sensibilidad del sistema nervioso. El <strong>afrontamiento activo</strong> propone sustituir la inmovilidad por un movimiento controlado por cuotas de tiempo (Pacing), enseñándole a tu cerebro a desvincular el movimiento de la señal de peligro.
+        </p>
+      </details>
+
+      <!-- FAQ Item 3 -->
+      <details class="faq-item">
+        <summary style="font-weight: 700; font-size: 1.05rem; color: var(--text-color); list-style: none; display: flex; justify-content: space-between; align-items: center;">
+          <span>¿Cómo se integra la Psiconeuroinmunología Clínica (PNI) en la fisioterapia habitual?</span>
+          <span style="color: var(--color-secondary); font-size: 1.3rem; margin-left: 10px;">+</span>
+        </summary>
+        <p style="margin-top: 14px; font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; border-top: 1px solid var(--border-color); padding-top: 12px;">
+          La PNI estudia las interacciones entre el sistema nervioso, el sistema inmune y el sistema endocrino. En la consulta, nos ayuda a evaluar variables del estilo de vida (sueño, ritmos circadianos, estrés crónico e inflamación de bajo grado) que condicionan la capacidad de recuperación de los tejidos.
+        </p>
+      </details>
+
+      <!-- FAQ Item 4 -->
+      <details class="faq-item">
+        <summary style="font-weight: 700; font-size: 1.05rem; color: var(--text-color); list-style: none; display: flex; justify-content: space-between; align-items: center;">
+          <span>¿La educación en neurociencia del dolor realmente ayuda a reducir el dolor físico?</span>
+          <span style="color: var(--color-secondary); font-size: 1.3rem; margin-left: 10px;">+</span>
+        </summary>
+        <p style="margin-top: 14px; font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; border-top: 1px solid var(--border-color); padding-top: 12px;">
+          Sí. Aprender cómo funciona el dolor desactiva la alarma del miedo en la amígdala cerebral y estimula la vía moduladora descendente del dolor. Al fortalecer el control inhibitorio prefrontal, el cerebro libera neurotransmisores como endorfinas y serotonina que bloquean físicamente la señal dolorosa.
+        </p>
+      </details>
+    </div>
+  </section>
+
+  <!-- Script to handle card interactions -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.myth-card');
+      
+      cards.forEach(card => {
+        const toggleCard = () => {
+          const isActive = card.classList.contains('active');
+          card.classList.toggle('active');
+          card.setAttribute('aria-expanded', !isActive);
+        };
+
+        card.addEventListener('click', toggleCard);
+        
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleCard();
+          }
+        });
+      });
+    });
+  </script>
+</Layout>

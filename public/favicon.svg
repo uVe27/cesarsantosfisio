@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <style>
+    .vertebra-icon { fill: #336367; }
+    @media (prefers-color-scheme: dark) {
+      .vertebra-icon { fill: #52B5AB; }
+    }
+  </style>
+  <g class="vertebra-icon">
+    <!-- Vertebra Spine Curves of Cesar Santos Personal Brand -->
+    <!-- Superior Vertebra -->
+    <path d="M 22 26 C 35 14, 65 14, 78 26 C 70 34, 30 34, 22 26 Z" />
+    <circle cx="50" cy="20" r="4.5" />
+    
+    <!-- Middle Vertebra -->
+    <path d="M 18 48 C 35 35, 65 35, 82 48 C 73 57, 27 57, 18 48 Z" />
+    <circle cx="50" cy="42" r="5.5" />
+    
+    <!-- Inferior Vertebra -->
+    <path d="M 14 71 C 35 57, 65 57, 86 71 C 76 81, 24 81, 14 71 Z" />
+    <circle cx="50" cy="65" r="6.5" />
+    
+    <!-- Spine Base -->
+    <path d="M 44 79 L 56 79 L 53 91 L 47 91 Z" />
+  </g>
+</svg>

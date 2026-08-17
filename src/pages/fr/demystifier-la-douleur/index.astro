@@ -1,0 +1,77 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ArticleSearchFilter from '../../../components/ArticleSearchFilter.astro';
+import { getCollection } from 'astro:content';
+import { useTranslations } from '../../../utils/i18n';
+
+const lang = 'fr';
+const t = useTranslations(lang);
+
+// Load French articles
+const allArticles = await getCollection('blog');
+const frArticles = allArticles
+  .filter(item => item.id.startsWith('fr/'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const categories = Array.from(new Set(frArticles.map(a => a.data.category)));
+---
+
+<Layout 
+  title="Démystifier la Douleur | Articles de Santé & Évidence" 
+  description="Explications scientifiques claires sur la lombalgie, las hernies discales et la posture pour dissiper les mythes et retrouver votre confiance." 
+  lang={lang} 
+  canonicalPath="/fr/demystifier-la-douleur"
+>
+  <div class="article-detail">
+    <span class="hero-subtitle">{t('nav.repo')}</span>
+    <h1 class="hero-title" style="margin-bottom: 25px;">
+      Démystifier la Douleur
+    </h1>
+    <p class="hero-description" style="border-bottom: 1px solid var(--border-color); padding-bottom: 30px; margin-bottom: 30px;">
+      Espace dédié à traduire les dernières découvertes scientifiques en santé dans un langage clair et utile pour les patients, en brisant les mythes structurels qui perpétuent la douleur.
+    </p>
+
+    <!-- Interactive Search and Category Filter -->
+    <ArticleSearchFilter categories={categories} lang={lang} />
+
+    <!-- Post list -->
+    <div role="feed" aria-label="Articles de santé et de science">
+      {frArticles.map((article) => {
+        const cleanSlug = article.id.replace(/^fr\//, '');
+        return (
+          <article 
+            style="border-bottom: 1px solid var(--border-color); padding-bottom: 30px; margin-bottom: 30px;" 
+            aria-labelledby={`title-${cleanSlug}`}
+            data-title={article.data.title}
+            data-description={article.data.description}
+            data-category={article.data.category}
+            data-tags={JSON.stringify(article.data.tags || [])}
+          >
+            <div style="display: flex; align-items: center; gap: 15px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 10px;">
+              <span style="color: var(--color-secondary);">{article.data.category}</span>
+              {article.data.doi && <span class="doi-badge">Ref: {article.data.doi}</span>}
+            </div>
+            
+            <h2 id={`title-${cleanSlug}`} style="font-size: 1.6rem; font-weight: 700; margin-bottom: 10px; text-transform: none; letter-spacing: normal;">
+              <a href={`/fr/demystifier-la-douleur/${cleanSlug}`} style="color: var(--text-color); text-decoration: none;">
+                {article.data.title}
+              </a>
+            </h2>
+            
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px; line-height: 1.6;">
+              {article.data.description}
+            </p>
+
+            <div style="display: flex; gap: 15px; font-size: 0.8rem; color: var(--text-muted);">
+              <time datetime={article.data.pubDate.toISOString()}>
+                {new Date(article.data.pubDate).toLocaleDateString('fr-FR', { dateStyle: 'long' })}
+              </time>
+              <span>·</span>
+              <span>{t('authorLabel')}: {article.data.author}</span>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</Layout>

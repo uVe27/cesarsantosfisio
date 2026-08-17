@@ -1,0 +1,230 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { useTranslations } from '../utils/i18n';
+
+const lang = 'es';
+const t = useTranslations(lang);
+---
+
+<Layout 
+  title="Contacto y Consulta de Fisioterapia | Cesar Santos" 
+  description="Contacta con Cesar Santos para información sobre fisioterapia integrativa, abordaje del dolor persistente, ejercicio terapéutico o colaboraciones profesionales." 
+  lang={lang} 
+  canonicalPath="/contacto"
+>
+  <div class="article-detail" style="max-width: 1000px;">
+    <span class="hero-subtitle">Contacto Directo y Orientación</span>
+    <h1 class="hero-title" style="margin-bottom: 30px;">
+      Contacto y Consulta de Fisioterapia
+    </h1>
+
+    <div class="contact-layout">
+      <!-- Media Kit / Collab Info -->
+      <section aria-labelledby="collaboration-heading">
+        <h2 id="collaboration-heading" style="font-size: 1.3rem; margin-bottom: 15px;">
+          ¿Hablamos?
+        </h2>
+        <p style="color: var(--text-muted); margin-bottom: 25px;">
+          Si eres paciente y quieres entender tu salud, o si eres un profesional interesado en colaborar, compartir divulgación o docencia integrativa, estaré encantado de escucharte.
+        </p>
+        <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px;" role="list">
+          <li style="display: flex; align-items: start; gap: 10px; font-size: 0.95rem;">
+            <span style="color: var(--color-secondary); font-weight: bold;" aria-hidden="true">&#10003;</span>
+            <span>Dudas sobre dolor persistente, ejercicio y Salud Integrativa para pacientes.</span>
+          </li>
+          <li style="display: flex; align-items: start; gap: 10px; font-size: 0.95rem;">
+            <span style="color: var(--color-secondary); font-weight: bold;" aria-hidden="true">&#10003;</span>
+            <span>Colaboraciones docentes y científicas con otros profesionales de la salud.</span>
+          </li>
+          <li style="display: flex; align-items: start; gap: 10px; font-size: 0.95rem;">
+            <span style="color: var(--color-secondary); font-weight: bold;" aria-hidden="true">&#10003;</span>
+            <span>Participación en ponencias, podcasts, radio y prensa especializada.</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Contact Form / Action Box -->
+      <section aria-labelledby="form-heading" class="contact-card">
+        <h2 id="form-heading" style="font-size: 1.3rem; margin-bottom: 10px;">
+          Enviar Mensaje
+        </h2>
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 25px;">
+          Todos los campos son obligatorios. Recibirás respuesta en breve.
+        </p>
+
+        <form id="contact-form" action="https://formsubmit.co/masthorth_csc@hotmail.com" method="POST">
+          <input type="hidden" name="_subject" value="Nuevo mensaje desde la web Cesar Santos" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+
+          <div class="form-group">
+            <label for="name" class="form-label">
+              Nombre Completo
+            </label>
+            <input 
+              type="text" 
+              id="name" 
+              name="name" 
+              required 
+              class="form-control"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">
+              Correo Electrónico
+            </label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              required 
+              class="form-control"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="message" class="form-label">
+              Mensaje o Consulta
+            </label>
+            <textarea 
+              id="message" 
+              name="message" 
+              rows="5" 
+              required 
+              class="form-control"
+            ></textarea>
+          </div>
+
+          <button 
+            type="submit" 
+            id="submit-btn"
+            class="btn-submit"
+          >
+            Enviar Mensaje
+          </button>
+        </form>
+
+        <div id="form-status" style="display: none; margin-top: 20px; padding: 15px; border-radius: 8px; font-size: 0.9rem; line-height: 1.5;"></div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Floating Success Modal Pop-up -->
+  <div id="success-modal-backdrop" class="success-modal-backdrop" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="modal-success-title">
+    <div class="success-modal-box">
+      <div style="font-size: 3.5rem; margin-bottom: 12px;" aria-hidden="true">✅</div>
+      <h2 id="modal-success-title" style="font-size: 1.4rem; color: var(--text-color); margin-bottom: 12px; font-weight: 700;">
+        ¡Mensaje Enviado con Éxito!
+      </h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 25px;">
+        Muchas gracias por tu mensaje. Tu consulta se ha registrado correctamente y te responderé en breve.
+      </p>
+      <button id="close-modal-btn" class="btn-submit" style="width: 100%; font-weight: 700; cursor: pointer;">
+        Aceptar
+      </button>
+    </div>
+  </div>
+
+  <style>
+    .success-modal-backdrop {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      background: rgba(0, 0, 0, 0.65) !important;
+      backdrop-filter: blur(6px) !important;
+      -webkit-backdrop-filter: blur(6px) !important;
+      z-index: 999999 !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .success-modal-box {
+      max-width: 440px;
+      width: 100%;
+      background: var(--card-bg, #ffffff);
+      border: 1px solid var(--border-color, #e0e0e0);
+      border-radius: 16px;
+      padding: 35px 25px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+      text-align: center;
+      animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes modalPop {
+      from {
+        opacity: 0;
+        transform: scale(0.85) translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+  </style>
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('contact-form');
+      const status = document.getElementById('form-status');
+      const btn = document.getElementById('submit-btn');
+      const modal = document.getElementById('success-modal-backdrop');
+      const closeBtn = document.getElementById('close-modal-btn');
+
+      if (closeBtn && modal) {
+        closeBtn.addEventListener('click', () => {
+          modal.style.display = 'none';
+          document.body.style.overflow = '';
+        });
+      }
+
+      if (form) {
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          btn.disabled = true;
+          btn.innerText = 'Enviando...';
+
+          const formData = new FormData(form);
+          
+          try {
+            const response = await fetch('https://formsubmit.co/ajax/masthorth_csc@hotmail.com', {
+              method: 'POST',
+              body: formData,
+              headers: {
+                'Accept': 'application/json'
+              }
+            });
+
+            if (response.ok) {
+              if (modal) {
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+              }
+              form.reset();
+              if (status) status.style.display = 'none';
+            } else {
+              const data = await response.json();
+              if (status) {
+                status.style.display = 'block';
+                status.style.backgroundColor = 'rgba(255, 193, 7, 0.1)';
+                status.style.border = '1px solid #ffc107';
+                status.style.color = '#856404';
+                status.innerHTML = '<strong>Activación requerida:</strong><br />Por favor, revisa tu bandeja de entrada de correo y pulsa el botón de confirmación de FormSubmit para activar la recepción.';
+              }
+            }
+          } catch (error) {
+            // Fallback: submit natively if fetch is blocked
+            form.submit();
+          } finally {
+            btn.disabled = false;
+            btn.innerText = 'Enviar Mensaje';
+          }
+        });
+      }
+    });
+  </script>
+</Layout>
