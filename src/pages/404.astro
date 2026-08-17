@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { useTranslations } from '../utils/i18n';
+
+const lang = 'es';
+const t = useTranslations(lang);
+---
+
+<Layout 
+  title="Página no encontrada (404) | Cesar Santos" 
+  description="La página solicitada no se encuentra disponible." 
+  lang={lang} 
+  canonicalPath="/404"
+>
+  <div class="article-detail" style="text-align: center; padding: 60px 20px;">
+    <span style="font-size: 3.5rem; display: block; margin-bottom: 20px;" aria-hidden="true">🧭</span>
+    <h1 class="hero-title" style="font-size: 2.2rem; margin-bottom: 15px;">
+      Página no encontrada
+    </h1>
+    <p class="hero-description" style="margin: 0 auto 35px auto; max-width: 600px;">
+      La dirección que buscas no existe o ha sido reubicada. Puedes volver a la página de inicio o explorar las secciones principales.
+    </p>
+
+    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+      <a href="/" class="btn-submit" style="width: auto; padding: 12px 28px; text-decoration: none;">
+        Volver al Inicio
+      </a>
+      <a href="/desmitificando-el-dolor" class="btn-link" style="padding: 12px 20px;">
+        Ver Artículos Científicos &rarr;
+      </a>
+    </div>
+  </div>
+
+  <!-- Smart Client-Side Route Recovery Script -->
+  <script is:inline>
+    (function() {
+      const p = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+      const routes = {
+        '/about-me': '/en/about-me',
+        '/a-propos': '/fr/a-propos',
+        '/coping-guide': '/en/coping-guide',
+        '/guide-adaptation': '/fr/guide-adaptation',
+        '/demystifying-pain': '/en/demystifying-pain',
+        '/demystifier-la-douleur': '/fr/demystifier-la-douleur',
+        '/sobre-mi': '/sobre-mi',
+        '/contacto': '/contacto',
+        '/contact': '/en/contact',
+        '/guia-afrontamiento': '/guia-afrontamiento',
+        '/desmitificando-el-dolor': '/desmitificando-el-dolor'
+      };
+
+      if (routes[p] && routes[p] !== window.location.pathname) {
+        window.location.replace(routes[p]);
+      }
+    })();
+  </script>
+</Layout>

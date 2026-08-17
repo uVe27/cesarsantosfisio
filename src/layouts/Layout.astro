@@ -114,12 +114,17 @@ const frPath = `${siteUrl}${getLocalizedPathForSwitch('fr')}`;
       }
     </script>
 
-    <!-- Automatic Browser Language Detection & International Redirection Script -->
+    <!-- Automatic Browser Language Detection & International Redirection Script (Root Only) -->
     <script is:inline define:vars={{ esPath, enPath, frPath, currentLang: lang }}>
       (function() {
         // Do not redirect bots, search engine crawlers, or direct path navigations
         const userAgent = (navigator.userAgent || '').toLowerCase();
         if (/bot|googlebot|crawler|spider|robot|crawling/i.test(userAgent)) return;
+
+        // Only auto-redirect on the root entrance page ('/' or '/index.html')
+        const rawPath = window.location.pathname.replace(/\/+$/, '') || '/';
+        const isRoot = (rawPath === '/' || rawPath === '/index.html' || rawPath === '');
+        if (!isRoot) return;
 
         // Check if user has a manually saved language preference
         const savedLang = localStorage.getItem('preferred-lang');
@@ -155,9 +160,9 @@ const frPath = `${siteUrl}${getLocalizedPathForSwitch('fr')}`;
           targetLang = detected;
         }
 
-        // Redirect if targetLang is different from current page language
-        if (targetLang !== currentLang) {
-          const targetUrl = targetLang === 'es' ? esPath : targetLang === 'en' ? enPath : frPath;
+        // Redirect on root if targetLang is not Spanish ('es' is default root)
+        if (targetLang !== currentLang && targetLang !== 'es') {
+          const targetUrl = targetLang === 'en' ? enPath : frPath;
           if (targetUrl) {
             try {
               const urlObj = new URL(targetUrl);
