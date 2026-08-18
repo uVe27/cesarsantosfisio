@@ -865,7 +865,6 @@ a:hover {
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s ease;
 }
 
-.contact-card:hover,
 .profile-card:hover,
 .resource-card:hover,
 .pillar-card:hover {
@@ -883,12 +882,15 @@ a:hover {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
-.dark .contact-card:hover,
 .dark .profile-card:hover,
 .dark .resource-card:hover,
 .dark .pillar-card:hover {
   border-color: #5ca1a8;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+.contact-card:hover {
+  transform: none !important;
 }
 
 .form-group {
