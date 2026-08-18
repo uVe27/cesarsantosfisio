@@ -97,16 +97,19 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
       Cesar Santos · Fisioterapeuta en Dolor Persistente y Salud Integrativa
     </h1>
     <p class="hero-description">
-      Soy <strong>Cesar Santos</strong>, fisioterapeuta, ex-Capitán de Infantería de Tropas de Montaña, con Máster Universitario en Fisioterapia del Sistema Musculoesquelético, formación en el Método Pilates e Iniciación a la Psiconeuroinmunología Clínica. Tras superar un cambio de vida radical debido a una patología neurológica con discapacidad visual, hoy dedico mi vida a traducir la ciencia médica para que pacientes y profesionales comprendan la enorme capacidad de adaptación del ser humano.
+      Si llevas meses lidiando con dolor de espalda, te han diagnosticado una hernia o sientes que el miedo al movimiento te impide hacer tu vida habitual, este espacio es para ti.
+    </p>
+    <p class="hero-description" style="margin-top: 10px;">
+      Soy <strong>Cesar Santos</strong>, fisioterapeuta graduado en la Escuela Universitaria de la ONCE (UAM), ex-Capitán de Infantería de Tropas de Montaña, con Máster Universitario en Fisioterapia del Sistema Musculoesquelético y formación en Psiconeuroinmunología Clínica (PNI) y Método Pilates. Mi trabajo no consiste en aplicar tratamientos pasivos indefinidos, sino en utilizar la <strong>Fisioterapia Integrativa</strong> y la neurociencia médica para enseñarte qué le ocurre a tu cuerpo, dosificar el ejercicio adecuado y devolverte tu autonomía.
     </p>
 
     <!-- Rapid Access Buttons -->
     <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
-      <a href={getLocalizedPath('/desmitificando-el-dolor', lang)} class="btn-submit" style="width: auto;">
-        <span aria-hidden="true">📖</span> Ver Artículos y Publicaciones
+      <a href={getLocalizedPath('/guia-afrontamiento', lang)} class="btn-submit" style="width: auto;">
+        <span aria-hidden="true">🛠️</span> Guía de Afrontamiento del Dolor
       </a>
-      <a href={getLocalizedPath('/guia-afrontamiento', lang)} class="btn-link">
-        <span aria-hidden="true">🛠️</span> Herramientas para Pacientes &rarr;
+      <a href={getLocalizedPath('/desmitificando-el-dolor', lang)} class="btn-link">
+        <span aria-hidden="true">📖</span> Artículos y Evidencia Científica &rarr;
       </a>
     </div>
     
@@ -126,16 +129,111 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
         <div>
           <h2 class="profile-info-title" style="margin: 0;">Cesar Santos</h2>
           <p class="profile-info-text" style="margin: 0;">
-            Fisioterapeuta · Máster Universitario en Fisioterapia Manual Ortopédica · Método Pilates & PNI
+            Fisioterapeuta · Máster en Fisioterapia Manual Ortopédica · Método Pilates & PNI Clínica
           </p>
         </div>
       </div>
       <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-color); margin: 10px 0 0 0;">
-        <em>"¿Qué haces cuando la vida te apaga la luz de un día para otro? Te reinventas para enseñar a otros a encontrar su propio camino."</em>
+        <em>"¿Qué haces cuando la vida te apaga la luz de un día para otro? Te reinventas para investigar a fondo cómo se adapta el cuerpo humano y enseñar a otros a recuperar el control."</em>
       </p>
       <div style="margin-top: 5px;">
         <a href={getLocalizedPath('/sobre-mi', lang)} class="btn-link" style="font-size: 0.9rem; font-weight: 700;">
-          Conoce mi historia completa &rarr;
+          Conoce mi trayectoria completa &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Common Conditions / What is Limiting You Section -->
+  <section aria-labelledby="conditions-heading" style="margin: 60px 0 40px 0;">
+    <div style="text-align: center; max-width: 750px; margin: 0 auto 35px auto;">
+      <span style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: var(--color-secondary); letter-spacing: 0.08em; display: block; margin-bottom: 8px;">Motivos de Consulta Frecuentes</span>
+      <h2 id="conditions-heading" class="section-title" style="font-size: 1.8rem; margin-bottom: 12px; color: var(--text-color);">
+        ¿Qué molestia o dolor te está limitando?
+      </h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+        El dolor corporal no siempre significa daño irreversible. Identifica tu situación y descubre qué dice la evidencia científica actual.
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+      <!-- Condition 1: Lumbar -->
+      <div class="contact-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="font-size: 2rem; margin-bottom: 12px;" aria-hidden="true">⚡</div>
+          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
+            Dolor Lumbar y Bloqueo de Espalda
+          </h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+            Rigidez matutina, pinchazos al agacharte o sensación de "quedarte clavado". La columna lumbar es una estructura biológica fuerte diseñada para moverse, no para inmovilizarse.
+          </p>
+        </div>
+        <a href={getLocalizedPath('/guia-afrontamiento', lang)} class="btn-link" style="font-weight: 700; font-size: 0.88rem;">
+          Calcular ejercicio graduado &rarr;
+        </a>
+      </div>
+
+      <!-- Condition 2: Sciatica -->
+      <div class="contact-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="font-size: 2rem; margin-bottom: 12px;" aria-hidden="true">🦵</div>
+          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
+            Ciática y Dolor Irradiado a la Pierna
+          </h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+            Quemazón, hormigueo o calambres que descienden por el glúteo hacia la pierna o el pie. Evaluamos la sensibilidad del tejido nervioso y el origen funcional de la irritación.
+          </p>
+        </div>
+        <a href={getLocalizedPath('/contacto', lang)} class="btn-link" style="font-weight: 700; font-size: 0.88rem;">
+          Consultar valoración clínica &rarr;
+        </a>
+      </div>
+
+      <!-- Condition 3: Hernias -->
+      <div class="contact-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="font-size: 2rem; margin-bottom: 12px;" aria-hidden="true">🩻</div>
+          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
+            Hernias Discales y Diagnósticos por Resonancia
+          </h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+            ¿Te han dicho que tienes una hernia o desgaste y tienes miedo de cargar peso o hacer deporte? La ciencia demuestra que la imagen no equivale a una condena de dolor.
+          </p>
+        </div>
+        <a href={getLocalizedPath('/desmitificando-el-dolor/resonancia-edad-no-dolor', lang)} class="btn-link" style="font-weight: 700; font-size: 0.88rem;">
+          Leer evidencia sobre hernias &rarr;
+        </a>
+      </div>
+
+      <!-- Condition 4: Cervical -->
+      <div class="contact-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="font-size: 2rem; margin-bottom: 12px;" aria-hidden="true">💻</div>
+          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
+            Dolor Cervical y Tensión de Hombros
+          </h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+            Sobrecarga en trapecios, rigidez al girar el cuello y dolores de cabeza tensionales por horas de trabajo sentado y acumulación de estrés.
+          </p>
+        </div>
+        <a href={getLocalizedPath('/desmitificando-el-dolor/equilibrio-estatuas-estabilidad-dinamica', lang)} class="btn-link" style="font-weight: 700; font-size: 0.88rem;">
+          Ver claves de movilidad cervical &rarr;
+        </a>
+      </div>
+
+      <!-- Condition 5: Persistent Pain -->
+      <div class="contact-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="font-size: 2rem; margin-bottom: 12px;" aria-hidden="true">⏳</div>
+          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
+            Dolor Persistente que No Remite
+          </h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+            Molestias continuadas de más de 3 meses que no mejoran con reposo ni fármacos. Analizamos la hipersensibilidad del sistema nervioso y los factores de estilo de vida.
+          </p>
+        </div>
+        <a href={getLocalizedPath('/desmitificando-el-dolor/freno-cerebro-control-prefrontal', lang)} class="btn-link" style="font-weight: 700; font-size: 0.88rem;">
+          Entender la alarma del dolor &rarr;
         </a>
       </div>
     </div>
@@ -157,7 +255,7 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
           <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--color-secondary); letter-spacing: 0.08em; display: block; margin-bottom: 10px;">Para Pacientes y Personas con Dolor</span>
           <h3 style="font-size: 1.3rem; margin-bottom: 15px; color: var(--text-color);">Entiende tu dolor y recupera tu autonomía</h3>
           <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
-            Aprende cómo interactúan tu movimiento, tu descanso, tu sistema inmune y tus hábitos. Sin jerga incomprensible ni miedos injustificados sobre tus resonancias o tu postura.
+            Aprende cómo interactúan tu movimiento, tu descanso, tu sistema inmune y tus hábitos. Sin tecnicismos innecesarios ni miedos injustificados sobre tus resonancias o tu postura.
           </p>
         </div>
         <div style="display: flex; flex-direction: column; gap: 12px;">
@@ -196,13 +294,13 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
 
   <!-- The 4 Pillars of Integrative Health Section -->
   <section aria-labelledby="pillars-heading" style="margin: 50px 0;">
-    <div style="text-align: center; max-width: 700px; margin: 0 auto 35px auto;">
+    <div style="text-align: center; max-width: 750px; margin: 0 auto 35px auto;">
       <span style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: var(--color-secondary); letter-spacing: 0.08em; display: block; margin-bottom: 8px;">Metodología de Abordaje</span>
       <h2 id="pillars-heading" class="section-title" style="font-size: 1.8rem; margin-bottom: 12px; color: var(--text-color);">
-        Los 4 Pilares de la Salud Integrativa
+        Los 4 Pilares de la Salud Integrativa y la PNI
       </h2>
       <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0;">
-        Un enfoque integrativo y científicamente fundamentado para abordar el dolor de forma global, respetando la complejidad biológica del ser humano.
+        El dolor persistente rara vez responde a una sola causa mecánica. La <strong>Salud Integrativa</strong> y la <strong>Psiconeuroinmunología Clínica (PNI)</strong> analizan la interacción entre tu sistema nervioso, tu musculatura, tus niveles de inflamación, tu descanso y tus estresores cotidianos para ofrecerte soluciones sólidas y sostenibles.
       </p>
     </div>
 

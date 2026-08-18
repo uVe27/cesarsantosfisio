@@ -57,22 +57,25 @@ const schemaJson = JSON.stringify(schema);
       Cesar Santos · Physiothérapeute en Douleur Persistante et Santé Intégrative
     </h1>
     <p class="hero-description">
-      Je suis <strong>Cesar Santos</strong>, physiothérapeute diplômé de l'École Universitaire de l'ONCE (UAM), ancien Capitaine d'Infanterie des Troupes de Montagne, avec un Master en Thérapie Manuelle Musculosquelettique et une formation en Exercice Thérapeutique, Pilates et Psychoneuroimmunologie Clinique (PNI) appliquée à la consultation quotidienne. Après avoir surmonté un changement de vie radical dû à une pathologie neurologique avec un handicap visuel de 80 %, je me consacre aujourd'hui à traduire la science médicale pour que patients et professionnels comprennent l'extraordinaire capacité d'adaptation de l'être humain.
+      Si vous souffrez de douleurs persistantes au dos, si l'on vous a diagnostiqué une hernie ou si la peur du mouvement vous empêche de vivre normalement, cet espace est fait pour vous.
+    </p>
+    <p class="hero-description" style="margin-top: 10px;">
+      Je suis <strong>Cesar Santos</strong>, physiothérapeute diplômé de l'École Universitaire de l'ONCE (UAM), ancien Capitaine d'Infanterie des Troupes de Montagne, avec un Master en Thérapie Manuelle Musculosquelettique et une formation en Psychoneuroimmunologie Clinique (PNI) et Méthode Pilates. Mon approche ne repose pas sur des soins passifs sans fin, mais sur la <strong>Physiothérapie Intégrative</strong> et les neurosciences de la douleur pour vous faire comprendre vos symptômes, doser l'exercice adéquat et vous rendre votre autonomie active.
     </p>
 
     <!-- Rapid Access Buttons -->
     <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
-      <a href="/fr/demystifier-la-douleur" class="btn-submit" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; width: auto; padding: 12px 24px; font-weight: 700;">
-        <span aria-hidden="true">📖</span> Voir les Articles & Publications
+      <a href="/fr/guide-adaptation" class="btn-submit" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; width: auto; padding: 12px 24px; font-weight: 700;">
+        <span aria-hidden="true">🛠️</span> Guide d'Adaptation Active
       </a>
-      <a href="/fr/guide-adaptation" class="btn-link" style="padding: 10px 0; font-weight: 700;">
-        <span aria-hidden="true">🛠️</span> Outils pour Patients &rarr;
+      <a href="/fr/demystifier-la-douleur" class="btn-link" style="padding: 10px 0; font-weight: 700;">
+        <span aria-hidden="true">📖</span> Articles & Preuves Scientifiques &rarr;
       </a>
     </div>
     
     <!-- Hero Main Image -->
     <div class="hero-image-wrapper" style="margin-bottom: 30px;">
-      <img src="/images/.webp" alt="Physiothérapeute guidant un patient dans un exercice thérapeutique et réhabilitation active" class="hero-image" />
+      <img src="/images/hero_physiotherapy.webp" alt="Physiothérapeute guidant un patient dans un exercice thérapeutique et réhabilitation active" class="hero-image" />
     </div>
     
     <!-- Profile Banner & Story Highlight -->
@@ -86,16 +89,111 @@ const schemaJson = JSON.stringify(schema);
         <div>
           <h2 class="profile-info-title" style="margin: 0;">Cesar Santos</h2>
           <p class="profile-info-text" style="margin: 0;">
-            Physiothérapeute · Master en Physiothérapie Manuelle Orthopédique · Méthode Pilates & PNI
+            Physiothérapeute · Master en Thérapie Manuelle Orthopédique · Pilates & PNI Clinique
           </p>
         </div>
       </div>
       <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-color); margin: 10px 0 0 0;">
-        <em>« Que faites-vous quand la vie éteint la lumière du jour au lendemain ? Vous vous réinventez pour enseigner aux autres à trouver leur propre voie. »</em>
+        <em>« Que faites-vous quand la vie éteint la lumière du jour au lendemain ? Vous vous réinventez pour étudier l'adaptation du corps humain et enseigner aux autres à reprendre le contrôle. »</em>
       </p>
       <div style="margin-top: 5px;">
         <a href="/fr/a-propos" class="btn-link" style="font-size: 0.9rem; font-weight: 700;">
-          Découvrir mon histoire complète &rarr;
+          Découvrir mon parcours complet &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Common Conditions / What is Limiting You Section -->
+  <section aria-labelledby="conditions-heading" style="margin: 60px 0 40px 0;">
+    <div style="text-align: center; max-width: 750px; margin: 0 auto 35px auto;">
+      <span style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: var(--color-secondary); letter-spacing: 0.08em; display: block; margin-bottom: 8px;">Motifs Fréquents de Consultation</span>
+      <h2 id="conditions-heading" class="section-title" style="font-size: 1.8rem; margin-bottom: 12px; color: var(--text-color);">
+        Quelle gêne ou douleur vous limite aujourd'hui ?
+      </h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+        La douleur corporelle ne signifie pas un dommage irréversible. Identifiez votre situation et découvrez ce que démontre la recherche clinique actuelle.
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+      <!-- Condition 1: Lumbar -->
+      <div class="contact-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="font-size: 2rem; margin-bottom: 12px;" aria-hidden="true">⚡</div>
+          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
+            Lumbago & Blocage Lombaire Aigu
+          </h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+            Raideur matinale, douleurs aiguës en se penchant ou sensation de blocage. La colonne lombaire est une structure solide conçue pour le mouvement, pas pour l'immobilité.
+          </p>
+        </div>
+        <a href="/fr/guide-adaptation" class="btn-link" style="font-weight: 700; font-size: 0.88rem;">
+          Calculer l'exercice gradué &rarr;
+        </a>
+      </div>
+
+      <!-- Condition 2: Sciatica -->
+      <div class="contact-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="font-size: 2rem; margin-bottom: 12px;" aria-hidden="true">🦵</div>
+          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
+            Sciatique & Douleur Irradiant dans la Jambe
+          </h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+            Brûlures, engourdissements ou décharges descendant du fessier vers la jambe et le pied. Nous évaluons la sensibilité neurodynamique et la cause fonctionnelle.
+          </p>
+        </div>
+        <a href="/fr/contact" class="btn-link" style="font-weight: 700; font-size: 0.88rem;">
+          Demander une consultation clinique &rarr;
+        </a>
+      </div>
+
+      <!-- Condition 3: Hernias -->
+      <div class="contact-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="font-size: 2rem; margin-bottom: 12px;" aria-hidden="true">🩻</div>
+          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
+            Hernies Discales & Résultats d'IRM
+          </h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+            On vous a dit que vous aviez une usure ou une protrusion et vous avez peur de porter des charges ? La science prouve que l'IRM n'est pas une condamnation à vie.
+          </p>
+        </div>
+        <a href="/fr/demystifier-la-douleur/irm-age-pas-douleur" class="btn-link" style="font-weight: 700; font-size: 0.88rem;">
+          Lire les preuves sur les hernies &rarr;
+        </a>
+      </div>
+
+      <!-- Condition 4: Cervical -->
+      <div class="contact-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="font-size: 2rem; margin-bottom: 12px;" aria-hidden="true">💻</div>
+          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
+            Douleur Cervicale & Tension aux Épaules
+          </h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+            Trapèzes contractés, raideur à la rotation du cou et maux de tête de tension liés aux longues heures de bureau et au stress accumulé.
+          </p>
+        </div>
+        <a href="/fr/demystifier-la-douleur/equilibre-statues-stabilite-dynamique" class="btn-link" style="font-weight: 700; font-size: 0.88rem;">
+          Découvrir les clés de mobilité &rarr;
+        </a>
+      </div>
+
+      <!-- Condition 5: Persistent Pain -->
+      <div class="contact-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="font-size: 2rem; margin-bottom: 12px;" aria-hidden="true">⏳</div>
+          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
+            Douleur Persistante & Chronique
+          </h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+            Douleurs durant depuis plus de 3 mois sans amélioration par le repos ou les médicaments. Nous analysons l'hypersensibilité du système nerveux et les habitudes de vie.
+          </p>
+        </div>
+        <a href="/fr/demystifier-la-douleur/frein-cerveau-controle-prefrontal" class="btn-link" style="font-weight: 700; font-size: 0.88rem;">
+          Comprendre l'alarme de la douleur &rarr;
         </a>
       </div>
     </div>
@@ -112,12 +210,12 @@ const schemaJson = JSON.stringify(schema);
       <div class="contact-card" style="padding: 25px; display: flex; flex-direction: column; justify-content: space-between;">
         <div>
           <div class="card-image-wrapper">
-            <img src={`${import.meta.env.BASE_URL}images/patient_empowerment.webp`} alt="Patient effectuant un exercice thérapeutique guidé avec confiance" class="card-image" />
+            <img src="/images/patient_empowerment.webp" alt="Patient effectuant un exercice thérapeutique guidé avec confiance" class="card-image" />
           </div>
           <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--color-secondary); letter-spacing: 0.08em; display: block; margin-bottom: 10px;">Pour les Patients & Personnes en Douleur</span>
           <h3 style="font-size: 1.3rem; margin-bottom: 15px; color: var(--text-color);">Comprenez votre douleur et retrouvez votre autonomie</h3>
           <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
-            Apprenez comment interagissent votre mouvement, votre sommeil, votre système immunitaire et vos habitudes. Sans jargon incompréhensible ni peur injustifiée sur vos IRM ou votre posture.
+            Apprenez comment interagissent votre mouvement, votre sommeil, votre système immunitaire et vos habitudes. Sans jargon inutile ni peur injustifiée sur vos IRM ou votre posture.
           </p>
         </div>
         <div style="display: flex; flex-direction: column; gap: 12px;">
@@ -134,7 +232,7 @@ const schemaJson = JSON.stringify(schema);
       <div class="contact-card" style="padding: 25px; display: flex; flex-direction: column; justify-content: space-between;">
         <div>
           <div class="card-image-wrapper">
-            <img src={`${import.meta.env.BASE_URL}images/professional_clinical.webp`} alt="Professionnels de santé collaborant et analysant des cas cliniques" class="card-image" />
+            <img src="/images/professional_clinical.webp" alt="Professionnels de santé collaborant et analysant des cas cliniques" class="card-image" />
           </div>
           <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--color-primary); letter-spacing: 0.08em; display: block; margin-bottom: 10px;">Pour les Professionnels de Santé</span>
           <h3 style="font-size: 1.3rem; margin-bottom: 15px; color: var(--text-color);">Rigueur clinique et perspective intégrative</h3>
@@ -150,6 +248,65 @@ const schemaJson = JSON.stringify(schema);
             Voir les publications avec DOI/PubMed &rarr;
           </a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The 4 Pillars of Integrative Health Section -->
+  <section aria-labelledby="pillars-heading" style="margin: 50px 0;">
+    <div style="text-align: center; max-width: 750px; margin: 0 auto 35px auto;">
+      <span style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: var(--color-secondary); letter-spacing: 0.08em; display: block; margin-bottom: 8px;">Méthodologie Clinique</span>
+      <h2 id="pillars-heading" class="section-title" style="font-size: 1.8rem; margin-bottom: 12px; color: var(--text-color);">
+        Les 4 Piliers de la Santé Intégrative et la PNI
+      </h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+        La douleur persistante répond rarement à une seule cause mécanique. La <strong>Santé Intégrative</strong> et la <strong>Psychoneuroimmunologie Clinique (PNI)</strong> analysent l'interaction entre votre système nerveux, votre musculature, vos niveaux d'inflammation, votre sommeil et vos facteurs de stress pour construire des solutions durables.
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
+      <!-- Pillar 1 -->
+      <div class="pillar-card" style="padding: 25px; border-top: 4px solid var(--color-secondary);">
+        <div style="font-size: 2.2rem; margin-bottom: 12px;" aria-hidden="true">💆‍♂️</div>
+        <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
+          1. Thérapie Manuelle Musculosquelettique
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+          Raisonnement clinique pour la modulation des symptômes aigus, le soulagement articulaire/myofascial et l'optimisation de la mobilité corporelle.
+        </p>
+      </div>
+
+      <!-- Pillar 2 -->
+      <div class="pillar-card" style="padding: 25px; border-top: 4px solid var(--color-primary);">
+        <div style="font-size: 2.2rem; margin-bottom: 12px;" aria-hidden="true">🏃‍♂️</div>
+        <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
+          2. Exercice Thérapeutique & Méthode Pilates
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+          Réentraînement progressif par quotas de mouvement et charge adaptée pour renforcer les tissus et rebâtir la confiance corporelle.
+        </p>
+      </div>
+
+      <!-- Pillar 3 -->
+      <div class="pillar-card" style="padding: 25px; border-top: 4px solid #28a745;">
+        <div style="font-size: 2.2rem; margin-bottom: 12px;" aria-hidden="true">🧬</div>
+        <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
+          3. Psychoneuroimmunologie Clinique (PNI)
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+          Prise en compte des facteurs de mode de vie : régulation des rythmes circadiens, sommeil, inflammation de bas grade et gestion du stress.
+        </p>
+      </div>
+
+      <!-- Pillar 4 -->
+      <div class="pillar-card" style="padding: 25px; border-top: 4px solid #17a2b8;">
+        <div style="font-size: 2.2rem; margin-bottom: 12px;" aria-hidden="true">🧠</div>
+        <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
+          4. Éducation en Neurosciences de la Douleur (PNE)
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+          Démystification de la fragilité structurelle et activation du frein préfrontal inhibiteur pour réduire l'hypersensibilité de l'alarme douloureuse.
+        </p>
       </div>
     </div>
   </section>
