@@ -5,6 +5,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://cesarsantos.me',
   base: '/',
+  trailingSlash: 'never',
   integrations: [sitemap()],
   i18n: {
     defaultLocale: 'es',
