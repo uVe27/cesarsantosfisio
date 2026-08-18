@@ -7,9 +7,12 @@ category: "Mouvement"
 doi: "10.1016/j.math.2025.102905"
 pubmedUrl: "https://pubmed.ncbi.nlm.nih.gov/38291030/"
 tags: ["stabilite", "posture", "mouvement", "mythes structurels"]
+image: "/images/dynamic_stability_posture.webp"
 ---
 
 Pendant des décennies, on nous a vendu l'idée que le corps humain doit être parfaitement symétrique. On nous répète que « l'équilibre musculaire » est la clé de la santé et que toute asymétrie (comme avoir une épaule plus haute que l'autre ou un bassin légèrement dévié) est une anomalie pathologique qui provoquera inévitablement de la douleur. Cette croyance manque non seulement de fondement scientifique, mais s'oppose également au fonctionnement même de la vie. L'équilibre est un état statique ; la santé est une **stabilité dynamique**.
+
+![Exercices de stabilité dynamique et variabilité du mouvement](/images/dynamic_stability_posture.webp)
 
 ## L'erreur de l'équilibre musculaire et de la symétrie statique
 

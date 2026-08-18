@@ -7,9 +7,12 @@ category: "Neurobiologie"
 doi: "10.1016/j.neuron.2026.02.008"
 pubmedUrl: "https://pubmed.ncbi.nlm.nih.gov/39102892/"
 tags: ["neurobiologie", "education douleur", "prefrontal", "PNE"]
+image: "/images/prefrontal_relaxation.webp"
 ---
 
 Le simple fait de lire sur la science ou d'apprendre comment fonctionne votre système nerveux peut-il réduire physiquement la douleur que vous ressentez ? La réponse scientifique est un oui retentissant. L'éducation à la neurobiologie de la douleur n'est pas seulement un exposé théorique ; c'est une intervention clinique qui modifie physiquement la chimie de votre système nerveux.
+
+![Contrôle préfrontal et neurosciences de la douleur](/images/prefrontal_relaxation.webp)
 
 ## Comprendre la douleur éteint l'alarme
 

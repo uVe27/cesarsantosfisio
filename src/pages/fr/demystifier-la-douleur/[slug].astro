@@ -24,34 +24,80 @@ const { Content } = await render(article);
 const lang = 'fr';
 const t = useTranslations(lang);
 
-// Constructing precise JSON-LD TechArticle schema for EEAT
+// Constructing comprehensive MedicalWebPage + TechArticle JSON-LD schema for Healthcare E-E-A-T
+const articleUrl = `https://cesarsantos.me/fr/demystifier-la-douleur/${Astro.params.slug}`;
+const imageUrl = article.data.image ? `https://cesarsantos.me${article.data.image}` : 'https://cesarsantos.me/images/og-default.jpg';
+
 const schema = {
   "@context": "https://schema.org",
-  "@type": "TechArticle",
-  "headline": article.data.title,
-  "description": article.data.description,
-  "datePublished": article.data.pubDate.toISOString(),
-  "dateModified": article.data.pubDate.toISOString(),
-  "author": {
-    "@type": "Person",
-    "name": article.data.author,
-    "jobTitle": "Physiothérapeute",
-    "alumniOf": {
-      "@type": "EducationalOrganization",
-      "name": "École Universitaire de Physiothérapie ONCE - Université Autonome de Madrid"
+  "@graph": [
+    {
+      "@type": ["MedicalWebPage", "TechArticle", "BlogPosting"],
+      "@id": `${articleUrl}#article`,
+      "url": articleUrl,
+      "headline": article.data.title,
+      "description": article.data.description,
+      "datePublished": article.data.pubDate.toISOString(),
+      "dateModified": article.data.pubDate.toISOString(),
+      "inLanguage": "fr-FR",
+      "image": {
+        "@type": "ImageObject",
+        "url": imageUrl,
+        "width": 1200,
+        "height": 630
+      },
+      "author": {
+        "@type": "Person",
+        "@id": "https://cesarsantos.me/fr/a-propos#person",
+        "name": article.data.author || "Cesar Santos",
+        "jobTitle": "Physiothérapeute",
+        "url": "https://cesarsantos.me/fr/a-propos",
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "École Universitaire de Physiothérapie de l'ONCE · Université Autonome de Madrid",
+          "sameAs": "https://www.uam.es"
+        },
+        "knowsAbout": [
+          "Physiothérapie",
+          "Psychoneuroimmunologie Clinique",
+          "Neurosciences de la Douleur",
+          "Exercice Thérapeutique",
+          "Thérapie Manuelle Orthopédique"
+        ],
+        "sameAs": [
+          "https://cesarsantos.me/fr/a-propos",
+          "https://es.linkedin.com/in/cesar-santos-fisio"
+        ]
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://cesarsantos.me/#organization",
+        "name": "Cesar Santos · Physiothérapie Intégrative & Santé",
+        "url": "https://cesarsantos.me",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://cesarsantos.me/LOGO/logo_dark.png"
+        }
+      },
+      "genre": "Vulgarisation Scientifique en Santé",
+      "audience": {
+        "@type": "MedicalAudience",
+        "audienceType": "Patients et Professionnels de Santé"
+      },
+      "about": [
+        {
+          "@type": "MedicalSpecialty",
+          "name": "Physiotherapy"
+        },
+        {
+          "@type": "MedicalCondition",
+          "name": "Douleur Persistante et Santé de la Colonne"
+        }
+      ],
+      ...(article.data.doi && { "identifier": article.data.doi }),
+      ...(article.data.pubmedUrl && { "sameAs": article.data.pubmedUrl })
     }
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Cesar Santos Physiothérapie & Santé"
-  },
-  "genre": "Vulgarisation Scientifique",
-  "about": {
-    "@type": "MedicalSpecialty",
-    "name": "Physical Therapy"
-  },
-  ...(article.data.doi && { "identifier": article.data.doi }),
-  ...(article.data.pubmedUrl && { "sameAs": article.data.pubmedUrl })
+  ]
 };
 
 const schemaJson = JSON.stringify(schema);
@@ -64,6 +110,7 @@ const schemaJson = JSON.stringify(schema);
   canonicalPath={`/fr/demystifier-la-douleur/${Astro.params.slug}`}
   schemaJson={schemaJson}
   ogType="article"
+  ogImage={article.data.image || '/images/og-default.jpg'}
 >
   <article class="article-detail">
     <!-- Meta details header -->

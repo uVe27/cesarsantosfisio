@@ -7,9 +7,12 @@ category: "Demystification"
 doi: "10.1016/j.clinimag.2025.04.012"
 pubmedUrl: "https://pubmed.ncbi.nlm.nih.gov/38910291/"
 tags: ["MRI", "herniated disc", "low back pain", "myths"]
+image: "/images/mri_spine_health.webp"
 ---
 
 When we receive an MRI report mentioning words like "herniated disc", "dehydration", or "protrusion", it is completely natural to be scared. The immediate tendency is to think that our spine is "broken", that we are fragile, and that we must stop moving to avoid making things worse. However, modern science tells us otherwise: your MRI shows your age, not your pain.
+
+![Clinical evidence on MRI findings and spinal health](/images/mri_spine_health.webp)
 
 ## What the data says: Prevalence in asymptomatic people
 

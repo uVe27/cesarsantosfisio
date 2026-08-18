@@ -7,9 +7,12 @@ category: "Neurobiología"
 doi: "10.1080/09593985.2016.1194652"
 pubmedUrl: "https://pubmed.ncbi.nlm.nih.gov/27351541/"
 tags: ["neurobiologia", "educacion dolor", "prefrontal", "PNE"]
+image: "/images/prefrontal_relaxation.webp"
 ---
 
 ¿Puede el simple hecho de leer sobre ciencia o aprender cómo funciona el sistema nervioso reducir físicamente el dolor que sientes? La respuesta científica es un rotundo sí. La educación en neurobiología del dolor no es solo una charla teórica; es una intervención clínica que cambia físicamente la química de tu sistema nervioso.
+
+![Control prefrontal y educación en neurociencia del dolor](/images/prefrontal_relaxation.webp)
 
 ## Entender el dolor apaga la alarma
 

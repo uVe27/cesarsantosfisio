@@ -7,9 +7,12 @@ category: "Démystification"
 doi: "10.1016/j.clinimag.2025.04.012"
 pubmedUrl: "https://pubmed.ncbi.nlm.nih.gov/38910291/"
 tags: ["IRM", "hernie discale", "lombalgie", "mythes"]
+image: "/images/mri_spine_health.webp"
 ---
 
 Lorsque nous recevons un rapport d'IRM mentionnant des mots tels que « hernie discale », « déshydratation » ou « saillie », il est tout à fait naturel d'avoir peur. La tendance immédiate est de penser que notre colonne est « cassée », que nous sommes fragiles et que nous devons cesser de bouger pour ne pas aggraver les choses. Cependant, la science moderne nous dit le contraire : votre IRM montre votre âge, pas votre douleur.
+
+![Preuves cliniques sur les résultats de l'IRM et la santé vertébrale](/images/mri_spine_health.webp)
 
 ## Ce que disent les données : Prévalence chez les asymptomatiques
 

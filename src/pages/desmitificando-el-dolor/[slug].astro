@@ -24,34 +24,80 @@ const { Content } = await render(article);
 const lang = 'es';
 const t = useTranslations(lang);
 
-// Constructing precise JSON-LD TechArticle schema for EEAT
+// Constructing comprehensive MedicalWebPage + TechArticle JSON-LD schema for Healthcare E-E-A-T
+const articleUrl = `https://cesarsantos.me/desmitificando-el-dolor/${Astro.params.slug}`;
+const imageUrl = article.data.image ? `https://cesarsantos.me${article.data.image}` : 'https://cesarsantos.me/images/og-default.jpg';
+
 const schema = {
   "@context": "https://schema.org",
-  "@type": "TechArticle",
-  "headline": article.data.title,
-  "description": article.data.description,
-  "datePublished": article.data.pubDate.toISOString(),
-  "dateModified": article.data.pubDate.toISOString(),
-  "author": {
-    "@type": "Person",
-    "name": article.data.author,
-    "jobTitle": "Fisioterapeuta",
-    "alumniOf": {
-      "@type": "EducationalOrganization",
-      "name": "Escuela Universitaria de Fisioterapia ONCE - Universidad Autónoma de Madrid"
+  "@graph": [
+    {
+      "@type": ["MedicalWebPage", "TechArticle", "BlogPosting"],
+      "@id": `${articleUrl}#article`,
+      "url": articleUrl,
+      "headline": article.data.title,
+      "description": article.data.description,
+      "datePublished": article.data.pubDate.toISOString(),
+      "dateModified": article.data.pubDate.toISOString(),
+      "inLanguage": "es-ES",
+      "image": {
+        "@type": "ImageObject",
+        "url": imageUrl,
+        "width": 1200,
+        "height": 630
+      },
+      "author": {
+        "@type": "Person",
+        "@id": "https://cesarsantos.me/sobre-mi#person",
+        "name": article.data.author || "Cesar Santos",
+        "jobTitle": "Fisioterapeuta",
+        "url": "https://cesarsantos.me/sobre-mi",
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "Escuela Universitaria de Fisioterapia de la ONCE · Universidad Autónoma de Madrid",
+          "sameAs": "https://www.uam.es"
+        },
+        "knowsAbout": [
+          "Fisioterapia",
+          "Psiconeuroinmunología Clínica",
+          "Neurobiología del Dolor",
+          "Ejercicio Terapéutico",
+          "Terapia Manual Ortopédica"
+        ],
+        "sameAs": [
+          "https://cesarsantos.me/sobre-mi",
+          "https://es.linkedin.com/in/cesar-santos-fisio"
+        ]
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://cesarsantos.me/#organization",
+        "name": "Cesar Santos · Fisioterapia y Salud Integrativa",
+        "url": "https://cesarsantos.me",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://cesarsantos.me/LOGO/logo_dark.png"
+        }
+      },
+      "genre": "Divulgación Científica en Fisioterapia y Salud",
+      "audience": {
+        "@type": "MedicalAudience",
+        "audienceType": "Pacientes y Profesionales de la Salud"
+      },
+      "about": [
+        {
+          "@type": "MedicalSpecialty",
+          "name": "Physiotherapy"
+        },
+        {
+          "@type": "MedicalCondition",
+          "name": "Dolor Persistente y Dolor de Espalda"
+        }
+      ],
+      ...(article.data.doi && { "identifier": article.data.doi }),
+      ...(article.data.pubmedUrl && { "sameAs": article.data.pubmedUrl })
     }
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Cesar Santos Fisioterapia y Salud"
-  },
-  "genre": "Divulgación Científica",
-  "about": {
-    "@type": "MedicalSpecialty",
-    "name": "Physical Therapy"
-  },
-  ...(article.data.doi && { "identifier": article.data.doi }),
-  ...(article.data.pubmedUrl && { "sameAs": article.data.pubmedUrl })
+  ]
 };
 
 const schemaJson = JSON.stringify(schema);
@@ -64,6 +110,7 @@ const schemaJson = JSON.stringify(schema);
   canonicalPath={`/desmitificando-el-dolor/${Astro.params.slug}`}
   schemaJson={schemaJson}
   ogType="article"
+  ogImage={article.data.image || '/images/og-default.jpg'}
 >
   <article class="article-detail">
     <!-- Meta details header -->

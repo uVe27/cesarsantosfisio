@@ -7,11 +7,12 @@ category: "Desmitificación"
 doi: "10.3174/ajnr.A4173"
 pubmedUrl: "https://pubmed.ncbi.nlm.nih.gov/25430861/"
 tags: ["resonancia", "hernia discal", "dolor lumbar", "mitos"]
+image: "/images/mri_spine_health.webp"
 ---
 
 Cuando recibimos el informe de una resonancia magnética que menciona palabras como "hernia discal", "deshidratación" o "protusión", es completamente natural asustarse. La tendencia inmediata es pensar que nuestra espalda está "rota", que somos frágiles y que debemos dejar de movernos para no empeorar las cosas. Sin embargo, la ciencia moderna nos dice lo contrario: tu resonancia muestra tu edad, no tu dolor.
 
-![Evidencia clínica sobre resonancia y salud de la columna](/cesarsantosfisio/images/.webp)
+![Evidencia clínica sobre resonancia y salud de la columna](/images/mri_spine_health.webp)
 
 ## Lo que dicen los datos: Prevalencia en asintomáticos
 

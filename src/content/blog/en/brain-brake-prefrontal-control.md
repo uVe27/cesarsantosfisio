@@ -7,9 +7,12 @@ category: "Neurobiology"
 doi: "10.1016/j.neuron.2026.02.008"
 pubmedUrl: "https://pubmed.ncbi.nlm.nih.gov/39102892/"
 tags: ["neurobiology", "pain education", "prefrontal", "PNE"]
+image: "/images/prefrontal_relaxation.webp"
 ---
 
 Can the simple act of reading about science or learning how your nervous system works physically reduce the pain you feel? The scientific answer is a resounding yes. Pain neuroscience education is not just a theoretical talk; it is a clinical intervention that physically changes the chemistry of your nervous system.
+
+![Prefrontal cortex regulation and pain neuroscience](/images/prefrontal_relaxation.webp)
 
 ## Understanding pain turns off the alarm
 

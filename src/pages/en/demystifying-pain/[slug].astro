@@ -24,34 +24,80 @@ const { Content } = await render(article);
 const lang = 'en';
 const t = useTranslations(lang);
 
-// Constructing precise JSON-LD TechArticle schema for EEAT
+// Constructing comprehensive MedicalWebPage + TechArticle JSON-LD schema for Healthcare E-E-A-T
+const articleUrl = `https://cesarsantos.me/en/demystifying-pain/${Astro.params.slug}`;
+const imageUrl = article.data.image ? `https://cesarsantos.me${article.data.image}` : 'https://cesarsantos.me/images/og-default.jpg';
+
 const schema = {
   "@context": "https://schema.org",
-  "@type": "TechArticle",
-  "headline": article.data.title,
-  "description": article.data.description,
-  "datePublished": article.data.pubDate.toISOString(),
-  "dateModified": article.data.pubDate.toISOString(),
-  "author": {
-    "@type": "Person",
-    "name": article.data.author,
-    "jobTitle": "Physiotherapist",
-    "alumniOf": {
-      "@type": "EducationalOrganization",
-      "name": "ONCE University School of Physiotherapy - Autonomous University of Madrid"
+  "@graph": [
+    {
+      "@type": ["MedicalWebPage", "TechArticle", "BlogPosting"],
+      "@id": `${articleUrl}#article`,
+      "url": articleUrl,
+      "headline": article.data.title,
+      "description": article.data.description,
+      "datePublished": article.data.pubDate.toISOString(),
+      "dateModified": article.data.pubDate.toISOString(),
+      "inLanguage": "en-US",
+      "image": {
+        "@type": "ImageObject",
+        "url": imageUrl,
+        "width": 1200,
+        "height": 630
+      },
+      "author": {
+        "@type": "Person",
+        "@id": "https://cesarsantos.me/en/about-me#person",
+        "name": article.data.author || "Cesar Santos",
+        "jobTitle": "Physiotherapist",
+        "url": "https://cesarsantos.me/en/about-me",
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "ONCE University School of Physiotherapy · Autonomous University of Madrid",
+          "sameAs": "https://www.uam.es"
+        },
+        "knowsAbout": [
+          "Physiotherapy",
+          "Clinical Psychoneuroimmunology",
+          "Pain Neuroscience",
+          "Therapeutic Exercise",
+          "Orthopedic Manual Physical Therapy"
+        ],
+        "sameAs": [
+          "https://cesarsantos.me/en/about-me",
+          "https://es.linkedin.com/in/cesar-santos-fisio"
+        ]
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://cesarsantos.me/#organization",
+        "name": "Cesar Santos · Integrative Physiotherapy & Health",
+        "url": "https://cesarsantos.me",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://cesarsantos.me/LOGO/logo_dark.png"
+        }
+      },
+      "genre": "Scientific Health Communication",
+      "audience": {
+        "@type": "MedicalAudience",
+        "audienceType": "Patients and Healthcare Professionals"
+      },
+      "about": [
+        {
+          "@type": "MedicalSpecialty",
+          "name": "Physiotherapy"
+        },
+        {
+          "@type": "MedicalCondition",
+          "name": "Persistent Pain and Spine Health"
+        }
+      ],
+      ...(article.data.doi && { "identifier": article.data.doi }),
+      ...(article.data.pubmedUrl && { "sameAs": article.data.pubmedUrl })
     }
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Cesar Santos Physiotherapy & Health"
-  },
-  "genre": "Scientific Divulgation",
-  "about": {
-    "@type": "MedicalSpecialty",
-    "name": "Physical Therapy"
-  },
-  ...(article.data.doi && { "identifier": article.data.doi }),
-  ...(article.data.pubmedUrl && { "sameAs": article.data.pubmedUrl })
+  ]
 };
 
 const schemaJson = JSON.stringify(schema);
@@ -64,6 +110,7 @@ const schemaJson = JSON.stringify(schema);
   canonicalPath={`/en/demystifying-pain/${Astro.params.slug}`}
   schemaJson={schemaJson}
   ogType="article"
+  ogImage={article.data.image || '/images/og-default.jpg'}
 >
   <article class="article-detail">
     <!-- Meta details header -->

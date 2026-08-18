@@ -7,11 +7,12 @@ category: "Movimiento"
 doi: "10.2519/jospt.2019.0610"
 pubmedUrl: "https://pubmed.ncbi.nlm.nih.gov/31366294/"
 tags: ["estabilidad", "postura", "movimiento", "mitos estructurales"]
+image: "/images/dynamic_stability_posture.webp"
 ---
 
 Durante décadas, se nos ha vendido la idea de que el cuerpo humano debe ser perfectamente simétrico. Se nos dice que el "equilibrio muscular" es la clave para la salud y que cualquier asimetría (como tener un hombro más alto que otro o una ligera desviación en la pelvis) es una anomalía patológica que causará dolor inevitablemente. Esta creencia no solo carece de base científica, sino que es contraria a cómo funciona la vida. El equilibrio es un estado estático; la salud es **estabilidad dinámica**.
 
-![Ejercicios de estabilidad dinámica y variabilidad postural](/cesarsantosfisio/images/.webp)
+![Ejercicios de estabilidad dinámica y variabilidad postural](/images/dynamic_stability_posture.webp)
 
 ## El error del equilibrio muscular y la simetría estática
 

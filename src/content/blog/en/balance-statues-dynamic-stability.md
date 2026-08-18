@@ -7,9 +7,12 @@ category: "Movement"
 doi: "10.1016/j.math.2025.102905"
 pubmedUrl: "https://pubmed.ncbi.nlm.nih.gov/38291030/"
 tags: ["stability", "posture", "movement", "structural myths"]
+image: "/images/dynamic_stability_posture.webp"
 ---
 
 For decades, we have been sold the idea that the human body must be perfectly symmetrical. We are told that "muscle balance" is the key to health and that any asymmetry (like one shoulder being higher than the other or a slightly tilted pelvis) is a pathological anomaly that will inevitably cause pain. This belief not only lacks a scientific basis but goes against how life itself works. Balance is a static state; health is **dynamic stability**.
+
+![Dynamic stability exercises and movement variability](/images/dynamic_stability_posture.webp)
 
 ## The error of muscle balance and static symmetry
 
