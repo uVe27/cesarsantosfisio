@@ -264,6 +264,18 @@ const { lang = 'es', gaId = import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID || 'G-YEQ
       });
     }
 
+    // Reopen cookie modal at any time from footer button or link
+    const openBtn = document.getElementById('open-cookies-btn');
+    if (openBtn) {
+      openBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (overlay) {
+          overlay.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    }
+
     function enableAnalytics() {
       if (!gaId || window.gtagLoaded) return;
       window.gtagLoaded = true;
