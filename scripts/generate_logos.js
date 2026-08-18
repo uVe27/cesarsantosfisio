@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 async function processLogos() {
-  const inputPath = path.resolve('public/LOGO/LOGO TRANSPARENTE.png');
+  const inputPath = path.resolve('VARIOS/LOGO TRANSPARENTE.png');
   const input = sharp(inputPath);
   const { data, info } = await input.raw().toBuffer({ resolveWithObject: true });
   
@@ -41,9 +41,12 @@ async function processLogos() {
       const r = data[srcIdx], g = data[srcIdx+1], b = data[srcIdx+2];
       const lum = (r * 0.299 + g * 0.587 + b * 0.114);
       
+      // Strict thresholding to guarantee 0% background noise and smooth antialiasing
       let alpha = 0;
-      if (lum < 245) {
-        alpha = Math.min(255, Math.max(0, Math.round((245 - lum) / 180 * 255)));
+      if (lum <= 75) {
+        alpha = 255;
+      } else if (lum < 195) {
+        alpha = Math.round(((195 - lum) / (195 - 75)) * 255);
       }
 
       // Light mode: Original brand colors on 100% transparent background
@@ -52,9 +55,10 @@ async function processLogos() {
       lightData[destIdx+2] = b;
       lightData[destIdx+3] = alpha;
 
-      // Dark mode: Luminous white & teal on 100% transparent background
+      // Dark mode: Crisp bright white and luminous teal on 100% transparent background
       if (alpha > 0) {
-        if (g > r + 10 && g > b) {
+        // Detect teal/accent vs dark text
+        if (g > r + 8 && g > b) {
           // Teal element (#5ca1a8)
           darkData[destIdx] = 0x5C;
           darkData[destIdx+1] = 0xA1;
