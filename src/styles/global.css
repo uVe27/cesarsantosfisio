@@ -917,14 +917,42 @@ a:hover {
   border: 1px solid var(--border-color);
   color: var(--text-color);
   border-radius: 8px;
-  transition: var(--transition-smooth);
+  transition: border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-control:hover {
+  border-color: var(--color-secondary, #336367);
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(51, 99, 103, 0.12);
 }
 
 .form-control:focus {
   outline: none;
-  background-color: var(--bg-color);
-  border-color: var(--color-secondary-light);
-  box-shadow: 0 0 0 3px rgba(92, 161, 168, 0.2);
+  background-color: #ffffff;
+  border-color: var(--color-secondary, #336367);
+  box-shadow: 0 0 0 3.5px rgba(51, 99, 103, 0.22);
+}
+
+.dark .form-control,
+:root.dark .form-control {
+  background-color: #171f23;
+  border-color: #2f3e46;
+  color: #ebf1f0;
+}
+
+.dark .form-control:hover,
+:root.dark .form-control:hover {
+  border-color: #5ca1a8;
+  background-color: #1c262b;
+  box-shadow: 0 2px 12px rgba(92, 161, 168, 0.2);
+}
+
+.dark .form-control:focus,
+:root.dark .form-control:focus {
+  outline: none;
+  background-color: #202b31;
+  border-color: #7ecbd2;
+  box-shadow: 0 0 0 3.5px rgba(126, 203, 210, 0.3);
 }
 
 /* Primary Action Buttons (.btn-submit, .btn-primary) */
