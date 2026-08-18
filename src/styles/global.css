@@ -213,45 +213,26 @@ a:hover {
   color: var(--text-color);
 }
 .brand-logo-img {
-  height: 105px;
+  height: 110px;
   width: auto;
   max-width: 100%;
+  object-fit: contain;
   display: block;
-  transition: transform var(--transition-speed) ease;
 }
 
-/* Vector SVG Brand Logo Styling for Light & Dark Modes */
-.brand-svg-vertebra { 
-  fill: var(--color-secondary); 
-  transition: fill var(--transition-speed) ease;
+/* Light / Dark Mode Logo Switching with 100% Genuine Transparency */
+.logo-dark-img {
+  display: none !important;
 }
-.brand-svg-title { 
-  font-family: var(--font-family); 
-  font-weight: 700; 
-  font-size: 26px; 
-  letter-spacing: 0.12em; 
-  fill: var(--color-primary); 
-  text-anchor: middle; 
-  transition: fill var(--transition-speed) ease;
-}
-.brand-svg-subtitle { 
-  font-family: var(--font-family); 
-  font-weight: 600; 
-  font-size: 13px; 
-  letter-spacing: 0.16em; 
-  fill: var(--color-secondary); 
-  text-anchor: middle; 
-  transition: fill var(--transition-speed) ease;
+.logo-light-img {
+  display: block !important;
 }
 
-.dark .brand-svg-vertebra { 
-  fill: #5CA1A8 !important; 
+.dark .logo-light-img {
+  display: none !important;
 }
-.dark .brand-svg-title { 
-  fill: #FFFFFF !important; 
-}
-.dark .brand-svg-subtitle { 
-  fill: #5CA1A8 !important; 
+.dark .logo-dark-img {
+  display: block !important;
 }
 
 /* FAQ Item Styling for Light & Dark Mode */

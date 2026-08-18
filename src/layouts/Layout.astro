@@ -194,7 +194,20 @@ const frPath = `${siteUrl}${getLocalizedPathForSwitch('fr')}`;
       <div class="header-container">
         <!-- Brand Identity / Logo -->
         <a href={getLocalizedPath('/', lang)} class="brand-link" aria-label="Cesar Santos Fisioterapia y Salud Home">
-          <BrandLogo />
+          <img 
+            src={`${import.meta.env.BASE_URL}LOGO/logo_light.webp`} 
+            alt="Cesar Santos - Fisioterapia y Salud" 
+            class="brand-logo-img logo-light-img" 
+            width="128"
+            height="120"
+          />
+          <img 
+            src={`${import.meta.env.BASE_URL}LOGO/logo_dark.webp`} 
+            alt="Cesar Santos - Fisioterapia y Salud" 
+            class="brand-logo-img logo-dark-img" 
+            width="128"
+            height="120"
+          />
         </a>
 
         <!-- Accessibility-optimised Navigation -->
