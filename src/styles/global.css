@@ -214,18 +214,29 @@ a:hover {
   color: var(--text-color);
 }
 .brand-logo-img {
-  height: 140px;
+  height: 120px;
   max-width: 100%;
   object-fit: contain;
   width: auto;
   display: block;
-  transition: var(--transition-smooth);
-  mix-blend-mode: multiply;
+  transition: opacity var(--transition-speed) ease;
 }
 
-.dark .brand-logo-img {
-  filter: invert(1);
-  mix-blend-mode: screen;
+/* 100% Transparent Logo Switching for Light & Dark Modes */
+.logo-dark-img {
+  display: none !important;
+}
+
+.logo-light-img {
+  display: block !important;
+}
+
+.dark .logo-light-img {
+  display: none !important;
+}
+
+.dark .logo-dark-img {
+  display: block !important;
 }
 
 /* FAQ Item Styling for Light & Dark Mode */
