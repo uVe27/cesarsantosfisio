@@ -26,8 +26,9 @@
   --shadow-medium: 0 8px 30px rgba(48, 62, 69, 0.1);
   --border-radius: 8px;
   
-  /* Font styling */
-  --font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Font styling: Inter for body, Outfit for display headings */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 /* Dark Mode Overrides */
@@ -152,10 +153,16 @@ body {
 
 /* Typography */
 h1, h2, h3, h4 {
+  font-family: var(--font-family-display);
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  text-transform: none;
+  letter-spacing: -0.02em;
   color: var(--text-color);
+  line-height: 1.25;
+}
+
+h1 {
+  letter-spacing: -0.03em;
 }
 
 a {
@@ -408,19 +415,119 @@ a:hover {
   color: var(--color-secondary);
 }
 
+/* Editorial Badge */
+.editorial-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background-color: rgba(51, 99, 103, 0.08);
+  color: var(--color-secondary);
+  border: 1px solid rgba(51, 99, 103, 0.2);
+  margin-bottom: 14px;
+}
+
+.dark .editorial-badge {
+  background-color: rgba(92, 161, 168, 0.14);
+  color: var(--color-secondary-light);
+  border-color: rgba(92, 161, 168, 0.3);
+}
+
+/* Authority Trust Bar */
+.trust-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 30px 0 0 0;
+  padding: 16px 20px;
+  background-color: var(--bg-muted);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-color);
+  line-height: 1.35;
+}
+
+.trust-item-bullet {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--color-secondary);
+  flex-shrink: 0;
+}
+
+.dark .trust-item-bullet {
+  background-color: var(--color-secondary-light);
+}
+
 /* Hero Section */
 .hero-section {
-  padding: 60px 0;
+  padding: 50px 0 60px 0;
   border-bottom: 1px solid var(--border-color);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.95fr;
+  gap: 40px;
+  align-items: center;
+}
+
+@media (max-width: 860px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+.hero-portrait-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-muted);
+  box-shadow: var(--shadow-medium);
+}
+
+.hero-portrait-img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+
+@media (max-width: 860px) {
+  .hero-portrait-img {
+    height: 320px;
+  }
+}
+
+.hero-portrait-caption {
+  padding: 18px 20px;
+  background: var(--bg-color);
+  border-top: 1px solid var(--border-color);
 }
 
 .hero-subtitle {
   color: var(--color-secondary);
   font-weight: 600;
   text-transform: uppercase;
-  font-size: 0.85rem;
-  letter-spacing: 0.12em;
-  margin-bottom: 10px;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
 }
 
 .dark .hero-subtitle {
@@ -428,17 +535,43 @@ a:hover {
 }
 
 .hero-title {
-  font-size: 2.5rem;
+  font-size: 2.35rem;
   font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: 20px;
+  line-height: 1.18;
+  margin-bottom: 18px;
+}
+
+@media (max-width: 600px) {
+  .hero-title {
+    font-size: 1.85rem;
+  }
 }
 
 .hero-description {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   color: var(--text-muted);
-  max-width: 800px;
-  margin-bottom: 30px;
+  max-width: 720px;
+  line-height: 1.65;
+  margin-bottom: 24px;
+}
+
+/* Card Number Index */
+.card-number-tag {
+  font-family: var(--font-family-display);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--color-secondary);
+  background: rgba(51, 99, 103, 0.08);
+  padding: 3px 8px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.dark .card-number-tag {
+  color: var(--color-secondary-light);
+  background: rgba(92, 161, 168, 0.14);
 }
 
 /* Card of authority (EEAT) */

@@ -92,79 +92,93 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
 >
   <!-- Hero Section with Storytelling & Mission -->
   <section class="hero-section" aria-labelledby="manifesto-heading">
-    <span class="hero-subtitle">Fisioterapia Basada en Evidencia, Ejercicio y Salud Integrativa</span>
-    <h1 id="manifesto-heading" class="hero-title">
-      Fisioterapeuta en Dolor Persistente y Salud Integrativa
-    </h1>
-    <p class="hero-description">
-      Si llevas meses lidiando con dolor de espalda, te han diagnosticado una hernia o sientes que el miedo al movimiento te impide hacer tu vida habitual, este espacio es para ti.
-    </p>
-    <p class="hero-description" style="margin-top: 10px;">
-      Soy <strong>Cesar Santos</strong>, fisioterapeuta graduado en la Escuela Universitaria de Fisioterapia de la ONCE (Universidad Autónoma de Madrid), ex-Capitán de Infantería de Tropas de Montaña, con Máster Universitario en Fisioterapia del Sistema Musculoesquelético y formación en Psiconeuroinmunología Clínica (PNI) y Método Pilates. Mi trabajo no consiste en aplicar tratamientos pasivos indefinidos, sino en utilizar la <strong>Fisioterapia Integrativa</strong> y la neurociencia médica para enseñarte qué le ocurre a tu cuerpo, dosificar el ejercicio adecuado y devolverte tu autonomía.
-    </p>
+    <div class="hero-grid">
+      <div>
+        <span class="editorial-badge">Fisioterapia Basada en Evidencia · Salud Integrativa</span>
+        <h1 id="manifesto-heading" class="hero-title">
+          Fisioterapeuta en Dolor Persistente y Salud Integrativa
+        </h1>
+        <p class="hero-description">
+          Si llevas meses lidiando con dolor de espalda, te han diagnosticado una hernia o sientes que el miedo al movimiento te impide hacer tu vida habitual, este espacio es para ti.
+        </p>
+        <p class="hero-description" style="font-size: 0.98rem; margin-top: -10px;">
+          Soy <strong>Cesar Santos</strong>, fisioterapeuta graduado en la Escuela Universitaria de Fisioterapia de la ONCE (Universidad Autónoma de Madrid), ex-Capitán de Infantería de Montaña y Máster Universitario en Fisioterapia del Sistema Musculoesquelético con formación en PNI y Método Pilates. Mi trabajo consiste en evaluar qué mantiene activa la alarma de tu dolor, dosificar el ejercicio preciso y devolverte tu autonomía.
+        </p>
 
-    <!-- Rapid Access Buttons -->
-    <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
-      <a href={getLocalizedPath('/guia-afrontamiento', lang)} class="btn-submit" style="width: auto;">
-        <span aria-hidden="true">🛠️</span> Guía de Afrontamiento del Dolor
-      </a>
-      <a href={getLocalizedPath('/desmitificando-el-dolor', lang)} class="btn-link">
-        <span aria-hidden="true">📖</span> Artículos y Evidencia Científica &rarr;
-      </a>
-    </div>
-    
-    <!-- Hero Main Image -->
-    <div class="hero-image-wrapper" style="margin-bottom: 30px;">
-      <img src={`${import.meta.env.BASE_URL}images/hero_physiotherapy.webp`} alt="Fisioterapeuta guiando a un paciente en ejercicio terapéutico y rehabilitación activa" class="hero-image" />
-    </div>
-    
-    <!-- Profile Banner & Story Highlight -->
-    <div class="profile-card" style="margin-top: 30px; display: flex; flex-direction: column; gap: 15px;">
-      <div style="display: flex; align-items: center; gap: 15px;">
-        <img 
-          src={`${import.meta.env.BASE_URL}images/cesar_santos_avatar.webp`} 
-          alt="Cesar Santos - Fisioterapeuta" 
-          class="profile-avatar-img" 
-        />
-        <div>
-          <h2 class="profile-info-title" style="margin: 0;">Cesar Santos</h2>
-          <p class="profile-info-text" style="margin: 0;">
-            Fisioterapeuta · Máster en Fisioterapia Manual Ortopédica · Método Pilates & PNI Clínica
-          </p>
+        <!-- Rapid Access Buttons -->
+        <div style="margin-top: 25px; display: flex; gap: 14px; flex-wrap: wrap; align-items: center;">
+          <a href={getLocalizedPath('/guia-afrontamiento', lang)} class="btn-submit" style="width: auto;">
+            Guía de Afrontamiento del Dolor &rarr;
+          </a>
+          <a href={getLocalizedPath('/desmitificando-el-dolor', lang)} class="btn-link">
+            Artículos y Evidencia Científica &rarr;
+          </a>
         </div>
       </div>
-      <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-color); margin: 10px 0 0 0;">
-        <em>"¿Qué haces cuando la vida te apaga la luz de un día para otro? Te reinventas para investigar a fondo cómo se adapta el cuerpo humano y enseñar a otros a recuperar el control."</em>
-      </p>
-      <div style="margin-top: 5px;">
-        <a href={getLocalizedPath('/sobre-mi', lang)} class="btn-link" style="font-size: 0.9rem; font-weight: 700;">
-          Conoce mi trayectoria completa &rarr;
-        </a>
+
+      <!-- Hero Portrait Card (Unified Authority) -->
+      <div class="hero-portrait-card">
+        <img 
+          src={`${import.meta.env.BASE_URL}images/cesar_santos_portrait.webp`} 
+          alt="Cesar Santos - Fisioterapeuta en Salud Integrativa y Dolor Persistente" 
+          class="hero-portrait-img" 
+        />
+        <div class="hero-portrait-caption">
+          <div style="font-weight: 700; font-size: 1.05rem; color: var(--text-color);">Cesar Santos</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">
+            Fisioterapeuta · Escuela Univ. de Fisioterapia de la ONCE (UAM)
+          </div>
+          <div style="margin-top: 10px;">
+            <a href={getLocalizedPath('/sobre-mi', lang)} class="btn-link" style="font-size: 0.82rem; padding: 4px 10px;">
+              Conoce mi trayectoria completa &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Authority Trust Bar -->
+    <div class="trust-bar" role="region" aria-label="Acreditaciones y Formación">
+      <div class="trust-item">
+        <span class="trust-item-bullet" aria-hidden="true"></span>
+        <span>Escuela Univ. de Fisioterapia de la ONCE (UAM)</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-item-bullet" aria-hidden="true"></span>
+        <span>Máster en Fisioterapia Musculoesquelética (OMT)</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-item-bullet" aria-hidden="true"></span>
+        <span>Psiconeuroinmunología Clínica (PNI)</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-item-bullet" aria-hidden="true"></span>
+        <span>Ejercicio Terapéutico y Método Pilates</span>
       </div>
     </div>
   </section>
 
   <!-- Common Conditions / What is Limiting You Section -->
-  <section aria-labelledby="conditions-heading" style="margin: 60px 0 40px 0;">
-    <div style="text-align: center; max-width: 750px; margin: 0 auto 35px auto;">
-      <span style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: var(--color-secondary); letter-spacing: 0.08em; display: block; margin-bottom: 8px;">Motivos de Consulta Frecuentes</span>
-      <h2 id="conditions-heading" class="section-title" style="font-size: 1.8rem; margin-bottom: 12px; color: var(--text-color);">
+  <section aria-labelledby="conditions-heading" style="margin: 80px 0 60px 0;">
+    <div style="text-align: center; max-width: 750px; margin: 0 auto 40px auto;">
+      <span class="editorial-badge">Motivos de Consulta Frecuentes</span>
+      <h2 id="conditions-heading" class="section-title" style="font-size: 1.9rem; margin-bottom: 12px; color: var(--text-color);">
         ¿Qué molestia o dolor te está limitando?
       </h2>
-      <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+      <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.6; margin: 0;">
         El dolor corporal no siempre significa daño irreversible. Identifica tu situación y descubre qué dice la evidencia científica actual.
       </p>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
       <!-- Condition 1: Lumbar -->
-      <div class="contact-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+      <div class="contact-card" style="padding: 26px; display: flex; flex-direction: column; justify-content: space-between;">
         <div>
-          <div style="font-size: 2rem; margin-bottom: 12px;" aria-hidden="true">⚡</div>
+          <span class="card-number-tag">01 · Columna Lumbar</span>
           <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
             Dolor Lumbar y Bloqueo de Espalda
           </h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px;">
             Rigidez matutina, pinchazos al agacharte o sensación de "quedarte clavado". La columna lumbar es una estructura biológica fuerte diseñada para moverse, no para inmovilizarse.
           </p>
         </div>
@@ -174,13 +188,13 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
       </div>
 
       <!-- Condition 2: Sciatica -->
-      <div class="contact-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+      <div class="contact-card" style="padding: 26px; display: flex; flex-direction: column; justify-content: space-between;">
         <div>
-          <div style="font-size: 2rem; margin-bottom: 12px;" aria-hidden="true">🦵</div>
+          <span class="card-number-tag">02 · Cadena Nerviosa</span>
           <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
             Ciática y Dolor Irradiado a la Pierna
           </h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px;">
             Quemazón, hormigueo o calambres que descienden por el glúteo hacia la pierna o el pie. Evaluamos la sensibilidad del tejido nervioso y el origen funcional de la irritación.
           </p>
         </div>
@@ -190,13 +204,13 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
       </div>
 
       <!-- Condition 3: Hernias -->
-      <div class="contact-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+      <div class="contact-card" style="padding: 26px; display: flex; flex-direction: column; justify-content: space-between;">
         <div>
-          <div style="font-size: 2rem; margin-bottom: 12px;" aria-hidden="true">🩻</div>
+          <span class="card-number-tag">03 · Pruebas de Imagen</span>
           <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
             Hernias Discales y Diagnósticos por Resonancia
           </h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px;">
             ¿Te han dicho que tienes una hernia o desgaste y tienes miedo de cargar peso o hacer deporte? La ciencia demuestra que la imagen no equivale a una condena de dolor.
           </p>
         </div>
@@ -206,13 +220,13 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
       </div>
 
       <!-- Condition 4: Cervical -->
-      <div class="contact-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+      <div class="contact-card" style="padding: 26px; display: flex; flex-direction: column; justify-content: space-between;">
         <div>
-          <div style="font-size: 2rem; margin-bottom: 12px;" aria-hidden="true">💻</div>
+          <span class="card-number-tag">04 · Región Cervical</span>
           <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
             Dolor Cervical y Tensión de Hombros
           </h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px;">
             Sobrecarga en trapecios, rigidez al girar el cuello y dolores de cabeza tensionales por horas de trabajo sentado y acumulación de estrés.
           </p>
         </div>
@@ -222,13 +236,13 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
       </div>
 
       <!-- Condition 5: Persistent Pain -->
-      <div class="contact-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+      <div class="contact-card" style="padding: 26px; display: flex; flex-direction: column; justify-content: space-between;">
         <div>
-          <div style="font-size: 2rem; margin-bottom: 12px;" aria-hidden="true">⏳</div>
+          <span class="card-number-tag">05 · Sistema de Alarma</span>
           <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
             Dolor Persistente que No Remite
           </h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px;">
             Molestias continuadas de más de 3 meses que no mejoran con reposo ni fármacos. Analizamos la hipersensibilidad del sistema nervioso y los factores de estilo de vida.
           </p>
         </div>
@@ -238,13 +252,13 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
       </div>
 
       <!-- Condition 6: Tendinopathies & Joint Overload -->
-      <div class="contact-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+      <div class="contact-card" style="padding: 26px; display: flex; flex-direction: column; justify-content: space-between;">
         <div>
-          <div style="font-size: 2rem; margin-bottom: 12px;" aria-hidden="true">🎯</div>
+          <span class="card-number-tag">06 · Tejido y Tendón</span>
           <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
             Tendinopatías, Hombro y Fascitis Plantar
           </h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px;">
             Dolor punzante al levantar el brazo (manguito rotador), en el tendón de Aquiles o al apoyar el talón por la mañana. Los tendones se adaptan con carga graduada, no con reposo absoluto.
           </p>
         </div>
@@ -255,112 +269,59 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
     </div>
   </section>
 
-  <!-- Dual Track Audience Selector -->
-  <section style="margin: 50px 0;">
-    <h2 class="section-title" style="text-align: center; margin-bottom: 25px;">
-      ¿En qué puedo ayudarte hoy?
-    </h2>
-    
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
-      <!-- Track 1: Patients -->
-      <div class="contact-card" style="padding: 25px; display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div class="card-image-wrapper">
-            <img src={`${import.meta.env.BASE_URL}images/patient_empowerment.webp`} alt="Paciente realizando ejercicio terapéutico guiado con confianza" class="card-image" />
-          </div>
-          <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--color-secondary); letter-spacing: 0.08em; display: block; margin-bottom: 10px;">Para Pacientes y Personas con Dolor</span>
-          <h3 style="font-size: 1.3rem; margin-bottom: 15px; color: var(--text-color);">Entiende tu dolor y recupera tu autonomía</h3>
-          <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
-            Aprende cómo interactúan tu movimiento, tu descanso, tu sistema inmune y tus hábitos. Sin tecnicismos innecesarios ni miedos injustificados sobre tus resonancias o tu postura.
-          </p>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 12px;">
-          <a href={getLocalizedPath('/guia-afrontamiento', lang)} class="btn-submit">
-            Ir a la Guía de Afrontamiento Activo
-          </a>
-          <a href={getLocalizedPath('/desmitificando-el-dolor', lang)} class="btn-link">
-            Leer artículos para pacientes &rarr;
-          </a>
-        </div>
-      </div>
-
-      <!-- Track 2: Health Professionals -->
-      <div class="contact-card" style="padding: 25px; display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div class="card-image-wrapper">
-            <img src={`${import.meta.env.BASE_URL}images/professional_clinical.webp`} alt="Profesionales de la salud colaborando y razonando casos clínicos" class="card-image" />
-          </div>
-          <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--color-primary); letter-spacing: 0.08em; display: block; margin-bottom: 10px;">Para Profesionales de la Salud</span>
-          <h3 style="font-size: 1.3rem; margin-bottom: 15px; color: var(--text-color);">Rigor clínico y visión integrativa</h3>
-          <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
-            Análisis sobre mecanismos neurofisiológicos de la terapia manual, abordaje PNI en patologías musculoesqueléticas complejas, ejercicio terapéutico y reflexiones de praxis.
-          </p>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 12px;">
-          <a href={getLocalizedPath('/contacto', lang)} class="btn-submit">
-            Colaboraciones y Docencia
-          </a>
-          <a href={getLocalizedPath('/desmitificando-el-dolor', lang)} class="btn-link">
-            Ver publicaciones con DOI/PubMed &rarr;
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- The 4 Pillars of Integrative Health Section -->
-  <section aria-labelledby="pillars-heading" style="margin: 50px 0;">
-    <div style="text-align: center; max-width: 750px; margin: 0 auto 35px auto;">
-      <span style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: var(--color-secondary); letter-spacing: 0.08em; display: block; margin-bottom: 8px;">Cómo Abordamos tu Recuperación</span>
-      <h2 id="pillars-heading" class="section-title" style="font-size: 1.8rem; margin-bottom: 12px; color: var(--text-color);">
+  <section aria-labelledby="pillars-heading" style="margin: 80px 0;">
+    <div style="text-align: center; max-width: 750px; margin: 0 auto 40px auto;">
+      <span class="editorial-badge">Metodología Clínica</span>
+      <h2 id="pillars-heading" class="section-title" style="font-size: 1.9rem; margin-bottom: 12px; color: var(--text-color);">
         Los 4 Pilares de la Fisioterapia Integrativa y la PNI
       </h2>
-      <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+      <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.6; margin: 0;">
         Si solo tratamos el punto exacto donde te duele, el dolor suele volver al poco tiempo. La <strong>Salud Integrativa</strong> y la <strong>Psiconeuroinmunología Clínica (PNI)</strong> miran el mapa completo: cómo se mueve tu cuerpo, cómo responde tu sistema nervioso, cómo descansas y qué factores de tu día a día mantienen la alarma del dolor encendida.
       </p>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;">
       <!-- Pillar 1 -->
-      <div class="pillar-card" style="padding: 25px; border-top: 4px solid var(--color-secondary);">
-        <div style="font-size: 2.2rem; margin-bottom: 12px;" aria-hidden="true">💆‍♂️</div>
+      <div class="pillar-card" style="padding: 26px;">
+        <span class="card-number-tag">Pilar 01 · Terapia Manual</span>
         <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-          1. Terapia Manual en Camilla
+          Terapia Manual en Camilla
         </h3>
-        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
           Técnicas manuales precisas para aliviar el dolor agudo y desbloquear articulaciones o músculos contracturados. No es un masaje pasivo para que vuelvas eternamente, sino el punto de partida para que tu cuerpo gane alivio y empiece a moverse con confianza.
         </p>
       </div>
 
       <!-- Pillar 2 -->
-      <div class="pillar-card" style="padding: 25px; border-top: 4px solid var(--color-primary);">
-        <div style="font-size: 2.2rem; margin-bottom: 12px;" aria-hidden="true">🏃‍♂️</div>
+      <div class="pillar-card" style="padding: 26px;">
+        <span class="card-number-tag">Pilar 02 · Ejercicio & Pilates</span>
         <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-          2. Ejercicio Terapéutico y Pilates
+          Ejercicio Terapéutico y Pilates
         </h3>
-        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
           El movimiento bien dosificado es la mejor medicina que existe. Diseñamos pautas de ejercicio sencillas y progresivas para fortalecer tu columna, mejorar tu control postural y demostrarle a tu cuerpo que es mucho más fuerte y capaz de lo que crees.
         </p>
       </div>
 
       <!-- Pillar 3 -->
-      <div class="pillar-card" style="padding: 25px; border-top: 4px solid #28a745;">
-        <div style="font-size: 2.2rem; margin-bottom: 12px;" aria-hidden="true">🧬</div>
+      <div class="pillar-card" style="padding: 26px;">
+        <span class="card-number-tag">Pilar 03 · Estilo de Vida & PNI</span>
         <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-          3. Psiconeuroinmunología Clínica (PNI)
+          Psiconeuroinmunología Clínica (PNI)
         </h3>
-        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
           Tu dolor no vive aislado de tu vida diaria. Si duermes mal, sufres estrés continuo o tu alimentación favorece la inflamación silenciosa, el cuerpo amplifica cualquier molestia. Con la PNI ajustamos estos hábitos para que la mejoría se mantenga a largo plazo.
         </p>
       </div>
 
       <!-- Pillar 4 -->
-      <div class="pillar-card" style="padding: 25px; border-top: 4px solid #17a2b8;">
-        <div style="font-size: 2.2rem; margin-bottom: 12px;" aria-hidden="true">🧠</div>
+      <div class="pillar-card" style="padding: 26px;">
+        <span class="card-number-tag">Pilar 04 · Neurociencia del Dolor</span>
         <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-          4. Educación en Ciencia del Dolor
+          Educación en Ciencia del Dolor
         </h3>
-        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
           Entender lo que te pasa cambia físicamente cómo lo sientes. Desmontamos mitos sobre resonancias o "espaldas frágiles" para que pierdas el miedo a moverte. Cuando tu cerebro comprende que no hay peligro real, baja el volumen del dolor por sí mismo.
         </p>
       </div>
@@ -368,13 +329,16 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
   </section>
 
   <!-- Interactive Myth Buster Section -->
-  <section class="myth-section" aria-labelledby="myths-heading">
-    <h2 id="myths-heading" class="section-title" style="text-align: center; margin-bottom: 10px;">
-      Desmitificador Rápido de Salud
-    </h2>
-    <p style="color: var(--text-muted); text-align: center; max-width: 600px; margin: 0 auto 30px auto; font-size: 0.95rem;">
-      Haz clic en cualquier tarjeta para contrastar las creencias comunes con la realidad que demuestra la investigación clínica.
-    </p>
+  <section class="myth-section" aria-labelledby="myths-heading" style="margin: 80px 0;">
+    <div style="text-align: center; max-width: 650px; margin: 0 auto 35px auto;">
+      <span class="editorial-badge">Ciencia Frente a Creencias</span>
+      <h2 id="myths-heading" class="section-title" style="font-size: 1.9rem; margin-bottom: 10px;">
+        Desmitificador Rápido de Salud
+      </h2>
+      <p style="color: var(--text-muted); font-size: 0.98rem; margin: 0;">
+        Haz clic en cualquier tarjeta para contrastar las creencias comunes con la realidad que demuestra la investigación clínica.
+      </p>
+    </div>
 
     <div class="myth-grid" role="region" aria-label="Mitos y Realidades del Dolor">
       <!-- Card 1: Hernias -->
@@ -425,9 +389,12 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
   </section>
 
   <!-- Latest Articles Section -->
-  <section class="articles-section" aria-labelledby="articles-heading" style="margin-top: 50px;">
-    <div class="section-header">
-      <h2 id="articles-heading" class="section-title">
+  <section class="articles-section" aria-labelledby="articles-heading" style="margin: 80px 0;">
+    <div style="margin-bottom: 25px;">
+      <span class="editorial-badge">Divulgación y Ciencia</span>
+    </div>
+    <div class="section-header" style="margin-bottom: 30px;">
+      <h2 id="articles-heading" class="section-title" style="font-size: 1.9rem; margin: 0;">
         {t('latestPosts')}
       </h2>
       <a href="/desmitificando-el-dolor" class="btn-link">
@@ -463,13 +430,13 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
   </section>
 
   <!-- FAQ Section with Schema.org FAQPage -->
-  <section class="faq-section" aria-labelledby="faq-heading" style="margin-top: 55px; padding: 40px 30px; background: rgba(51, 99, 103, 0.03); border: 1px solid var(--border-color); border-radius: 16px;">
+  <section class="faq-section" aria-labelledby="faq-heading" style="margin: 80px 0; padding: 44px 32px; background: rgba(51, 99, 103, 0.03); border: 1px solid var(--border-color); border-radius: 16px;">
     <div style="text-align: center; max-width: 700px; margin: 0 auto 35px auto;">
-      <span style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: var(--color-secondary); letter-spacing: 0.08em; display: block; margin-bottom: 8px;">Resolviendo Dudas Frecuentes</span>
-      <h2 id="faq-heading" class="section-title" style="font-size: 1.8rem; margin-bottom: 12px; color: var(--text-color);">
+      <span class="editorial-badge">Resolviendo Dudas Frecuentes</span>
+      <h2 id="faq-heading" class="section-title" style="font-size: 1.9rem; margin-bottom: 12px; color: var(--text-color);">
         Preguntas Frecuentes sobre Salud y Dolor
       </h2>
-      <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+      <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.6; margin: 0;">
         Respuestas directas basadas en la evidencia biomédica para pacientes y profesionales de la salud.
       </p>
     </div>
