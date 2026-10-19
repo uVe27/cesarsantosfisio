@@ -113,7 +113,12 @@ const t = useTranslations(lang);
   <!-- Floating Success Modal Pop-up -->
   <div id="success-modal-backdrop" class="success-modal-backdrop" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="modal-success-title">
     <div class="success-modal-box">
-      <div style="font-size: 3.5rem; margin-bottom: 12px;" aria-hidden="true">✅</div>
+      <div style="margin-bottom: 16px; display: flex; justify-content: center;" aria-hidden="true">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="m9 12 2 2 4-4"></path>
+        </svg>
+      </div>
       <h2 id="modal-success-title" style="font-size: 1.4rem; color: var(--text-color); margin-bottom: 12px; font-weight: 700;">
         ¡Mensaje Enviado con Éxito!
       </h2>

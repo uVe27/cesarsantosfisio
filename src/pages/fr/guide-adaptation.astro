@@ -27,12 +27,12 @@ const t = useTranslations(lang);
       <!-- Section 1: Graded Activity Calculator -->
       <section class="contact-card" aria-labelledby="graded-heading" style="padding: 30px;">
         <div class="card-image-wrapper" style="height: 220px;">
-          <img src="/images/.webp" alt="Personne effectuant un exercice d'activité graduée en plein air" class="card-image" />
+          <img src={`${import.meta.env.BASE_URL}images/graded_activity.webp`} alt="Personne effectuant un exercice d'activité graduée en plein air" class="card-image" />
         </div>
-        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-          <span style="font-size: 2rem;" aria-hidden="true">📊</span>
-          <h2 id="graded-heading" style="font-size: 1.4rem; margin: 0;">
-            1. Planificateur d'Activité Graduée (Mouvement par Quotas)
+        <div style="margin-bottom: 15px;">
+          <span class="card-number-tag">Phase 01 · Activité Graduée</span>
+          <h2 id="graded-heading" style="font-size: 1.4rem; margin-top: 8px; margin-bottom: 0;">
+            Planificateur de Mouvement par Quotas
           </h2>
         </div>
         <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px;">
@@ -69,12 +69,12 @@ const t = useTranslations(lang);
       <!-- Section 2: Pacing Guide -->
       <section class="contact-card" aria-labelledby="pacing-heading" style="padding: 30px;">
         <div class="card-image-wrapper" style="height: 220px;">
-          <img src="/images/.webp" alt="Personne régulant le rythme de ses activités avec équilibre" class="card-image" />
+          <img src={`${import.meta.env.BASE_URL}images/pacing_activity.webp`} alt="Personne régulant le rythme de ses activités avec équilibre" class="card-image" />
         </div>
-        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-          <span style="font-size: 2rem;" aria-hidden="true">⏱️</span>
-          <h2 id="pacing-heading" style="font-size: 1.4rem; margin: 0;">
-            2. Pacing (Régulation du Rythme)
+        <div style="margin-bottom: 15px;">
+          <span class="card-number-tag">Phase 02 · Régulation du Rythme</span>
+          <h2 id="pacing-heading" style="font-size: 1.4rem; margin-top: 8px; margin-bottom: 0;">
+            Pacing Actif et Dosimétrie de l'Effort
           </h2>
         </div>
         <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">
@@ -104,12 +104,12 @@ const t = useTranslations(lang);
       <!-- Section 3: Prefrontal Brake (PNE & Relaxation) -->
       <section class="contact-card" aria-labelledby="brake-heading" style="padding: 30px;">
         <div class="card-image-wrapper" style="height: 220px;">
-          <img src="/images/.webp" alt="Personne pratiquant la respiration diPhragmatique" class="card-image" />
+          <img src={`${import.meta.env.BASE_URL}images/prefrontal_relaxation.webp`} alt="Personne pratiquant la respiration diPhragmatique" class="card-image" />
         </div>
-        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-          <span style="font-size: 2rem;" aria-hidden="true">🧠</span>
-          <h2 id="brake-heading" style="font-size: 1.4rem; margin: 0;">
-            3. Le Frein Cérébral (Modulation & Relaxation)
+        <div style="margin-bottom: 15px;">
+          <span class="card-number-tag">Phase 03 · Neurobiologie</span>
+          <h2 id="brake-heading" style="font-size: 1.4rem; margin-top: 8px; margin-bottom: 0;">
+            Le Frein Préfrontal et Modulation Inhibitrice
           </h2>
         </div>
         <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">

@@ -30,10 +30,10 @@ const t = useTranslations(lang);
         <div class="card-image-wrapper" style="height: 220px;">
           <img src={`${import.meta.env.BASE_URL}images/graded_activity.webp`} alt="Persona realizando caminata y ejercicio de actividad graduada al aire libre" class="card-image" />
         </div>
-        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-          <span style="font-size: 2rem;" aria-hidden="true">📊</span>
-          <h2 id="graded-heading" style="font-size: 1.4rem; margin: 0;">
-            1. Planificador de Actividad Graduada (Movimiento por Cuotas)
+        <div style="margin-bottom: 15px;">
+          <span class="card-number-tag">Fase 01 · Actividad Graduada</span>
+          <h2 id="graded-heading" style="font-size: 1.4rem; margin-top: 8px; margin-bottom: 0;">
+            Planificador de Movimiento por Cuotas
           </h2>
         </div>
         <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px;">
@@ -67,16 +67,16 @@ const t = useTranslations(lang);
 
           <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
             <button id="calc-btn" class="btn-submit" style="width: auto; padding: 14px 28px; font-size: 1rem; font-weight: 700;">
-              ⚡ Generar y Descargar Pauta PDF Personalizada
+              Generar y Descargar Pauta PDF Personalizada
             </button>
           </div>
         </div>
 
         <!-- Calculator Result Area & Success Notification -->
         <div id="calc-result" style="display: none; margin-top: 25px; padding: 25px; background-color: rgba(51, 99, 103, 0.06); border-left: 5px solid var(--color-secondary); border-radius: 8px;">
-          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-            <span style="font-size: 1.5rem;">🎉</span>
-            <h3 style="font-size: 1.2rem; margin: 0; color: var(--color-secondary); font-weight: 700;">¡Tu Pauta Oficial en PDF se ha generado e iniciado la descarga!</h3>
+          <div style="margin-bottom: 10px;">
+            <span class="card-number-tag">Pauta Generada</span>
+            <h3 style="font-size: 1.2rem; margin-top: 6px; margin-bottom: 0; color: var(--color-secondary); font-weight: 700;">Tu pauta oficial en PDF se ha generado correctamente</h3>
           </div>
           <p id="result-text" style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px;"></p>
           <div style="font-size: 0.85rem; color: var(--text-muted); background: var(--card-bg, #ffffff); padding: 12px 15px; border-radius: 6px; border: 1px solid var(--border-color);">
@@ -90,10 +90,10 @@ const t = useTranslations(lang);
         <div class="card-image-wrapper" style="height: 220px;">
           <img src={`${import.meta.env.BASE_URL}images/pacing_activity.webp`} alt="Persona descansando de forma equilibrada aplicando técnicas de Pacing" class="card-image" />
         </div>
-        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-          <span style="font-size: 2rem;" aria-hidden="true">⏱️</span>
-          <h2 id="pacing-heading" style="font-size: 1.4rem; margin: 0;">
-            2. Pacing (Regulación del Ritmo)
+        <div style="margin-bottom: 15px;">
+          <span class="card-number-tag">Fase 02 · Regulación del Ritmo</span>
+          <h2 id="pacing-heading" style="font-size: 1.4rem; margin-top: 8px; margin-bottom: 0;">
+            Pacing Activo y Dosificación del Esfuerzo
           </h2>
         </div>
         <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">
@@ -125,10 +125,10 @@ const t = useTranslations(lang);
         <div class="card-image-wrapper" style="height: 220px;">
           <img src={`${import.meta.env.BASE_URL}images/prefrontal_relaxation.webp`} alt="Persona practicando respiración diafragmática para la modulación vaga del dolor" class="card-image" />
         </div>
-        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-          <span style="font-size: 2rem;" aria-hidden="true">🧠</span>
-          <h2 id="brake-heading" style="font-size: 1.4rem; margin: 0;">
-            3. El Freno Cerebral (Modulación y Relajación)
+        <div style="margin-bottom: 15px;">
+          <span class="card-number-tag">Fase 03 · Neurobiología</span>
+          <h2 id="brake-heading" style="font-size: 1.4rem; margin-top: 8px; margin-bottom: 0;">
+            El Freno Prefrontal y Modulación Inhibitoria
           </h2>
         </div>
         <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">
@@ -151,10 +151,10 @@ const t = useTranslations(lang);
 
       <!-- Scientific Evidence & Primary References Section -->
       <section class="contact-card" aria-labelledby="references-heading" style="padding: 30px; background: rgba(51, 99, 103, 0.04); border: 1px solid var(--border-color);">
-        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
-          <span style="font-size: 1.8rem;" aria-hidden="true">📚</span>
-          <h2 id="references-heading" style="font-size: 1.3rem; margin: 0; color: var(--text-color);">
-            Evidencia Científica y Referencias Base
+        <div style="margin-bottom: 15px;">
+          <span class="card-number-tag">Evidencia Clínica</span>
+          <h2 id="references-heading" style="font-size: 1.3rem; margin-top: 8px; margin-bottom: 0; color: var(--text-color);">
+            Publicaciones Científicas y Referencias Primarias
           </h2>
         </div>
         <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">
