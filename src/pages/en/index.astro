@@ -1,19 +1,17 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import { useTranslations } from '../../utils/i18n';
+import { useTranslations, getLocalizedPath } from '../../utils/i18n';
 
 const lang = 'en';
 const t = useTranslations(lang);
 
-// Get latest articles filtered by English subdirectory
 const allArticles = await getCollection('blog');
 const enArticles = allArticles
   .filter(item => item.id.startsWith('en/'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 
-// JSON-LD ProfilePage & MedicalWebPage Schema
 const schema = {
   "@context": "https://schema.org",
   "@type": "MedicalWebPage",
@@ -40,61 +38,120 @@ const schema = {
   }
 };
 
-const schemaJson = JSON.stringify(schema);
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I exercise if I have a herniated disc or disc wear on my lumbar MRI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Clinical evidence shows that herniated discs and disc dehydration appear in 35% of pain-free adults over 40. With an integrative physiotherapy plan and graded activity pacing, you can rebuild strength and move safely."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between strict rest and active coping (pacing)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Prolonged rest weakens stabilizing muscles and increases nervous system sensitivity. Active coping replaces immobility with time-based movement quotas (pacing) so your brain gradually decouples movement from danger."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does Clinical Psychoneuroimmunology (PNI) integrate into physiotherapy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PNI examines the interactions between the nervous, immune, and endocrine systems. In clinical practice, it helps evaluate sleep, circadian rhythms, chronic stress, and low-grade inflammation that influence tissue recovery and pain sensitivity."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does pain neuroscience education actually help reduce physical pain?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Understanding how pain operates lowers threat signaling in the amygdala and engages descending inhibitory control from the prefrontal cortex."
+      }
+    }
+  ]
+};
+
+const schemaJson = JSON.stringify([schema, faqSchema]);
 ---
 
-<Layout 
-  title="Physiotherapy & Chronic Pain | Cesar Santos · Integrative Health & Exercise" 
-  description="Evidence-based physiotherapy specializing in persistent pain neuroscience, herniated discs, graded activity pacing, and Clinical Psychoneuroimmunology (PNI)." 
-  lang={lang} 
-  canonicalPath="/en" 
+<Layout
+  title="Physiotherapy & Chronic Pain | Cesar Santos · Integrative Health & Exercise"
+  description="Evidence-based physiotherapy specializing in persistent pain neuroscience, herniated discs, graded activity pacing, and Clinical Psychoneuroimmunology (PNI)."
+  lang={lang}
+  canonicalPath="/en"
   schemaJson={schemaJson}
 >
-  <!-- Hero Section with Storytelling & Mission -->
+  <!-- Editorial Hero Section (No portrait duplication; patient-first clinical entry panel) -->
   <section class="hero-section" aria-labelledby="manifesto-heading">
     <div class="hero-grid">
       <div>
-        <span class="editorial-badge">Evidence-Based Physiotherapy · Integrative Health</span>
         <h1 id="manifesto-heading" class="hero-title">
-          Physiotherapist in Persistent Pain & Integrative Health
+          Physiotherapist in persistent pain and integrative health
         </h1>
         <p class="hero-description">
-          If you have been dealing with persistent back pain, received a herniated disc diagnosis, or feel that fear of movement is holding you back from living your life, you are in the right place.
-        </p>
-        <p class="hero-description" style="font-size: 0.98rem; margin-top: -10px;">
-          I am <strong>Cesar Santos</strong>, physiotherapist graduated from the ONCE University School of Physiotherapy (UAM), former Mountain Troops Captain, with a Master's in Musculoskeletal Manual Therapy and education in Clinical Psychoneuroimmunology (PNI) and Pilates. My methodology does not rely on indefinite passive treatments; instead, I apply <strong>Integrative Physiotherapy</strong> and medical pain neuroscience to help you understand your symptoms, dose progressive exercise, and regain your active autonomy.
+          If you have been dealing with back pain for months, worry about an MRI report, or feel that fear of movement holds back your daily life, we combine evidence-based physiotherapy, graded exercise, and Clinical Psychoneuroimmunology (PNI) to restore your autonomy.
         </p>
 
-        <!-- Rapid Access Buttons -->
-        <div style="margin-top: 25px; display: flex; gap: 14px; flex-wrap: wrap; align-items: center;">
-          <a href="/en/coping-guide" class="btn-submit" style="width: auto;">
-            Active Coping Guide &rarr;
+        <div class="hero-actions">
+          <a href={getLocalizedPath('/coping-guide', lang)} class="btn-submit" style="width: auto;">
+            Build your coping plan &rarr;
           </a>
-          <a href="/en/demystifying-pain" class="btn-link">
-            Scientific Articles & Evidence &rarr;
+          <a href={getLocalizedPath('/demystifying-pain', lang)} class="btn-link">
+            Read scientific evidence
           </a>
+        </div>
+
+        <div class="hero-byline">
+          <span><strong>Cesar Santos</strong> · ONCE University School of Physiotherapy (UAM).</span>
+          <a href={getLocalizedPath('/about-me', lang)} class="inline-text-link">Read my background &rarr;</a>
         </div>
       </div>
 
-      <!-- Hero Portrait Card (Unified Authority) -->
-      <div class="hero-portrait-card">
-        <img 
-          src="/images/cesar_santos_portrait.webp" 
-          alt="Cesar Santos - Physiotherapist in Integrative Health & Persistent Pain" 
-          class="hero-portrait-img" 
-        />
-        <div class="hero-portrait-caption">
-          <div style="font-weight: 700; font-size: 1.05rem; color: var(--text-color);">Cesar Santos</div>
-          <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">
-            Licensed Physiotherapist · ONCE University School of Physiotherapy (UAM)
-          </div>
-          <div style="margin-top: 10px;">
-            <a href="/en/about-me" class="btn-link" style="font-size: 0.82rem; padding: 4px 10px;">
-              Discover my full journey &rarr;
+      <!-- Clinical Starting Point Panel -->
+      <aside class="triage-panel" aria-labelledby="triage-heading">
+        <h2 id="triage-heading" class="triage-panel-title">Where to start today?</h2>
+        <p class="triage-panel-sub">Select the situation closest to what you are experiencing:</p>
+
+        <ul class="triage-list">
+          <li class="triage-item">
+            <a href="/en/demystifying-pain/mri-age-not-pain" class="triage-link">
+              <span>
+                <span class="triage-link-title">I have a herniated disc or wear on my MRI</span>
+                <span class="triage-link-desc">What imaging findings mean and why safe movement remains possible.</span>
+              </span>
+              <span class="triage-arrow" aria-hidden="true">&rarr;</span>
             </a>
-          </div>
-        </div>
-      </div>
+          </li>
+          <li class="triage-item">
+            <a href="/en/demystifying-pain/brain-brake-prefrontal-control" class="triage-link">
+              <span>
+                <span class="triage-link-title">My pain has lasted more than 3 months</span>
+                <span class="triage-link-desc">How nervous system sensitization and prefrontal pain inhibition work.</span>
+              </span>
+              <span class="triage-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+          <li class="triage-item">
+            <a href="/en/coping-guide" class="triage-link">
+              <span>
+                <span class="triage-link-title">I want to resume exercise without flare-ups</span>
+                <span class="triage-link-desc">Calculate your safe daily movement quota using graded pacing.</span>
+              </span>
+              <span class="triage-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+        </ul>
+
+        <p class="triage-evidence-note">
+          <strong>Clinical data:</strong> <span class="triage-stat-num">35%</span> of pain-free adults over 40 show herniated discs on lumbar MRI (Varun S. et al., 2025).
+        </p>
+      </aside>
     </div>
 
     <!-- Authority Trust Bar -->
@@ -118,251 +175,223 @@ const schemaJson = JSON.stringify(schema);
     </div>
   </section>
 
-  <!-- Common Conditions / What is Limiting You Section -->
-  <section aria-labelledby="conditions-heading" style="margin: 80px 0 60px 0;">
-    <div style="text-align: center; max-width: 750px; margin: 0 auto 40px auto;">
-      <span class="editorial-badge">Frequent Reasons for Consultation</span>
-      <h2 id="conditions-heading" class="section-title" style="font-size: 1.9rem; margin-bottom: 12px; color: var(--text-color);">
-        What pain or limitation are you experiencing?
+  <!-- Common Conditions / Editorial 2-Column Index -->
+  <section class="home-section" aria-labelledby="conditions-heading">
+    <div class="section-intro">
+      <h2 id="conditions-heading" class="section-title">
+        What pain or limitation is holding you back?
       </h2>
-      <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.6; margin: 0;">
-        Physical pain rarely indicates irreversible damage. Identify your situation and discover what modern clinical evidence demonstrates.
+      <p class="section-lead">
+        Physical pain rarely equals irreversible structural damage. Find your situation below and review what current clinical evidence shows.
       </p>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
-      <!-- Condition 1: Lumbar -->
-      <div class="contact-card" style="padding: 26px; display: flex; flex-direction: column; justify-content: space-between;">
+    <div class="conditions-grid">
+      <article class="condition-row">
         <div>
-          <span class="card-number-tag">01 · Lumbar Spine</span>
-          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-            Lower Back Pain & Acute Lumbar Locking
-          </h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px;">
-            Morning stiffness, sharp pain when bending over, or feeling "stuck". The lumbar spine is a robust biological structure engineered for movement, not immobilization.
+          <span class="condition-tag">Lumbar spine</span>
+          <h3 class="condition-title">Lower back pain and lumbar locking</h3>
+          <p class="condition-desc">
+            Morning stiffness, sharp pain when bending forward, or feeling locked up. The lumbar spine is a strong biological structure built to tolerate load and move.
           </p>
         </div>
-        <a href="/en/coping-guide" class="btn-link" style="font-weight: 700; font-size: 0.88rem;">
+        <a href="/en/coping-guide" class="editorial-link">
           Calculate graded exercise &rarr;
         </a>
-      </div>
+      </article>
 
-      <!-- Condition 2: Sciatica -->
-      <div class="contact-card" style="padding: 26px; display: flex; flex-direction: column; justify-content: space-between;">
+      <article class="condition-row">
         <div>
-          <span class="card-number-tag">02 · Nerve Chain</span>
-          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-            Sciatica & Radiating Leg Pain
-          </h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px;">
-            Burning, tingling, or electrical shooting pain descending from the glute down the thigh and foot. We assess neurodynamic sensitivity and the functional root cause.
+          <span class="condition-tag">Nerve chain</span>
+          <h3 class="condition-title">Sciatica and radiating leg pain</h3>
+          <p class="condition-desc">
+            Burning, tingling, or shooting discomfort traveling from the glute down the thigh and foot. We assess neurodynamic sensitivity and the functional source of irritation.
           </p>
         </div>
-        <a href="/en/contact" class="btn-link" style="font-weight: 700; font-size: 0.88rem;">
+        <a href="/en/contact" class="editorial-link">
           Request clinical consultation &rarr;
         </a>
-      </div>
+      </article>
 
-      <!-- Condition 3: Hernias -->
-      <div class="contact-card" style="padding: 26px; display: flex; flex-direction: column; justify-content: space-between;">
+      <article class="condition-row">
         <div>
-          <span class="card-number-tag">03 · Diagnostic Imaging</span>
-          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-            Herniated Discs & MRI Findings
-          </h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px;">
-            Were you told you have disc degeneration or a protrusion and now fear lifting weights? Science proves MRI images do not equate to a lifetime pain sentence.
+          <span class="condition-tag">Diagnostic imaging</span>
+          <h3 class="condition-title">Herniated discs and MRI findings</h3>
+          <p class="condition-desc">
+            If you were told you have disc wear or a protrusion and fear lifting weights, clinical research shows that an MRI scan is only one partial piece of the picture.
           </p>
         </div>
-        <a href="/en/demystifying-pain/mri-age-not-pain" class="btn-link" style="font-weight: 700; font-size: 0.88rem;">
+        <a href="/en/demystifying-pain/mri-age-not-pain" class="editorial-link">
           Read evidence on herniated discs &rarr;
         </a>
-      </div>
+      </article>
 
-      <!-- Condition 4: Cervical -->
-      <div class="contact-card" style="padding: 26px; display: flex; flex-direction: column; justify-content: space-between;">
+      <article class="condition-row">
         <div>
-          <span class="card-number-tag">04 · Cervical Region</span>
-          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-            Neck Pain & Shoulder Tension
-          </h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px;">
-            Trapezius stiffness, restricted neck rotation, and tension headaches caused by long desk hours, static postures, and accumulated stress.
+          <span class="condition-tag">Cervical region</span>
+          <h3 class="condition-title">Neck pain and shoulder tension</h3>
+          <p class="condition-desc">
+            Trapezius tightness, restricted neck rotation, and tension headaches following long desk hours and accumulated daily stress.
           </p>
         </div>
-        <a href="/en/demystifying-pain/balance-statues-dynamic-stability" class="btn-link" style="font-weight: 700; font-size: 0.88rem;">
-          Discover cervical mobility keys &rarr;
+        <a href="/en/demystifying-pain/balance-statues-dynamic-stability" class="editorial-link">
+          Review cervical mobility keys &rarr;
         </a>
-      </div>
+      </article>
 
-      <!-- Condition 5: Persistent Pain -->
-      <div class="contact-card" style="padding: 26px; display: flex; flex-direction: column; justify-content: space-between;">
+      <article class="condition-row">
         <div>
-          <span class="card-number-tag">05 · Pain Alarm System</span>
-          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-            Persistent & Chronic Pain
-          </h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px;">
-            Pain lasting over 3 months that has not resolved with rest or medications. We evaluate nervous system hypersensitivity, lifestyle factors, and sleep quality.
+          <span class="condition-tag">Alarm system</span>
+          <h3 class="condition-title">Persistent pain lasting over 3 months</h3>
+          <p class="condition-desc">
+            Ongoing discomfort that continues despite rest or medication. We assess nervous system hypersensitivity alongside sleep and lifestyle load.
           </p>
         </div>
-        <a href="/en/demystifying-pain/brain-brake-prefrontal-control" class="btn-link" style="font-weight: 700; font-size: 0.88rem;">
-          Understand the brain's pain alarm &rarr;
+        <a href="/en/demystifying-pain/brain-brake-prefrontal-control" class="editorial-link">
+          Understand the pain alarm &rarr;
         </a>
-      </div>
+      </article>
 
-      <!-- Condition 6: Tendinopathies & Joint Overload -->
-      <div class="contact-card" style="padding: 26px; display: flex; flex-direction: column; justify-content: space-between;">
+      <article class="condition-row">
         <div>
-          <span class="card-number-tag">06 · Tissue & Tendon</span>
-          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-            Tendinopathies, Shoulder & Plantar Fasciitis
-          </h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px;">
-            Sharp pain when raising your arm (rotator cuff), Achilles tendon stiffness, or heel pain in the morning. Tendons adapt and rebuild through progressive load, not total rest.
+          <span class="condition-tag">Tissue and tendon</span>
+          <h3 class="condition-title">Tendinopathies, shoulder and plantar fasciitis</h3>
+          <p class="condition-desc">
+            Sharp pain when raising your arm (rotator cuff), Achilles tendon stiffness, or morning heel pain. Tendons rebuild load tolerance through structured, progressive loading.
           </p>
         </div>
-        <a href="/en/coping-guide" class="btn-link" style="font-weight: 700; font-size: 0.88rem;">
+        <a href="/en/coping-guide" class="editorial-link">
           Load management strategies &rarr;
         </a>
+      </article>
+    </div>
+  </section>
+
+  <!-- The 4 Pillars of Integrative Health (Full-Bleed Tonal Asymmetric Band) -->
+  <section class="full-bleed-band" aria-labelledby="pillars-heading">
+    <div class="band-inner">
+      <div class="pillars-layout">
+        <div class="pillars-intro-sticky">
+          <h2 id="pillars-heading" class="section-title">
+            The 4 pillars of integrative physiotherapy and PNI
+          </h2>
+          <p class="section-lead" style="margin-bottom: 24px;">
+            Treating only the exact spot that hurts often leads to recurring flare-ups. <strong>Integrative Health</strong> and <strong>Clinical Psychoneuroimmunology (PNI)</strong> evaluate the full map: how you move, how your nervous system reacts, how you sleep, and which daily habits keep your pain alarm active.
+          </p>
+          <a href="/en/about-me" class="editorial-link">
+            Clinical approach and credentials &rarr;
+          </a>
+        </div>
+
+        <div class="pillars-grid">
+          <article class="pillar-card">
+            <span class="card-number-tag">01 · Manual Therapy</span>
+            <h3 style="font-size: 1.18rem; margin-bottom: 10px;">
+              Hands-on manual therapy
+            </h3>
+            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.62; margin: 0;">
+              Targeted manual techniques to calm acute pain and ease stiff joints or guarded muscles. They provide an opening window of relief so you can begin moving with confidence.
+            </p>
+          </article>
+
+          <article class="pillar-card">
+            <span class="card-number-tag">02 · Exercise & Pilates</span>
+            <h3 style="font-size: 1.18rem; margin-bottom: 10px;">
+              Therapeutic exercise and Pilates
+            </h3>
+            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.62; margin: 0;">
+              Properly dosed movement carries the strongest clinical backing. We design progressive routines to rebuild spinal strength, refine motor control, and restore trust in your body.
+            </p>
+          </article>
+
+          <article class="pillar-card">
+            <span class="card-number-tag">03 · Lifestyle & PNI</span>
+            <h3 style="font-size: 1.18rem; margin-bottom: 10px;">
+              Clinical Psychoneuroimmunology (PNI)
+            </h3>
+            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.62; margin: 0;">
+              Pain interacts continuously with the rest of your physiology. Poor sleep, sustained stress, or low-grade inflammation lowers your pain threshold. PNI helps adjust these drivers for lasting results.
+            </p>
+          </article>
+
+          <article class="pillar-card">
+            <span class="card-number-tag">04 · Pain Science</span>
+            <h3 style="font-size: 1.18rem; margin-bottom: 10px;">
+              Pain neuroscience education
+            </h3>
+            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.62; margin: 0;">
+              Understanding what happens in your body physically alters how intense symptoms feel. Clear explanations around MRIs and tissue resilience help your brain turn down unnecessary threat signals.
+            </p>
+          </article>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- The 4 Pillars of Integrative Health Section -->
-  <section aria-labelledby="pillars-heading" style="margin: 80px 0;">
-    <div style="text-align: center; max-width: 750px; margin: 0 auto 40px auto;">
-      <span class="editorial-badge">Clinical Methodology</span>
-      <h2 id="pillars-heading" class="section-title" style="font-size: 1.9rem; margin-bottom: 12px; color: var(--text-color);">
-        The 4 Pillars of Integrative Physiotherapy & PNI
+  <!-- Interactive Myth Buster Section (Semantic Buttons) -->
+  <section class="home-section" aria-labelledby="myths-heading">
+    <div class="section-intro">
+      <h2 id="myths-heading" class="section-title">
+        Common beliefs versus clinical evidence
       </h2>
-      <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.6; margin: 0;">
-        Treating only the exact spot where it hurts usually leads to recurring pain. <strong>Integrative Health</strong> and <strong>Clinical Psychoneuroimmunology (PNI)</strong> look at the whole picture: how you move, how your nervous system responds, how you sleep, and which daily habits keep your pain alarm active.
-      </p>
-    </div>
-
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;">
-      <!-- Pillar 1 -->
-      <div class="pillar-card" style="padding: 26px;">
-        <span class="card-number-tag">Pillar 01 · Manual Therapy</span>
-        <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-          Hands-on Manual Therapy
-        </h3>
-        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
-          Precise manual techniques to relieve acute pain and ease joint or muscular stiffness. Not a passive treatment to keep you coming back endlessly, but a starting point so your body regains confidence and can start moving comfortably.
-        </p>
-      </div>
-
-      <!-- Pillar 2 -->
-      <div class="pillar-card" style="padding: 26px;">
-        <span class="card-number-tag">Pillar 02 · Exercise & Pilates</span>
-        <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-          Therapeutic Exercise & Pilates
-        </h3>
-        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
-          Properly dosed movement is the best medicine available. We build progressive, tailored exercises to rebuild spinal strength, improve motor control, and prove to your body that it is far more resilient than you think.
-        </p>
-      </div>
-
-      <!-- Pillar 3 -->
-      <div class="pillar-card" style="padding: 26px;">
-        <span class="card-number-tag">Pillar 03 · Lifestyle & PNI</span>
-        <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-          Clinical Psychoneuroimmunology (PNI)
-        </h3>
-        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
-          Your pain does not exist in a vacuum. Poor sleep, chronic stress, or low-grade inflammation make your nervous system sound the pain alarm much faster. Through PNI, we fine-tune these key daily factors to ensure long-term relief.
-        </p>
-      </div>
-
-      <!-- Pillar 4 -->
-      <div class="pillar-card" style="padding: 26px;">
-        <span class="card-number-tag">Pillar 04 · Pain Neuroscience</span>
-        <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-          Pain Neuroscience Education
-        </h3>
-        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
-          Understanding your symptoms physically changes how much they hurt. We dismantle fears and myths around MRIs or fragile joints. When your brain recognizes that movement is safe, it naturally turns down the pain volume.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Interactive Myth Buster Section -->
-  <section class="myth-section" aria-labelledby="myths-heading" style="margin: 80px 0;">
-    <div style="text-align: center; max-width: 650px; margin: 0 auto 35px auto;">
-      <span class="editorial-badge">Science vs Beliefs</span>
-      <h2 id="myths-heading" class="section-title" style="font-size: 1.9rem; margin-bottom: 10px;">
-        Quick Health Myth-Buster
-      </h2>
-      <p style="color: var(--text-muted); font-size: 0.98rem; margin: 0;">
-        Click on any card to contrast common beliefs with scientific facts demonstrated by clinical research.
+      <p class="section-lead">
+        Select any card to compare widespread assumptions about back pain with findings from peer-reviewed medical research.
       </p>
     </div>
 
     <div class="myth-grid" role="region" aria-label="Pain Myths and Realities">
-      <!-- Card 1: Hernias -->
-      <div class="myth-card" role="button" aria-expanded="false" tabindex="0">
-        <div>
-          <span class="myth-label">Common Myth</span>
-          <h3 class="myth-title">"I have a herniated disc on my MRI, so my spine is broken and damaged."</h3>
-        </div>
-        <div class="reality-content">
-          <span class="reality-label">Scientific Reality</span>
-          <p style="margin: 0; font-size: 0.9rem;">
-            <strong>35% of people over 40 have herniated discs without feeling any pain</strong> (Varun S. et al., 2025). The image reflects normal age-related changes, like wrinkles on the skin, not a certificate of disability.
-          </p>
-        </div>
-        <span class="myth-action-hint">See reality &rarr;</span>
-      </div>
+      <button type="button" class="myth-card" aria-expanded="false" data-open-label="See evidence →" data-close-label="Back to belief">
+        <span class="myth-front">
+          <span class="myth-label">Common belief</span>
+          <span class="myth-title">“I have a herniated disc on my MRI, so my spine is permanently damaged.”</span>
+        </span>
+        <span class="reality-content">
+          <span class="reality-label">Clinical evidence</span>
+          <strong>35% of people over 40 have herniated discs without any pain</strong> (Varun S. et al., 2025). Imaging reflects normal age-related changes, much like gray hair or skin wrinkles.
+        </span>
+        <span class="myth-action-hint">See evidence &rarr;</span>
+      </button>
 
-      <!-- Card 2: Posture -->
-      <div class="myth-card" role="button" aria-expanded="false" tabindex="0">
-        <div>
-          <span class="myth-label">Common Myth</span>
-          <h3 class="myth-title">"I need to find the perfect posture to sit or stand and thus avoid back pain."</h3>
-        </div>
-        <div class="reality-content">
-          <span class="reality-label">Scientific Reality</span>
-          <p style="margin: 0; font-size: 0.9rem;">
-            <strong>There is no single or perfect posture.</strong> Science shows no causal link between static postures and pain. The body needs movement and variability; your best posture is the next one.
-          </p>
-        </div>
-        <span class="myth-action-hint">See reality &rarr;</span>
-      </div>
+      <button type="button" class="myth-card" aria-expanded="false" data-open-label="See evidence →" data-close-label="Back to belief">
+        <span class="myth-front">
+          <span class="myth-label">Common belief</span>
+          <span class="myth-title">“I must hold one perfect upright posture to prevent back pain.”</span>
+        </span>
+        <span class="reality-content">
+          <span class="reality-label">Clinical evidence</span>
+          <strong>No single ideal posture exists.</strong> Clinical reviews find no direct causal link between static posture and back pain. Regular variation matters most: your best posture is your next one.
+        </span>
+        <span class="myth-action-hint">See evidence &rarr;</span>
+      </button>
 
-      <!-- Card 3: Pain vs Damage -->
-      <div class="myth-card" role="button" aria-expanded="false" tabindex="0">
-        <div>
-          <span class="myth-label">Common Myth</span>
-          <h3 class="myth-title">"If a physical activity hurts, it means I am causing damage to my body tissues."</h3>
-        </div>
-        <div class="reality-content">
-          <span class="reality-label">Scientific Reality</span>
-          <p style="margin: 0; font-size: 0.9rem;">
-            <strong>Persistent pain is a hypersensitive alarm system.</strong> Pain protects before actual damage occurs. Graded, adapted movement trains the brain to regulate sensitivity.
-          </p>
-        </div>
-        <span class="myth-action-hint">See reality &rarr;</span>
-      </div>
+      <button type="button" class="myth-card" aria-expanded="false" data-open-label="See evidence →" data-close-label="Back to belief">
+        <span class="myth-front">
+          <span class="myth-label">Common belief</span>
+          <span class="myth-title">“If movement hurts, I must be tearing or damaging my tissues.”</span>
+        </span>
+        <span class="reality-content">
+          <span class="reality-label">Clinical evidence</span>
+          <strong>Persistent pain works as a sensitized protection alarm.</strong> It fires well before real tissue injury occurs. Graded, adapted movement retrains your nervous system to recalibrate sensitivity.
+        </span>
+        <span class="myth-action-hint">See evidence &rarr;</span>
+      </button>
     </div>
   </section>
 
   <!-- Latest Articles Section -->
-  <section class="articles-section" aria-labelledby="articles-heading" style="margin: 80px 0;">
-    <div style="margin-bottom: 25px;">
-      <span class="editorial-badge">Science & Outreach</span>
-    </div>
-    <div class="section-header" style="margin-bottom: 30px;">
-      <h2 id="articles-heading" class="section-title" style="font-size: 1.9rem; margin: 0;">
-        {t('latestPosts')}
-      </h2>
+  <section class="home-section" style="padding-top: 20px;" aria-labelledby="articles-heading">
+    <div class="section-header">
+      <div>
+        <h2 id="articles-heading" class="section-title" style="margin-bottom: 6px;">
+          {t('latestPosts')}
+        </h2>
+        <p class="section-lead">Peer-reviewed PubMed studies translated into practical guidance.</p>
+      </div>
       <a href="/en/demystifying-pain" class="btn-link">
         {t('viewAll')} &rarr;
       </a>
     </div>
 
-    <!-- Articles Grid -->
     <div class="articles-grid">
       {enArticles.map((article) => {
         const cleanSlug = article.id.replace(/^en\//, '');
@@ -380,7 +409,9 @@ const schemaJson = JSON.stringify(schema);
               {article.data.description}
             </p>
             <div class="article-footer">
-              <span>{new Date(article.data.pubDate).toLocaleDateString('en-US', { dateStyle: 'medium' })}</span>
+              <time datetime={article.data.pubDate.toISOString()}>
+                {new Date(article.data.pubDate).toLocaleDateString('en-US', { dateStyle: 'medium' })}
+              </time>
               {article.data.doi && <span class="doi-badge">DOI: {article.data.doi.split('/')[1] || article.data.doi}</span>}
             </div>
           </article>
@@ -389,24 +420,94 @@ const schemaJson = JSON.stringify(schema);
     </div>
   </section>
 
-  <!-- Script to handle card interactions -->
+  <!-- FAQ Section (Editorial 2-Column Layout with FAQPage Schema) -->
+  <section class="home-section" aria-labelledby="faq-heading">
+    <div class="faq-layout">
+      <div>
+        <h2 id="faq-heading" class="section-title">
+          Frequently asked questions on health and pain
+        </h2>
+        <p class="section-lead">
+          Direct answers grounded in biomedical literature for patients and clinicians.
+        </p>
+      </div>
+
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>
+            <span>Can I return to sports if I have a herniated disc or wear on my MRI?</span>
+            <span class="faq-toggle-icon" aria-hidden="true">+</span>
+          </summary>
+          <p class="faq-answer">
+            <strong>Yes.</strong> Research shows that herniated discs and disc dehydration appear in 35% of pain-free adults over 40. The spine adapts to progressive load, so a structured graded exercise plan lets you rebuild athletic capacity safely.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            <span>What is the difference between strict rest and active coping?</span>
+            <span class="faq-toggle-icon" aria-hidden="true">+</span>
+          </summary>
+          <p class="faq-answer">
+            Extended bed rest weakens supporting muscles, reduces disc nutrition, and heightens nervous system sensitivity. <strong>Active coping</strong> uses fixed time quotas (pacing) to retrain your nervous system so movement stops triggering a danger response.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            <span>How does Clinical Psychoneuroimmunology (PNI) fit into physiotherapy?</span>
+            <span class="faq-toggle-icon" aria-hidden="true">+</span>
+          </summary>
+          <p class="faq-answer">
+            PNI studies the communication between nervous, immune, and endocrine systems. In clinical care, it helps assess sleep quality, circadian rhythm, chronic stress, and low-grade inflammation that shape tissue healing.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            <span>Does learning pain neuroscience actually lower physical pain?</span>
+            <span class="faq-toggle-icon" aria-hidden="true">+</span>
+          </summary>
+          <p class="faq-answer">
+            Yes. Understanding pain physiology reduces fear-driven amygdala signaling and engages descending inhibitory pathways from the prefrontal cortex, releasing endogenous pain-modulating neurotransmitters.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing Editorial CTA -->
+  <section class="closing-cta" aria-labelledby="closing-cta-heading">
+    <div class="closing-cta-copy">
+      <h2 id="closing-cta-heading" class="section-title" style="font-size: 1.65rem; margin-bottom: 8px;">
+        Looking for clinical guidance on your pain?
+      </h2>
+      <p class="section-lead" style="font-size: 0.96rem;">
+        Send a message with your questions or build your starting movement quota right now in the free coping guide.
+      </p>
+    </div>
+    <div class="closing-cta-actions">
+      <a href="/en/contact" class="btn-submit" style="width: auto;">
+        Contact Cesar Santos
+      </a>
+      <a href="/en/coping-guide" class="btn-link">
+        Open active coping guide &rarr;
+      </a>
+    </div>
+  </section>
+
   <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
       const cards = document.querySelectorAll('.myth-card');
-      
       cards.forEach(card => {
-        const toggleCard = () => {
-          const isActive = card.classList.contains('active');
-          card.classList.toggle('active');
-          card.setAttribute('aria-expanded', !isActive);
-        };
-
-        card.addEventListener('click', toggleCard);
-        
-        card.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            toggleCard();
+        card.addEventListener('click', () => {
+          const isActive = card.classList.toggle('active');
+          card.setAttribute('aria-expanded', String(isActive));
+          const hint = card.querySelector('.myth-action-hint');
+          if (hint) {
+            hint.textContent = isActive
+              ? (card.getAttribute('data-close-label') || 'Back')
+              : (card.getAttribute('data-open-label') || 'See evidence →');
           }
         });
       });

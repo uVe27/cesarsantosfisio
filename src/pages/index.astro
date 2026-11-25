@@ -6,14 +6,12 @@ import { getCollection } from 'astro:content';
 const lang = 'es';
 const t = useTranslations(lang);
 
-// Get latest articles filtered by Spanish subdirectory
 const allArticles = await getCollection('blog');
 const esArticles = allArticles
   .filter(item => item.id.startsWith('es/'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 
-// JSON-LD ProfilePage & MedicalWebPage Schema
 const schema = {
   "@context": "https://schema.org",
   "@type": "MedicalWebPage",
@@ -40,7 +38,6 @@ const schema = {
   }
 };
 
-// JSON-LD FAQPage Schema for Google Rich Snippets & Search Intent
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -74,7 +71,7 @@ const faqSchema = {
       "name": "¿Por qué educarse en neurociencia del dolor ayuda a reducir el dolor físico?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Entender que el dolor es un mecanismo de protección y no siempre un signo de daño en los tejidos desactiva la alarma del miedo en la amígdala cerebral y activa el control inhibitorio descendente del córtex prefrontal."
+        "text": "Entender que el dolor es un mecanismo de protección desactiva la alarma del miedo en la amígdala cerebral y activa el control inhibitorio descendente del córtex prefrontal."
       }
     }
   ]
@@ -83,65 +80,85 @@ const faqSchema = {
 const schemaJson = JSON.stringify([schema, faqSchema]);
 ---
 
-<Layout 
-  title="Fisioterapia y Dolor Crónico | Cesar Santos · Salud Integrativa y Ejercicio" 
-  description="Especialista en fisioterapia basada en la evidencia, neurociencia del dolor persistente, hernias discales, ejercicio terapéutico graduado y Psiconeuroinmunología Clínica (PNI)." 
-  lang={lang} 
-  canonicalPath="/" 
+<Layout
+  title="Fisioterapia y Dolor Crónico | Cesar Santos · Salud Integrativa y Ejercicio"
+  description="Especialista en fisioterapia basada en la evidencia, neurociencia del dolor persistente, hernias discales, ejercicio terapéutico graduado y Psiconeuroinmunología Clínica (PNI)."
+  lang={lang}
+  canonicalPath="/"
   schemaJson={schemaJson}
 >
-  <!-- Hero Section with Storytelling & Mission -->
+  <!-- Editorial Hero Section (No portrait duplication; patient-first clinical entry panel) -->
   <section class="hero-section" aria-labelledby="manifesto-heading">
     <div class="hero-grid">
       <div>
-        <span class="editorial-badge">Fisioterapia Basada en Evidencia · Salud Integrativa</span>
         <h1 id="manifesto-heading" class="hero-title">
-          Fisioterapeuta en Dolor Persistente y Salud Integrativa
+          Fisioterapeuta en dolor persistente y salud integrativa
         </h1>
         <p class="hero-description">
-          Si llevas meses lidiando con dolor de espalda, te han diagnosticado una hernia o sientes que el miedo al movimiento te impide hacer tu vida habitual, este espacio es para ti.
-        </p>
-        <p class="hero-description" style="font-size: 0.98rem; margin-top: -10px;">
-          Soy <strong>Cesar Santos</strong>, fisioterapeuta graduado en la Escuela Universitaria de Fisioterapia de la ONCE (Universidad Autónoma de Madrid), ex-Capitán de Infantería de Montaña y Máster Universitario en Fisioterapia del Sistema Musculoesquelético con formación en PNI y Método Pilates. Mi trabajo consiste en evaluar qué mantiene activa la alarma de tu dolor, dosificar el ejercicio preciso y devolverte tu autonomía.
+          Si llevas meses lidiando con dolor de espalda, te preocupa el informe de una resonancia o el miedo a recaer limita tu vida diaria, trabajamos con fisioterapia basada en evidencia, ejercicio terapéutico graduado y Psiconeuroinmunología Clínica (PNI) para recuperar tu autonomía.
         </p>
 
-        <!-- Rapid Access Buttons -->
-        <div style="margin-top: 25px; display: flex; gap: 14px; flex-wrap: wrap; align-items: center;">
+        <div class="hero-actions">
           <a href={getLocalizedPath('/guia-afrontamiento', lang)} class="btn-submit" style="width: auto;">
-            Guía de Afrontamiento del Dolor &rarr;
+            Calcular pauta de afrontamiento &rarr;
           </a>
           <a href={getLocalizedPath('/desmitificando-el-dolor', lang)} class="btn-link">
-            Artículos y Evidencia Científica &rarr;
+            Leer evidencia científica
           </a>
+        </div>
+
+        <div class="hero-byline">
+          <span><strong>Cesar Santos</strong> · Escuela Universitaria de Fisioterapia de la ONCE (UAM).</span>
+          <a href={getLocalizedPath('/sobre-mi', lang)} class="inline-text-link">Conoce mi trayectoria &rarr;</a>
         </div>
       </div>
 
-      <!-- Hero Portrait Card (Unified Authority) -->
-      <div class="hero-portrait-card">
-        <img 
-          src={`${import.meta.env.BASE_URL}images/cesar_santos_portrait.webp`} 
-          alt="Cesar Santos - Fisioterapeuta en Salud Integrativa y Dolor Persistente" 
-          class="hero-portrait-img" 
-        />
-        <div class="hero-portrait-caption">
-          <div style="font-weight: 700; font-size: 1.05rem; color: var(--text-color);">Cesar Santos</div>
-          <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">
-            Fisioterapeuta · Escuela Univ. de Fisioterapia de la ONCE (UAM)
-          </div>
-          <div style="margin-top: 10px;">
-            <a href={getLocalizedPath('/sobre-mi', lang)} class="btn-link" style="font-size: 0.82rem; padding: 4px 10px;">
-              Conoce mi trayectoria completa &rarr;
+      <!-- Clinical Starting Point Panel -->
+      <aside class="triage-panel" aria-labelledby="triage-heading">
+        <h2 id="triage-heading" class="triage-panel-title">¿Por dónde empezar hoy?</h2>
+        <p class="triage-panel-sub">Elige la situación que mejor describe tu caso actual:</p>
+
+        <ul class="triage-list">
+          <li class="triage-item">
+            <a href={getLocalizedPath('/desmitificando-el-dolor/resonancia-edad-no-dolor', lang)} class="triage-link">
+              <span>
+                <span class="triage-link-title">Tengo una hernia o desgaste en la resonancia</span>
+                <span class="triage-link-desc">Qué significan realmente estos hallazgos y por qué puedes volver a moverte.</span>
+              </span>
+              <span class="triage-arrow" aria-hidden="true">&rarr;</span>
             </a>
-          </div>
-        </div>
-      </div>
+          </li>
+          <li class="triage-item">
+            <a href={getLocalizedPath('/desmitificando-el-dolor/freno-cerebro-control-prefrontal', lang)} class="triage-link">
+              <span>
+                <span class="triage-link-title">Llevo más de 3 meses con dolor persistente</span>
+                <span class="triage-link-desc">Cómo funciona el sistema de alarma nervioso y el control inhibitorio cerebral.</span>
+              </span>
+              <span class="triage-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+          <li class="triage-item">
+            <a href={getLocalizedPath('/guia-afrontamiento', lang)} class="triage-link">
+              <span>
+                <span class="triage-link-title">Quiero retomar ejercicio sin provocar un brote</span>
+                <span class="triage-link-desc">Calcula tu cuota segura de movimiento (pacing) y descarga tu pauta en PDF.</span>
+              </span>
+              <span class="triage-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+        </ul>
+
+        <p class="triage-evidence-note">
+          <strong>Dato clínico:</strong> el <span class="triage-stat-num">35 %</span> de las personas mayores de 40 años presentan hernias discales en resonancia sin ningún dolor (Varun S. et al., 2025).
+        </p>
+      </aside>
     </div>
 
     <!-- Authority Trust Bar -->
     <div class="trust-bar" role="region" aria-label="Acreditaciones y Formación">
       <div class="trust-item">
         <span class="trust-item-bullet" aria-hidden="true"></span>
-        <span>Escuela Univ. de Fisioterapia de la ONCE (UAM)</span>
+        <span>Escuela Universitaria de Fisioterapia de la ONCE (UAM)</span>
       </div>
       <div class="trust-item">
         <span class="trust-item-bullet" aria-hidden="true"></span>
@@ -158,251 +175,223 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
     </div>
   </section>
 
-  <!-- Common Conditions / What is Limiting You Section -->
-  <section aria-labelledby="conditions-heading" style="margin: 80px 0 60px 0;">
-    <div style="text-align: center; max-width: 750px; margin: 0 auto 40px auto;">
-      <span class="editorial-badge">Motivos de Consulta Frecuentes</span>
-      <h2 id="conditions-heading" class="section-title" style="font-size: 1.9rem; margin-bottom: 12px; color: var(--text-color);">
+  <!-- Common Conditions / Editorial 2-Column Index -->
+  <section class="home-section" aria-labelledby="conditions-heading">
+    <div class="section-intro">
+      <h2 id="conditions-heading" class="section-title">
         ¿Qué molestia o dolor te está limitando?
       </h2>
-      <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.6; margin: 0;">
-        El dolor corporal no siempre significa daño irreversible. Identifica tu situación y descubre qué dice la evidencia científica actual.
+      <p class="section-lead">
+        Sentir dolor corporal rara vez equivale a un daño irreversible. Identifica tu caso y consulta qué demuestra la evidencia clínica actual.
       </p>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
-      <!-- Condition 1: Lumbar -->
-      <div class="contact-card" style="padding: 26px; display: flex; flex-direction: column; justify-content: space-between;">
+    <div class="conditions-grid">
+      <article class="condition-row">
         <div>
-          <span class="card-number-tag">01 · Columna Lumbar</span>
-          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-            Dolor Lumbar y Bloqueo de Espalda
-          </h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px;">
-            Rigidez matutina, pinchazos al agacharte o sensación de "quedarte clavado". La columna lumbar es una estructura biológica fuerte diseñada para moverse, no para inmovilizarse.
+          <span class="condition-tag">Columna lumbar</span>
+          <h3 class="condition-title">Dolor lumbar y bloqueo de espalda</h3>
+          <p class="condition-desc">
+            Rigidez al levantarte, pinchazos al agacharte o sensación de quedarte clavado. La columna lumbar es una estructura biológica fuerte diseñada para soportar carga y moverse.
           </p>
         </div>
-        <a href={getLocalizedPath('/guia-afrontamiento', lang)} class="btn-link" style="font-weight: 700; font-size: 0.88rem;">
+        <a href={getLocalizedPath('/guia-afrontamiento', lang)} class="editorial-link">
           Calcular ejercicio graduado &rarr;
         </a>
-      </div>
+      </article>
 
-      <!-- Condition 2: Sciatica -->
-      <div class="contact-card" style="padding: 26px; display: flex; flex-direction: column; justify-content: space-between;">
+      <article class="condition-row">
         <div>
-          <span class="card-number-tag">02 · Cadena Nerviosa</span>
-          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-            Ciática y Dolor Irradiado a la Pierna
-          </h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px;">
+          <span class="condition-tag">Cadena nerviosa</span>
+          <h3 class="condition-title">Ciática y dolor irradiado a la pierna</h3>
+          <p class="condition-desc">
             Quemazón, hormigueo o calambres que descienden por el glúteo hacia la pierna o el pie. Evaluamos la sensibilidad del tejido nervioso y el origen funcional de la irritación.
           </p>
         </div>
-        <a href={getLocalizedPath('/contacto', lang)} class="btn-link" style="font-weight: 700; font-size: 0.88rem;">
+        <a href={getLocalizedPath('/contacto', lang)} class="editorial-link">
           Consultar valoración clínica &rarr;
         </a>
-      </div>
+      </article>
 
-      <!-- Condition 3: Hernias -->
-      <div class="contact-card" style="padding: 26px; display: flex; flex-direction: column; justify-content: space-between;">
+      <article class="condition-row">
         <div>
-          <span class="card-number-tag">03 · Pruebas de Imagen</span>
-          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-            Hernias Discales y Diagnósticos por Resonancia
-          </h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px;">
-            ¿Te han dicho que tienes una hernia o desgaste y tienes miedo de cargar peso o hacer deporte? La ciencia demuestra que la imagen no equivale a una condena de dolor.
+          <span class="condition-tag">Pruebas de imagen</span>
+          <h3 class="condition-title">Hernias discales y diagnósticos por resonancia</h3>
+          <p class="condition-desc">
+            Si te han diagnosticado una hernia o deshidratación y temes cargar peso o hacer deporte, la investigación clínica demuestra que la imagen radiológica es solo una foto parcial del problema.
           </p>
         </div>
-        <a href={getLocalizedPath('/desmitificando-el-dolor/resonancia-edad-no-dolor', lang)} class="btn-link" style="font-weight: 700; font-size: 0.88rem;">
+        <a href={getLocalizedPath('/desmitificando-el-dolor/resonancia-edad-no-dolor', lang)} class="editorial-link">
           Leer evidencia sobre hernias &rarr;
         </a>
-      </div>
+      </article>
 
-      <!-- Condition 4: Cervical -->
-      <div class="contact-card" style="padding: 26px; display: flex; flex-direction: column; justify-content: space-between;">
+      <article class="condition-row">
         <div>
-          <span class="card-number-tag">04 · Región Cervical</span>
-          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-            Dolor Cervical y Tensión de Hombros
-          </h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px;">
-            Sobrecarga en trapecios, rigidez al girar el cuello y dolores de cabeza tensionales por horas de trabajo sentado y acumulación de estrés.
+          <span class="condition-tag">Región cervical</span>
+          <h3 class="condition-title">Dolor cervical y tensión de hombros</h3>
+          <p class="condition-desc">
+            Sobrecarga en trapecios, rigidez al girar el cuello y dolores de cabeza tensionales tras horas frente a la pantalla y acumulación de estrés diario.
           </p>
         </div>
-        <a href={getLocalizedPath('/desmitificando-el-dolor/equilibrio-estatuas-estabilidad-dinamica', lang)} class="btn-link" style="font-weight: 700; font-size: 0.88rem;">
+        <a href={getLocalizedPath('/desmitificando-el-dolor/equilibrio-estatuas-estabilidad-dinamica', lang)} class="editorial-link">
           Ver claves de movilidad cervical &rarr;
         </a>
-      </div>
+      </article>
 
-      <!-- Condition 5: Persistent Pain -->
-      <div class="contact-card" style="padding: 26px; display: flex; flex-direction: column; justify-content: space-between;">
+      <article class="condition-row">
         <div>
-          <span class="card-number-tag">05 · Sistema de Alarma</span>
-          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-            Dolor Persistente que No Remite
-          </h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px;">
-            Molestias continuadas de más de 3 meses que no mejoran con reposo ni fármacos. Analizamos la hipersensibilidad del sistema nervioso y los factores de estilo de vida.
+          <span class="condition-tag">Sistema de alarma</span>
+          <h3 class="condition-title">Dolor persistente que se prolonga meses</h3>
+          <p class="condition-desc">
+            Molestias continuadas de más de 3 meses que persisten pese al reposo o los fármacos. Analizamos la sensibilización del sistema nervioso y los factores del estilo de vida que la mantienen.
           </p>
         </div>
-        <a href={getLocalizedPath('/desmitificando-el-dolor/freno-cerebro-control-prefrontal', lang)} class="btn-link" style="font-weight: 700; font-size: 0.88rem;">
+        <a href={getLocalizedPath('/desmitificando-el-dolor/freno-cerebro-control-prefrontal', lang)} class="editorial-link">
           Entender la alarma del dolor &rarr;
         </a>
-      </div>
+      </article>
 
-      <!-- Condition 6: Tendinopathies & Joint Overload -->
-      <div class="contact-card" style="padding: 26px; display: flex; flex-direction: column; justify-content: space-between;">
+      <article class="condition-row">
         <div>
-          <span class="card-number-tag">06 · Tejido y Tendón</span>
-          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-            Tendinopatías, Hombro y Fascitis Plantar
-          </h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px;">
-            Dolor punzante al levantar el brazo (manguito rotador), en el tendón de Aquiles o al apoyar el talón por la mañana. Los tendones se adaptan con carga graduada, no con reposo absoluto.
+          <span class="condition-tag">Tejido y tendón</span>
+          <h3 class="condition-title">Tendinopatías, hombro y fascitis plantar</h3>
+          <p class="condition-desc">
+            Dolor punzante al elevar el brazo (manguito rotador), en el tendón de Aquiles o al apoyar el talón por la mañana. Los tendones recuperan su capacidad mediante carga progresiva bien medida.
           </p>
         </div>
-        <a href={getLocalizedPath('/guia-afrontamiento', lang)} class="btn-link" style="font-weight: 700; font-size: 0.88rem;">
+        <a href={getLocalizedPath('/guia-afrontamiento', lang)} class="editorial-link">
           Estrategias de dosificación de carga &rarr;
         </a>
+      </article>
+    </div>
+  </section>
+
+  <!-- The 4 Pillars of Integrative Health (Full-Bleed Tonal Asymmetric Band) -->
+  <section class="full-bleed-band" aria-labelledby="pillars-heading">
+    <div class="band-inner">
+      <div class="pillars-layout">
+        <div class="pillars-intro-sticky">
+          <h2 id="pillars-heading" class="section-title">
+            Los 4 pilares de la fisioterapia integrativa y la PNI
+          </h2>
+          <p class="section-lead" style="margin-bottom: 24px;">
+            Cuando el tratamiento se limita únicamente al punto exacto que duele, la molestia suele reaparecer al cabo de unas semanas. La <strong>Salud Integrativa</strong> y la <strong>Psiconeuroinmunología Clínica (PNI)</strong> analizan el conjunto completo: cómo se mueve tu cuerpo, cómo responde tu sistema nervioso, cómo descansas y qué hábitos diarios mantienen encendida la señal de alarma.
+          </p>
+          <a href={getLocalizedPath('/sobre-mi', lang)} class="editorial-link">
+            Cómo trabajo y formación clínica &rarr;
+          </a>
+        </div>
+
+        <div class="pillars-grid">
+          <article class="pillar-card">
+            <span class="card-number-tag">01 · Terapia Manual</span>
+            <h3 style="font-size: 1.18rem; margin-bottom: 10px;">
+              Terapia manual en camilla
+            </h3>
+            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.62; margin: 0;">
+              Técnicas manuales precisas para calmar el dolor agudo y liberar articulaciones o músculos tensos. Sirven como punto de partida para ganar alivio inmediato y empezar a moverte con seguridad.
+            </p>
+          </article>
+
+          <article class="pillar-card">
+            <span class="card-number-tag">02 · Ejercicio y Pilates</span>
+            <h3 style="font-size: 1.18rem; margin-bottom: 10px;">
+              Ejercicio terapéutico y Pilates
+            </h3>
+            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.62; margin: 0;">
+              El movimiento bien dosificado es la herramienta con mayor respaldo científico. Diseñamos pautas progresivas para fortalecer tu columna, mejorar el control motor y demostrarle a tu cuerpo toda su capacidad.
+            </p>
+          </article>
+
+          <article class="pillar-card">
+            <span class="card-number-tag">03 · Estilo de Vida y PNI</span>
+            <h3 style="font-size: 1.18rem; margin-bottom: 10px;">
+              Psiconeuroinmunología Clínica (PNI)
+            </h3>
+            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.62; margin: 0;">
+              El dolor convive con el resto de tu biología. Dormir mal, sostener estrés continuo o arrastrar inflamación silenciosa amplifica cualquier síntoma. Con la PNI ajustamos estos factores para consolidar la mejoría.
+            </p>
+          </article>
+
+          <article class="pillar-card">
+            <span class="card-number-tag">04 · Neurociencia</span>
+            <h3 style="font-size: 1.18rem; margin-bottom: 10px;">
+              Educación en ciencia del dolor
+            </h3>
+            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.62; margin: 0;">
+              Comprender lo que ocurre en tus tejidos cambia físicamente la intensidad con la que lo percibes. Desmontamos mitos sobre resonancias o espaldas frágiles para que tu cerebro baje el volumen de la alarma.
+            </p>
+          </article>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- The 4 Pillars of Integrative Health Section -->
-  <section aria-labelledby="pillars-heading" style="margin: 80px 0;">
-    <div style="text-align: center; max-width: 750px; margin: 0 auto 40px auto;">
-      <span class="editorial-badge">Metodología Clínica</span>
-      <h2 id="pillars-heading" class="section-title" style="font-size: 1.9rem; margin-bottom: 12px; color: var(--text-color);">
-        Los 4 Pilares de la Fisioterapia Integrativa y la PNI
+  <!-- Interactive Myth Buster Section (Semantic Buttons) -->
+  <section class="home-section" aria-labelledby="myths-heading">
+    <div class="section-intro">
+      <h2 id="myths-heading" class="section-title">
+        Creencias frecuentes frente a la evidencia clínica
       </h2>
-      <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.6; margin: 0;">
-        Si solo tratamos el punto exacto donde te duele, el dolor suele volver al poco tiempo. La <strong>Salud Integrativa</strong> y la <strong>Psiconeuroinmunología Clínica (PNI)</strong> miran el mapa completo: cómo se mueve tu cuerpo, cómo responde tu sistema nervioso, cómo descansas y qué factores de tu día a día mantienen la alarma del dolor encendida.
-      </p>
-    </div>
-
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;">
-      <!-- Pillar 1 -->
-      <div class="pillar-card" style="padding: 26px;">
-        <span class="card-number-tag">Pilar 01 · Terapia Manual</span>
-        <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-          Terapia Manual en Camilla
-        </h3>
-        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
-          Técnicas manuales precisas para aliviar el dolor agudo y desbloquear articulaciones o músculos contracturados. No es un masaje pasivo para que vuelvas eternamente, sino el punto de partida para que tu cuerpo gane alivio y empiece a moverse con confianza.
-        </p>
-      </div>
-
-      <!-- Pillar 2 -->
-      <div class="pillar-card" style="padding: 26px;">
-        <span class="card-number-tag">Pilar 02 · Ejercicio & Pilates</span>
-        <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-          Ejercicio Terapéutico y Pilates
-        </h3>
-        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
-          El movimiento bien dosificado es la mejor medicina que existe. Diseñamos pautas de ejercicio sencillas y progresivas para fortalecer tu columna, mejorar tu control postural y demostrarle a tu cuerpo que es mucho más fuerte y capaz de lo que crees.
-        </p>
-      </div>
-
-      <!-- Pillar 3 -->
-      <div class="pillar-card" style="padding: 26px;">
-        <span class="card-number-tag">Pilar 03 · Estilo de Vida & PNI</span>
-        <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-          Psiconeuroinmunología Clínica (PNI)
-        </h3>
-        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
-          Tu dolor no vive aislado de tu vida diaria. Si duermes mal, sufres estrés continuo o tu alimentación favorece la inflamación silenciosa, el cuerpo amplifica cualquier molestia. Con la PNI ajustamos estos hábitos para que la mejoría se mantenga a largo plazo.
-        </p>
-      </div>
-
-      <!-- Pillar 4 -->
-      <div class="pillar-card" style="padding: 26px;">
-        <span class="card-number-tag">Pilar 04 · Neurociencia del Dolor</span>
-        <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700;">
-          Educación en Ciencia del Dolor
-        </h3>
-        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
-          Entender lo que te pasa cambia físicamente cómo lo sientes. Desmontamos mitos sobre resonancias o "espaldas frágiles" para que pierdas el miedo a moverte. Cuando tu cerebro comprende que no hay peligro real, baja el volumen del dolor por sí mismo.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Interactive Myth Buster Section -->
-  <section class="myth-section" aria-labelledby="myths-heading" style="margin: 80px 0;">
-    <div style="text-align: center; max-width: 650px; margin: 0 auto 35px auto;">
-      <span class="editorial-badge">Ciencia Frente a Creencias</span>
-      <h2 id="myths-heading" class="section-title" style="font-size: 1.9rem; margin-bottom: 10px;">
-        Desmitificador Rápido de Salud
-      </h2>
-      <p style="color: var(--text-muted); font-size: 0.98rem; margin: 0;">
-        Haz clic en cualquier tarjeta para contrastar las creencias comunes con la realidad que demuestra la investigación clínica.
+      <p class="section-lead">
+        Pulsa cualquier tarjeta para contrastar afirmaciones habituales sobre el dolor de espalda con lo que demuestran los estudios médicos.
       </p>
     </div>
 
     <div class="myth-grid" role="region" aria-label="Mitos y Realidades del Dolor">
-      <!-- Card 1: Hernias -->
-      <div class="myth-card" role="button" aria-expanded="false" tabindex="0">
-        <div>
-          <span class="myth-label">Mito Común</span>
-          <h3 class="myth-title">"Tengo una hernia discal en mi resonancia, por lo tanto mi columna está rota y dañada."</h3>
-        </div>
-        <div class="reality-content">
-          <span class="reality-label">La Realidad Científica</span>
-          <p style="margin: 0; font-size: 0.9rem;">
-            <strong>El 35% de las personas mayores de 40 años tienen hernias discales sin sentir ningún dolor</strong> (Varun S. et al., 2025). La imagen refleja cambios normales por edad, como las arrugas en la piel, no un acta de discapacidad.
-          </p>
-        </div>
-        <span class="myth-action-hint">Ver realidad &rarr;</span>
-      </div>
+      <button type="button" class="myth-card" aria-expanded="false" data-open-label="Ver evidencia →" data-close-label="Volver a la creencia">
+        <span class="myth-front">
+          <span class="myth-label">Creencia común</span>
+          <span class="myth-title">“Tengo una hernia discal en mi resonancia, así que mi columna está dañada.”</span>
+        </span>
+        <span class="reality-content">
+          <span class="reality-label">Evidencia clínica</span>
+          <strong>El 35 % de las personas mayores de 40 años tienen hernias discales sin sentir dolor</strong> (Varun S. et al., 2025). La imagen refleja cambios normales de la edad, igual que las canas o las arrugas.
+        </span>
+        <span class="myth-action-hint">Ver evidencia &rarr;</span>
+      </button>
 
-      <!-- Card 2: Posture -->
-      <div class="myth-card" role="button" aria-expanded="false" tabindex="0">
-        <div>
-          <span class="myth-label">Mito Común</span>
-          <h3 class="myth-title">"Necesito encontrar la postura perfecta para sentarme o pararme y así evitar el dolor de espalda."</h3>
-        </div>
-        <div class="reality-content">
-          <span class="reality-label">La Realidad Científica</span>
-          <p style="margin: 0; font-size: 0.9rem;">
-            <strong>No existe una postura única o perfecta.</strong> La ciencia demuestra que no hay relación causal entre posturas estáticas y el dolor. El cuerpo necesita movimiento y variabilidad; tu mejor postura es la siguiente.
-          </p>
-        </div>
-        <span class="myth-action-hint">Ver realidad &rarr;</span>
-      </div>
+      <button type="button" class="myth-card" aria-expanded="false" data-open-label="Ver evidencia →" data-close-label="Volver a la creencia">
+        <span class="myth-front">
+          <span class="myth-label">Creencia común</span>
+          <span class="myth-title">“Necesito mantener una postura recta y perfecta para evitar el dolor de espalda.”</span>
+        </span>
+        <span class="reality-content">
+          <span class="reality-label">Evidencia clínica</span>
+          <strong>No existe una postura única ni perfecta.</strong> Las revisiones clínicas descartan una relación causal directa entre posturas estáticas y dolor. Tu mejor postura es la siguiente que adoptes.
+        </span>
+        <span class="myth-action-hint">Ver evidencia &rarr;</span>
+      </button>
 
-      <!-- Card 3: Pain vs Damage -->
-      <div class="myth-card" role="button" aria-expanded="false" tabindex="0">
-        <div>
-          <span class="myth-label">Mito Común</span>
-          <h3 class="myth-title">"Si una actividad física me duele, significa que me estoy haciendo daño en los tejidos."</h3>
-        </div>
-        <div class="reality-content">
-          <span class="reality-label">La Realidad Científica</span>
-          <p style="margin: 0; font-size: 0.9rem;">
-            <strong>El dolor persistente es un sistema de alarma hipersensible.</strong> El dolor protege antes de que haya daño real. El movimiento graduado y adaptado entrena al cerebro para regular la sensibilidad.
-          </p>
-        </div>
-        <span class="myth-action-hint">Ver realidad &rarr;</span>
-      </div>
+      <button type="button" class="myth-card" aria-expanded="false" data-open-label="Ver evidencia →" data-close-label="Volver a la creencia">
+        <span class="myth-front">
+          <span class="myth-label">Creencia común</span>
+          <span class="myth-title">“Si una actividad física molesta, significa que estoy rompiendo los tejidos.”</span>
+        </span>
+        <span class="reality-content">
+          <span class="reality-label">Evidencia clínica</span>
+          <strong>El dolor persistente actúa como una alarma hipersensible.</strong> Avisa mucho antes de que exista daño estructural. El movimiento graduado reentrena al sistema nervioso para ajustar ese umbral.
+        </span>
+        <span class="myth-action-hint">Ver evidencia &rarr;</span>
+      </button>
     </div>
   </section>
 
   <!-- Latest Articles Section -->
-  <section class="articles-section" aria-labelledby="articles-heading" style="margin: 80px 0;">
-    <div style="margin-bottom: 25px;">
-      <span class="editorial-badge">Divulgación y Ciencia</span>
-    </div>
-    <div class="section-header" style="margin-bottom: 30px;">
-      <h2 id="articles-heading" class="section-title" style="font-size: 1.9rem; margin: 0;">
-        {t('latestPosts')}
-      </h2>
-      <a href="/desmitificando-el-dolor" class="btn-link">
+  <section class="home-section" style="padding-top: 20px;" aria-labelledby="articles-heading">
+    <div class="section-header">
+      <div>
+        <h2 id="articles-heading" class="section-title" style="margin-bottom: 6px;">
+          {t('latestPosts')}
+        </h2>
+        <p class="section-lead">Artículos con referencias primarias de PubMed traducidos a la práctica diaria.</p>
+      </div>
+      <a href={getLocalizedPath('/desmitificando-el-dolor', lang)} class="btn-link">
         {t('viewAll')} &rarr;
       </a>
     </div>
 
-    <!-- Articles Grid -->
     <div class="articles-grid">
       {esArticles.map((article) => {
         const cleanSlug = article.id.replace(/^es\//, '');
@@ -420,7 +409,9 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
               {article.data.description}
             </p>
             <div class="article-footer">
-              <span>{new Date(article.data.pubDate).toLocaleDateString('es-ES', { dateStyle: 'medium' })}</span>
+              <time datetime={article.data.pubDate.toISOString()}>
+                {new Date(article.data.pubDate).toLocaleDateString('es-ES', { dateStyle: 'medium' })}
+              </time>
               {article.data.doi && <span class="doi-badge">DOI: {article.data.doi.split('/')[1] || article.data.doi}</span>}
             </div>
           </article>
@@ -429,83 +420,94 @@ const schemaJson = JSON.stringify([schema, faqSchema]);
     </div>
   </section>
 
-  <!-- FAQ Section with Schema.org FAQPage -->
-  <section class="faq-section" aria-labelledby="faq-heading" style="margin: 80px 0; padding: 44px 32px; background: rgba(51, 99, 103, 0.03); border: 1px solid var(--border-color); border-radius: 16px;">
-    <div style="text-align: center; max-width: 700px; margin: 0 auto 35px auto;">
-      <span class="editorial-badge">Resolviendo Dudas Frecuentes</span>
-      <h2 id="faq-heading" class="section-title" style="font-size: 1.9rem; margin-bottom: 12px; color: var(--text-color);">
-        Preguntas Frecuentes sobre Salud y Dolor
-      </h2>
-      <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.6; margin: 0;">
-        Respuestas directas basadas en la evidencia biomédica para pacientes y profesionales de la salud.
-      </p>
-    </div>
-
-    <div class="faq-list" style="display: flex; flex-direction: column; gap: 15px; max-width: 800px; margin: 0 auto;">
-      <!-- FAQ Item 1 -->
-      <details class="faq-item">
-        <summary style="font-weight: 700; font-size: 1.05rem; color: var(--text-color); list-style: none; display: flex; justify-content: space-between; align-items: center;">
-          <span>¿Puedo volver a hacer deporte si tengo una hernia discal o desgaste en la resonancia?</span>
-          <span style="color: var(--color-secondary); font-size: 1.3rem; margin-left: 10px;">+</span>
-        </summary>
-        <p style="margin-top: 14px; font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; border-top: 1px solid var(--border-color); padding-top: 12px;">
-          <strong>Sí, rotundamente.</strong> La investigación demuestra que las hernias discales y deshidrataciones son hallazgos habituales en el 35% de las personas asintomáticas mayores de 40 años sin dolor. La columna es una estructura sólida y adaptable. Con una pauta de ejercicio graduado y reentrenamiento activo, puedes recuperar tu vida deportiva con total seguridad.
+  <!-- FAQ Section (Editorial 2-Column Layout with FAQPage Schema) -->
+  <section class="home-section" aria-labelledby="faq-heading">
+    <div class="faq-layout">
+      <div>
+        <h2 id="faq-heading" class="section-title">
+          Preguntas frecuentes sobre salud y dolor
+        </h2>
+        <p class="section-lead">
+          Respuestas directas basadas en la evidencia biomédica para pacientes y profesionales sanitarios.
         </p>
-      </details>
+      </div>
 
-      <!-- FAQ Item 2 -->
-      <details class="faq-item">
-        <summary style="font-weight: 700; font-size: 1.05rem; color: var(--text-color); list-style: none; display: flex; justify-content: space-between; align-items: center;">
-          <span>¿Qué diferencia hay entre el reposo absoluto y el afrontamiento activo?</span>
-          <span style="color: var(--color-secondary); font-size: 1.3rem; margin-left: 10px;">+</span>
-        </summary>
-        <p style="margin-top: 14px; font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; border-top: 1px solid var(--border-color); padding-top: 12px;">
-          El reposo prolongado debilita la musculatura, reduce la nutrición discal e incrementa la sensibilidad del sistema nervioso. El <strong>afrontamiento activo</strong> propone sustituir la inmovilidad por un movimiento controlado por cuotas de tiempo (Pacing), enseñándole a tu cerebro a desvincular el movimiento de la señal de peligro.
-        </p>
-      </details>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>
+            <span>¿Puedo volver a hacer deporte si tengo una hernia discal o desgaste en la resonancia?</span>
+            <span class="faq-toggle-icon" aria-hidden="true">+</span>
+          </summary>
+          <p class="faq-answer">
+            <strong>Sí, rotundamente.</strong> La investigación demuestra que las hernias discales y deshidrataciones aparecen en el 35 % de las personas mayores de 40 años sin dolor. La columna es una estructura sólida y adaptable. Con una pauta de ejercicio graduado y reentrenamiento activo, puedes recuperar tu vida deportiva con seguridad.
+          </p>
+        </details>
 
-      <!-- FAQ Item 3 -->
-      <details class="faq-item">
-        <summary style="font-weight: 700; font-size: 1.05rem; color: var(--text-color); list-style: none; display: flex; justify-content: space-between; align-items: center;">
-          <span>¿Cómo se integra la Psiconeuroinmunología Clínica (PNI) en la fisioterapia habitual?</span>
-          <span style="color: var(--color-secondary); font-size: 1.3rem; margin-left: 10px;">+</span>
-        </summary>
-        <p style="margin-top: 14px; font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; border-top: 1px solid var(--border-color); padding-top: 12px;">
-          La PNI estudia las interacciones entre el sistema nervioso, el sistema inmune y el sistema endocrino. En la consulta, nos ayuda a evaluar variables del estilo de vida (sueño, ritmos circadianos, estrés crónico e inflamación de bajo grado) que condicionan la capacidad de recuperación de los tejidos.
-        </p>
-      </details>
+        <details class="faq-item">
+          <summary>
+            <span>¿Qué diferencia hay entre el reposo absoluto y el afrontamiento activo?</span>
+            <span class="faq-toggle-icon" aria-hidden="true">+</span>
+          </summary>
+          <p class="faq-answer">
+            El reposo prolongado debilita la musculatura, reduce la nutrición discal e incrementa la sensibilidad del sistema nervioso. El <strong>afrontamiento activo</strong> sustituye la inmovilidad por movimiento controlado por cuotas de tiempo (pacing), enseñando a tu cerebro a desvincular el movimiento de la señal de peligro.
+          </p>
+        </details>
 
-      <!-- FAQ Item 4 -->
-      <details class="faq-item">
-        <summary style="font-weight: 700; font-size: 1.05rem; color: var(--text-color); list-style: none; display: flex; justify-content: space-between; align-items: center;">
-          <span>¿La educación en neurociencia del dolor realmente ayuda a reducir el dolor físico?</span>
-          <span style="color: var(--color-secondary); font-size: 1.3rem; margin-left: 10px;">+</span>
-        </summary>
-        <p style="margin-top: 14px; font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; border-top: 1px solid var(--border-color); padding-top: 12px;">
-          Sí. Aprender cómo funciona el dolor desactiva la alarma del miedo en la amígdala cerebral y estimula la vía moduladora descendente del dolor. Al fortalecer el control inhibitorio prefrontal, el cerebro libera neurotransmisores como endorfinas y serotonina que bloquean físicamente la señal dolorosa.
-        </p>
-      </details>
+        <details class="faq-item">
+          <summary>
+            <span>¿Cómo se integra la Psiconeuroinmunología Clínica (PNI) en la fisioterapia habitual?</span>
+            <span class="faq-toggle-icon" aria-hidden="true">+</span>
+          </summary>
+          <p class="faq-answer">
+            La PNI estudia las interacciones entre el sistema nervioso, el sistema inmune y el sistema endocrino. En consulta permite evaluar variables del estilo de vida (sueño, ritmos circadianos, estrés crónico e inflamación de bajo grado) que condicionan la recuperación de los tejidos.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            <span>¿La educación en neurociencia del dolor realmente ayuda a reducir el dolor físico?</span>
+            <span class="faq-toggle-icon" aria-hidden="true">+</span>
+          </summary>
+          <p class="faq-answer">
+            Sí. Comprender cómo funciona el dolor desactiva la alarma del miedo en la amígdala cerebral y estimula la vía moduladora descendente. Al fortalecer el control inhibitorio prefrontal, el sistema nervioso libera neurotransmisores propios que reducen la señal dolorosa.
+          </p>
+        </details>
+      </div>
     </div>
   </section>
 
-  <!-- Script to handle card interactions -->
+  <!-- Closing Editorial CTA -->
+  <section class="closing-cta" aria-labelledby="closing-cta-heading">
+    <div class="closing-cta-copy">
+      <h2 id="closing-cta-heading" class="section-title" style="font-size: 1.65rem; margin-bottom: 8px;">
+        ¿Quieres orientación clínica sobre tu caso?
+      </h2>
+      <p class="section-lead" style="font-size: 0.96rem;">
+        Cuéntame tu situación o empieza ahora mismo diseñando tu plan progresivo de movimiento en la guía gratuita.
+      </p>
+    </div>
+    <div class="closing-cta-actions">
+      <a href={getLocalizedPath('/contacto', lang)} class="btn-submit" style="width: auto;">
+        Contactar con Cesar Santos
+      </a>
+      <a href={getLocalizedPath('/guia-afrontamiento', lang)} class="btn-link">
+        Ir a la guía de afrontamiento &rarr;
+      </a>
+    </div>
+  </section>
+
   <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
       const cards = document.querySelectorAll('.myth-card');
-      
       cards.forEach(card => {
-        const toggleCard = () => {
-          const isActive = card.classList.contains('active');
-          card.classList.toggle('active');
-          card.setAttribute('aria-expanded', !isActive);
-        };
-
-        card.addEventListener('click', toggleCard);
-        
-        card.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            toggleCard();
+        card.addEventListener('click', () => {
+          const isActive = card.classList.toggle('active');
+          card.setAttribute('aria-expanded', String(isActive));
+          const hint = card.querySelector('.myth-action-hint');
+          if (hint) {
+            hint.textContent = isActive
+              ? (card.getAttribute('data-close-label') || 'Volver')
+              : (card.getAttribute('data-open-label') || 'Ver evidencia →');
           }
         });
       });
